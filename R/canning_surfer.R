@@ -52,6 +52,7 @@
 #' @importFrom lubridate ymd
 #' @importFrom sp coordinates
 #' @import fields
+#' @importFrom stats complete.cases
 #'
 #' @export
 
@@ -69,11 +70,11 @@ canning_surfR <- function(path, obac, onic){
       }
       # read in lower data
       lower <- sonde_reader(path = locations[1])
-      lower_clean <- lower[complete.cases(lower), ]
+      lower_clean <- lower[stats::complete.cases(lower), ]
 
       # read in upper data
       upper <- sonde_reader(path = locations[2])
-      upper_clean <- upper[complete.cases(upper), ]
+      upper_clean <- upper[stats::complete.cases(upper), ]
 
       # join and delete and rename prob sites
       samp_data <- dplyr::bind_rows(lower_clean, upper_clean) %>%
@@ -88,14 +89,14 @@ canning_surfR <- function(path, obac, onic){
       sparams <- c("Salinity", "Dissolved_Oxygen", "Temperature", "Chlorophyll")
 
       # filter sampling data for separate interpolations
-      d_all <- d_reduced[complete.cases(d_reduced),] %>%
+      d_all <- d_reduced[stats::complete.cases(d_reduced),] %>%
         dplyr::mutate(y = -1 * dep_m, x = dist_bridg/1000)
 
-      d_low <- d_reduced[complete.cases(d_reduced),] %>%
+      d_low <- d_reduced[stats::complete.cases(d_reduced),] %>%
         dplyr::mutate(y = -1 * dep_m, x = dist_bridg/1000) %>%
         dplyr::filter(x < 11.3)
 
-      d_up <- d_reduced[complete.cases(d_reduced),] %>%
+      d_up <- d_reduced[stats::complete.cases(d_reduced),] %>%
         dplyr::mutate(y = -1 * dep_m, x = dist_bridg/1000) %>%
         dplyr::filter(x > 11.3)
 
