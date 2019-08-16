@@ -5,6 +5,10 @@
 
 <!-- badges: start -->
 
+[![Travis build
+status](https://travis-ci.org/Bartesto/rivRmon.svg?branch=master)](https://travis-ci.org/Bartesto/rivRmon)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/Bartesto/rivRmon?branch=master&svg=true)](https://ci.appveyor.com/project/Bartesto/rivRmon)
 <!-- badges: end -->
 
 The goal of rivRmon is to provide tools to aid in data munging and
