@@ -19,7 +19,8 @@ A named character vector where names relate to data break values and
     of colours.
 }
 \examples{
-colours <- surfer_cols(metric = "chl")
+ \dontrun{
+colours <- surfer_cols(metric = "chl")}
 
 }
 \author{

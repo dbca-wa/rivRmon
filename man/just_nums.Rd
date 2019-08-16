@@ -17,7 +17,8 @@ A character value with correct suffix.
     with the correct suffix, e.g. 'th', 'nd' etc.
 }
 \examples{
-just_nums(n = 2)
+ \dontrun{
+just_nums(n = 2)}
 
 }
 \author{

@@ -150,7 +150,8 @@ sonde_reader <- function(path){
 #'    characters are colour hex codes.
 #'
 #' @examples
-#'colours <- surfer_cols(metric = "chl")
+#'  \dontrun{
+#'colours <- surfer_cols(metric = "chl")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 surfer_cols <- function(metric){
@@ -200,7 +201,8 @@ surfer_cols <- function(metric){
 #' @return A character value with correct suffix.
 #'
 #' @examples
-#'just_nums(n = 2)
+#'  \dontrun{
+#'just_nums(n = 2)}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
