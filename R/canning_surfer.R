@@ -480,11 +480,15 @@ canning_surfR <- function(path, obac, onic){
       #rbind (i.e. 1 column) size arg matters!
       surfers <- rbind(plta[[1]], plta[[2]], plta[[3]], plta[[4]], size = "first")
       pdf_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surfer.pdf")
+      # png_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surfer.png")
+      # jpg_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surfer.jpg")
       cat(paste0(pdf_name,"\n"))
       #add margin padding coarse but effective
       surfers_pad <- gtable::gtable_add_padding(surfers, padding = unit(c(1,4,3,4), "cm"))
 
       ggsave(plot = grid.draw(surfers_pad), filename = pdf_name, width=28, height=18)
+      # ggsave(plot = grid.draw(surfers_pad), filename = png_name, width=28, height=18, res = 400)
+      # ggsave(plot = grid.draw(surfers_pad), filename = jpg_name, width=28, height=18, res = 400)
 
     } else {
       stop(paste0("Function expecting only 2 excel workbooks for one monitoring period, ",
