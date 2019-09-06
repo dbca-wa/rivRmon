@@ -1425,9 +1425,10 @@ ann_rep_secchi_c <- function(outpath, data, surface){
 #'     Outputs will be exported to two folders created at the outpath
 #'     location. `c_panels/` for plots and `c_tables/` for data tables.
 #'
-#' @param outpath filepath to desired export location.
+#' @param inpath character filepath to premade annual report data
+#'     \code{\link{canning_WIN_report_data}}.
 #'
-#' @param data the data object created from running `canning_WIN_report_data`.
+#' @param outpath character filepath to desired export location.
 #'
 #' @param surface colour for surface plots. Can be named colour or hex format.
 #'     Defaults to "blue".
@@ -1443,7 +1444,7 @@ ann_rep_secchi_c <- function(outpath, data, surface){
 #'
 #' @examples
 #' \dontrun{
-#' canning_reportR(outpath, data, surface = "blue", bottom = "red",
+#' canning_reportR(inpath, outpath, surface = "blue", bottom = "red",
 #' chloro = "darkgreen")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}

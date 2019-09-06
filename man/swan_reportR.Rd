@@ -9,7 +9,10 @@ swan_reportR(inpath, outpath, surface = "blue", bottom = "red",
   chloro = "darkgreen")
 }
 \arguments{
-\item{outpath}{filepath to desired export location.}
+\item{inpath}{character filepath to premade annual report data
+\code{\link{swan_WIN_report_data}}.}
+
+\item{outpath}{character filepath to desired export location.}
 
 \item{surface}{colour for surface plots. Can be named colour or hex format.
 Defaults to "blue".}
@@ -19,16 +22,13 @@ Defaults to "red".}
 
 \item{chloro}{colour for integrated plots. Can be named colour or hex format.
 Defaults to "darkgreen".}
-
-\item{data}{the data object created from running `swan_WIN_report_data`.}
 }
 \value{
 panel plots for all metrics and a csvs of metrics for
     inclusion to tables.
 }
 \description{
-\code{swan_reportR} takes an export filepath, data, surface, bottom and
-    integrated plot colours and produces panel plots and tables for all
+\code{swan_reportR} produces panel plots and tables for all
     metrics.
 }
 \details{
@@ -39,7 +39,7 @@ This is a wrapper function that runs all of the individual functions
 }
 \examples{
 \dontrun{
-swan_reportR(outpath, data, surface = "blue", bottom = "red",
+swan_reportR(inpath, outpath, surface = "blue", bottom = "red",
 chloro = "darkgreen")}
 
 }

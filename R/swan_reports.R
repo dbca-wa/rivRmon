@@ -1491,8 +1491,7 @@ ann_rep_secchi_s <- function(outpath, data, surface){
 #' Function to create all of the plots and tables for the annual Swan River
 #' report.
 #'
-#' \code{swan_reportR} takes an export filepath, data, surface, bottom and
-#'     integrated plot colours and produces panel plots and tables for all
+#' \code{swan_reportR} produces panel plots and tables for all
 #'     metrics.
 #'
 #' @details This is a wrapper function that runs all of the individual functions
@@ -1500,9 +1499,10 @@ ann_rep_secchi_s <- function(outpath, data, surface){
 #'     Outputs will be exported to two folders created at the outpath
 #'     location. `s_panels/` for plots and `s_tables/` for data tables.
 #'
-#' @param outpath filepath to desired export location.
+#' @param inpath character filepath to premade annual report data
+#'     \code{\link{swan_WIN_report_data}}.
 #'
-#' @param data the data object created from running `swan_WIN_report_data`.
+#' @param outpath character filepath to desired export location.
 #'
 #' @param surface colour for surface plots. Can be named colour or hex format.
 #'     Defaults to "blue".
@@ -1518,7 +1518,7 @@ ann_rep_secchi_s <- function(outpath, data, surface){
 #'
 #' @examples
 #' \dontrun{
-#' swan_reportR(outpath, data, surface = "blue", bottom = "red",
+#' swan_reportR(inpath, outpath, surface = "blue", bottom = "red",
 #' chloro = "darkgreen")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}

@@ -9,7 +9,10 @@ canning_reportR(inpath, outpath, surface = "blue", bottom = "red",
   chloro = "darkgreen")
 }
 \arguments{
-\item{outpath}{filepath to desired export location.}
+\item{inpath}{character filepath to premade annual report data
+\code{\link{canning_WIN_report_data}}.}
+
+\item{outpath}{character filepath to desired export location.}
 
 \item{surface}{colour for surface plots. Can be named colour or hex format.
 Defaults to "blue".}
@@ -19,8 +22,6 @@ Defaults to "red".}
 
 \item{chloro}{colour for integrated plots. Can be named colour or hex format.
 Defaults to "darkgreen".}
-
-\item{data}{the data object created from running `canning_WIN_report_data`.}
 }
 \value{
 panel plots for all metrics and a csvs of metrics for
@@ -38,7 +39,7 @@ This is a wrapper function that runs all of the individual functions
 }
 \examples{
 \dontrun{
-canning_reportR(outpath, data, surface = "blue", bottom = "red",
+canning_reportR(inpath, outpath, surface = "blue", bottom = "red",
 chloro = "darkgreen")}
 
 }
