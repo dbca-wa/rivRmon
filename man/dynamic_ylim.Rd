@@ -20,6 +20,11 @@ a numeric vector of length 2, first value zero, second the calculated
     Lower y limit is zero. Is highly very specific to data structure created
     when processing the annual report data.
 }
+\examples{
+\dontrun{
+dynamic_ylim(data)}
+
+}
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
 }

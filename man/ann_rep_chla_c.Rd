@@ -18,10 +18,6 @@ ann_rep_chla_c(outpath, data, surface, chloro)
 \value{
 a  panel plot for chlorophyl a and a csv of metrics for
     inclusion to a table.
-
- @example
-\dontrun{
-ann_rep_chla_c(outpath, data, surface = "blue", chloro = "darkgreen")}
 }
 \description{
 \code{ann_rep_chla_c} takes an export filepath, data, surface and integrated
@@ -31,6 +27,11 @@ ann_rep_chla_c(outpath, data, surface = "blue", chloro = "darkgreen")}
 Outputs will be exported to two folders  at the outpath
     location. `c_panels/` for plots and `c_tables/` for data tables. These
     will need to be created if they don't exist.
+}
+\examples{
+\dontrun{
+ann_rep_chla_c(outpath, data, surface = "blue", chloro = "darkgreen")}
+
 }
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}

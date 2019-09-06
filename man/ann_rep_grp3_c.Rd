@@ -19,10 +19,6 @@ ann_rep_grp3_c(outpath, data, surface, bottom)
 \value{
 a separate panel plot for each nutrient and a csv of metrics for
     inclusion to a table.
-
- @example
-\dontrun{
-ann_rep_grp3_c(outpath, data, surface = "blue", bottom = "red")}
 }
 \description{
 \code{ann_rep_grp3_c} takes an export filepath, data, surface and bottom
@@ -35,6 +31,11 @@ Group 3 metrics are a grouping based on a common collection
     Outputs will be exported to two folders at the outpath location.
     `c_panels/` for plots and `c_tables/` for data tables. These will need to
     be created if they don't exist.
+}
+\examples{
+\dontrun{
+ann_rep_grp3_c(outpath, data, surface = "blue", bottom = "red")}
+
 }
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}

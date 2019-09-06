@@ -54,8 +54,6 @@
 #' @importFrom lubridate ymd
 #' @importFrom sp coordinates
 #' @import fields
-#'
-#' @export
 
 CKAN_swan_surfR <- function(path, ovit, ocav){
   suppressWarnings({

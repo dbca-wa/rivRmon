@@ -25,17 +25,16 @@
 #' @return a separate panel plot for each metric and a csv of metrics for
 #'     inclusion to a table.
 #'
-#'  @example
+#' @examples
 #' \dontrun{
 #' ann_rep_grp1_c(outpath, data, surface = "blue", bottom = "red")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
 #' @import tidyverse
-#' @import lubridate
 #' @import ggthemes
 #' @import grid
-#' @import gridExtra
+#' @importFrom gridExtra grid.arrange
 #'
 #' @export
 
@@ -301,17 +300,16 @@ ann_rep_grp1_c <- function(outpath, data, surface, bottom){
 #' @return a  panel plot for silica and a csv of metrics for
 #'     inclusion to a table.
 #'
-#'  @example
+#' @examples
 #' \dontrun{
 #' ann_rep_si_c(outpath, data, surface = "blue")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
 #' @import tidyverse
-#' @import lubridate
 #' @import ggthemes
 #' @import grid
-#' @import gridExtra
+#' @importFrom gridExtra grid.arrange
 #'
 #' @export
 
@@ -498,17 +496,16 @@ ann_rep_si_c <- function(outpath, data, surface){
 #' @return a  panel plot for dissolved organic carbon and a csv of metrics for
 #'     inclusion to a table.
 #'
-#'  @example
+#' @examples
 #' \dontrun{
 #' ann_rep_doc_c(outpath, data, surface = "blue")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
 #' @import tidyverse
-#' @import lubridate
 #' @import ggthemes
 #' @import grid
-#' @import gridExtra
+#' @importFrom gridExtra grid.arrange
 #'
 #' @export
 
@@ -699,17 +696,16 @@ ann_rep_doc_c <- function(outpath, data, surface){
 #' @return a separate panel plot for each nutrient and a csv of metrics for
 #'     inclusion to a table.
 #'
-#'  @example
+#' @examples
 #' \dontrun{
 #' ann_rep_grp3_c(outpath, data, surface = "blue", bottom = "red")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
 #' @import tidyverse
-#' @import lubridate
 #' @import ggthemes
 #' @import grid
-#' @import gridExtra
+#' @importFrom gridExtra grid.arrange
 #'
 #' @export
 
@@ -980,17 +976,16 @@ ann_rep_grp3_c <- function(outpath, data, surface, bottom){
 #' @return a  panel plot for chlorophyl a and a csv of metrics for
 #'     inclusion to a table.
 #'
-#'  @example
+#' @examples
 #' \dontrun{
 #' ann_rep_chla_c(outpath, data, surface = "blue", chloro = "darkgreen")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
 #' @import tidyverse
-#' @import lubridate
 #' @import ggthemes
 #' @import grid
-#' @import gridExtra
+#' @importFrom gridExtra grid.arrange
 #'
 #' @export
 
@@ -1254,17 +1249,16 @@ ann_rep_chla_c <- function(outpath, data, surface, chloro){
 #' @return a  panel plot for secchi depth and a csv of metrics for
 #'     inclusion to a table.
 #'
-#'  @example
+#' @examples
 #' \dontrun{
 #' ann_rep_secchi_c(outpath, data, surface = "blue")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
 #' @import tidyverse
-#' @import lubridate
 #' @import ggthemes
 #' @import grid
-#' @import gridExtra
+#' @importFrom gridExtra grid.arrange
 #'
 #' @export
 
@@ -1447,7 +1441,7 @@ ann_rep_secchi_c <- function(outpath, data, surface){
 #' @return panel plots for all metrics and a csvs of metrics for
 #'     inclusion to tables.
 #'
-#'  @example
+#' @examples
 #' \dontrun{
 #' canning_reportR(outpath, data, surface = "blue", bottom = "red",
 #' chloro = "darkgreen")}
@@ -1455,10 +1449,9 @@ ann_rep_secchi_c <- function(outpath, data, surface){
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
 #' @import tidyverse
-#' @import lubridate
 #' @import ggthemes
 #' @import grid
-#' @import gridExtra
+#' @importFrom gridExtra grid.arrange
 #'
 #' @export
 

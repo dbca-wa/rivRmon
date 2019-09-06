@@ -34,7 +34,7 @@ get_legend<-function(myggplot){
 #' @return a numeric vector of length 2, first value zero, second the calculated
 #'     y limit. Will be passed to ylim argument in a ggplot call.
 #'
-#' @example
+#' @examples
 #' \dontrun{
 #' dynamic_ylim(data)}
 #'
@@ -72,13 +72,14 @@ dynamic_ylim <- function(x){
 #'
 #' @return a csv export named SG-E-CANEST_annual_report_data_for_YYYY.
 #'
-#' @example \dontrun{
+#' @examples
+#' \dontrun{
 #' canning_WIN_report_data(inpath, reportYear = 2019, outpath)}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
 #' @import tidyverse
-#' @import lubridate
+#' @importFrom  lubridate month
 #' @import readxl
 #' @import janitor
 #'
@@ -179,7 +180,7 @@ canning_WIN_report_data <- function(inpath, reportingYear = 2019, outpath){
     mutate(emz = case_when(project_site_ref == "SCB2" | project_site_ref == "SAL" | project_site_ref == "RIV" | project_site_ref == "CASMID" ~ "estuary",
                            project_site_ref == "KEN" | project_site_ref == "BAC" | project_site_ref == "NIC" | project_site_ref == "ELL" ~ "river",
                            TRUE ~ "nrz")) %>%
-    mutate(mth = month(collect_date),
+    mutate(mth = lubridate::month(collect_date),
            pord = case_when(mth == 1 ~ 8,
                             mth == 2 ~ 9,
                             mth == 3 ~ 10,
@@ -220,13 +221,14 @@ canning_WIN_report_data <- function(inpath, reportingYear = 2019, outpath){
 #'
 #' @return a csv export named SG-E-SWANEST_annual_report_data_for_YYYY.
 #'
-#' @example \dontrun{
+#' @examples
+#' \dontrun{
 #' swan_WIN_report_data(inpath, reportYear = 2019, outpath)}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
 #' @import tidyverse
-#' @import lubridate
+#' @importFrom lubridate month
 #' @import readxl
 #' @import janitor
 #'
@@ -331,7 +333,7 @@ swan_WIN_report_data <- function(inpath, reportingYear = 2019, outpath){
                            project_site_ref == "NIL" | project_site_ref == "STJ" | project_site_ref == "MAY" | project_site_ref == "RON" ~ "middle",
                            project_site_ref == "KIN" | project_site_ref == "SUC" | project_site_ref == "WMP" | project_site_ref == "MSB" ~ "upper",
                            project_site_ref == "JBC" | project_site_ref == "POL" ~ "swan", TRUE ~ "nrz")) %>%
-    mutate(mth = month(collect_date),
+    mutate(mth = lubridate::month(collect_date),
            pord = case_when(mth == 1 ~ 8,
                             mth == 2 ~ 9,
                             mth == 3 ~ 10,

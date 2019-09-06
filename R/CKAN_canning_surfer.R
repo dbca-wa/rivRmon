@@ -52,8 +52,6 @@
 #' @importFrom lubridate ymd
 #' @importFrom sp coordinates
 #' @import fields
-#'
-#' @export
 
 CKAN_canning_surfR <- function(path, obac, onic){
   suppressWarnings({

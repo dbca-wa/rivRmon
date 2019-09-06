@@ -25,11 +25,6 @@ Defaults to "darkgreen".}
 \value{
 panel plots for all metrics and a csvs of metrics for
     inclusion to tables.
-
- @example
-\dontrun{
-canning_reportR(outpath, data, surface = "blue", bottom = "red",
-chloro = "darkgreen")}
 }
 \description{
 \code{canning_reportR} takes an export filepath, data, and surface
@@ -40,6 +35,12 @@ This is a wrapper function that runs all of the individual functions
     to produce all of the plots and tables for the Canning River.
     Outputs will be exported to two folders created at the outpath
     location. `c_panels/` for plots and `c_tables/` for data tables.
+}
+\examples{
+\dontrun{
+canning_reportR(outpath, data, surface = "blue", bottom = "red",
+chloro = "darkgreen")}
+
 }
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}

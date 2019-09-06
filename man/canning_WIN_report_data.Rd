@@ -29,6 +29,11 @@ Original source data must be downloaded from
     for Site(s) cross-tabulated". These datasets are then read in and
     reformatted for ease of use in the annual report.
 }
+\examples{
+\dontrun{
+canning_WIN_report_data(inpath, reportYear = 2019, outpath)}
+
+}
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
 }

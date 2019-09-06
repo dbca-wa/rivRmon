@@ -25,11 +25,6 @@ Defaults to "darkgreen".}
 \value{
 panel plots for all metrics and a csvs of metrics for
     inclusion to tables.
-
- @example
-\dontrun{
-swan_reportR(outpath, data, surface = "blue", bottom = "red",
-chloro = "darkgreen")}
 }
 \description{
 \code{swan_reportR} takes an export filepath, data, surface, bottom and
@@ -41,6 +36,12 @@ This is a wrapper function that runs all of the individual functions
     to produce all of the plots and tables for the Swan River.
     Outputs will be exported to two folders created at the outpath
     location. `s_panels/` for plots and `s_tables/` for data tables.
+}
+\examples{
+\dontrun{
+swan_reportR(outpath, data, surface = "blue", bottom = "red",
+chloro = "darkgreen")}
+
 }
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
