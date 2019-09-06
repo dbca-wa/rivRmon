@@ -25,5 +25,8 @@ Imports:
     readxl,
     sp,
     tidyr,
-    unpivotr
+    unpivotr,
+    ggthemes,
+    gridExtra,
+    tidyverse
 RoxygenNote: 6.1.1
