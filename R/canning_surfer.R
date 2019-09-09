@@ -41,6 +41,9 @@
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
+#'
 #' @import dplyr
 #' @importFrom janitor clean_names
 #' @importFrom raster raster interpolate reclassify rasterToPoints merge

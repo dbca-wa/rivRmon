@@ -33,4 +33,7 @@ data_finder(path = "Z:/DEC/MonitoringProgram/Data", river = "c")}
 }
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
+
+For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+{the rivRmon website}
 }

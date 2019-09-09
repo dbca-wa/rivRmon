@@ -12,6 +12,9 @@
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
+#'
 #' @import ggplot2
 
 get_legend<-function(myggplot){
@@ -39,6 +42,9 @@ get_legend<-function(myggplot){
 #' dynamic_ylim(data)}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
 #'
 #' @import dplyr
 
@@ -77,6 +83,9 @@ dynamic_ylim <- function(x){
 #' canning_WIN_report_data(inpath, reportYear = 2019, outpath)}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
 #'
 #' @import tidyverse
 #' @importFrom  lubridate month
@@ -226,6 +235,9 @@ canning_WIN_report_data <- function(inpath, reportingYear = 2019, outpath){
 #' swan_WIN_report_data(inpath, reportYear = 2019, outpath)}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
 #'
 #' @import tidyverse
 #' @importFrom lubridate month

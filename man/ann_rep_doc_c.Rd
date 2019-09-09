@@ -35,4 +35,7 @@ ann_rep_doc_c(outpath, data, surface = "blue")}
 }
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
+
+For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+{the rivRmon website}
 }

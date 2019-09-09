@@ -2,8 +2,8 @@
 % Please edit documentation in R/CKAN_canning_surfer.R
 \name{CKAN_canning_surfR}
 \alias{CKAN_canning_surfR}
-\title{Reads in external data, combines with internal datasets and produces Canning
-River surfer plots}
+\title{CKAN version. Reads in external data, combines with internal datasets and
+produces Canning River surfer plots}
 \usage{
 CKAN_canning_surfR(path, obac, onic)
 }
@@ -50,4 +50,7 @@ canning_surfR(path = "Z:/DEC/MonitoringProgram/Data", obac = "green", onic = "re
 }
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
+
+For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+{the rivRmon website}
 }

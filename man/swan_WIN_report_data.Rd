@@ -36,4 +36,7 @@ swan_WIN_report_data(inpath, reportYear = 2019, outpath)}
 }
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
+
+For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+{the rivRmon website}
 }

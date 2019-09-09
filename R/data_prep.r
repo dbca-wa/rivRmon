@@ -24,6 +24,9 @@
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
+#'
 #' @importFrom stringr str_detect
 
 data_finder <- function(path, river){
@@ -67,6 +70,9 @@ data_finder <- function(path, river){
 #' sonde_reader(path = "Z:/DEC/MonitoringProgram/Data/20191201cpoEXO1.xlsx")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
 #'
 #' @importFrom readxl read_excel
 #' @import dplyr
@@ -154,6 +160,9 @@ sonde_reader <- function(path){
 #'colours <- surfer_cols(metric = "chl")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
 surfer_cols <- function(metric){
   if(metric == "sal"){
     sal_brk <- as.character(seq(2, 42, 2))
@@ -205,6 +214,9 @@ surfer_cols <- function(metric){
 #'just_nums(n = 2)}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
 #'
 #' @importFrom dplyr case_when
 just_nums <- function(n){

@@ -31,6 +31,9 @@
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
+#'
 #' @import tidyverse
 #' @import ggthemes
 #' @import grid
@@ -306,6 +309,9 @@ ann_rep_grp1_c <- function(outpath, data, surface, bottom){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
+#'
 #' @import tidyverse
 #' @import ggthemes
 #' @import grid
@@ -501,6 +507,9 @@ ann_rep_si_c <- function(outpath, data, surface){
 #' ann_rep_doc_c(outpath, data, surface = "blue")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
 #'
 #' @import tidyverse
 #' @import ggthemes
@@ -701,6 +710,9 @@ ann_rep_doc_c <- function(outpath, data, surface){
 #' ann_rep_grp3_c(outpath, data, surface = "blue", bottom = "red")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
 #'
 #' @import tidyverse
 #' @import ggthemes
@@ -982,6 +994,9 @@ ann_rep_grp3_c <- function(outpath, data, surface, bottom){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
+#'
 #' @import tidyverse
 #' @import ggthemes
 #' @import grid
@@ -1255,6 +1270,9 @@ ann_rep_chla_c <- function(outpath, data, surface, chloro){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
+#'
 #' @import tidyverse
 #' @import ggthemes
 #' @import grid
@@ -1448,6 +1466,9 @@ ann_rep_secchi_c <- function(outpath, data, surface){
 #' chloro = "darkgreen")}
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
 #'
 #' @import tidyverse
 #' @import ggthemes

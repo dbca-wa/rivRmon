@@ -22,14 +22,11 @@ You can install the development version from
 ``` r
 # install.packages("devtools")
 devtools::install_github("Bartesto/rivRmon")
-```
-
-## Example
-
-A basic example:
-
-``` r
 library(rivRmon)
-# To create surfer plots for the SWan River - please see help for parameter descriptions
-swan_surfR(path = "C:/some path to sonde spreadsheets", ovit = "green", ocav = "red")
 ```
+
+## Help Files
+
+All functions within rivRmon have the usual R help files, however the
+best place to see these and some vignettes is the [rivRmon
+website](https://Bartesto.github.io/rivRmon/index.html)

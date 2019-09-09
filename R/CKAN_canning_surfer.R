@@ -1,7 +1,7 @@
 # Main function for creating canning surfer plots
 
-#' Reads in external data, combines with internal datasets and produces Canning
-#' River surfer plots
+#' CKAN version. Reads in external data, combines with internal datasets and
+#' produces Canning River surfer plots
 #'
 #' \code{canning_surfR} takes a file path to Canning River sonde output and creates
 #'     a four panel (single column) surfer plot of salinity, dissolved oxygen,
@@ -40,6 +40,9 @@
 #' }
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
 #'
 #' @import dplyr
 #' @importFrom janitor clean_names

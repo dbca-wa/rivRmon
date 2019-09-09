@@ -52,4 +52,7 @@ swan_surfR(path = "Z:/DEC/MonitoringProgram/Data", ovit = "green", ocav = "red")
 }
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
+
+For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+{the rivRmon website}
 }
