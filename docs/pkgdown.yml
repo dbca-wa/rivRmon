@@ -1,0 +1,7 @@
+pandoc: 2.2.1
+pkgdown: 1.4.0
+pkgdown_sha: ~
+articles:
+  annual_reports: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon/vignettes/annual_reports.html
+  surfr: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon/vignettes/surfr.html
+

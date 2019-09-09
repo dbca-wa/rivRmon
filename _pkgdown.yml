@@ -1,0 +1,70 @@
+template:
+  params:
+    bootswatch: cerulean
+
+destination: docs
+
+reference:
+  - title: "Generating surfer plots"
+    desc: >
+      Functions for creating physical and chemical surfer style profile plots
+      for the Swan and Canning rivers
+    contents:
+      - canning_surfR
+      - swan_surfR
+  - title: "Annual report data compilation and cleaning"
+    desc: >
+      Functions for reading in original WIN downloads and creating data for
+      annual reporting
+    contents:
+      - canning_WIN_report_data
+      - swan_WIN_report_data
+  - title: "Annual report plot and table generation"
+    desc: >
+      Convenience functions that produce all plots and tables for a specific
+      river for the annual report
+    contents:
+      - canning_reportR
+      - swan_reportR
+  - title: "Plots and tables for specific groupings of metrics - Canning river"
+    desc: >
+      Functions for creating plots and tables for the annual report for specific
+      groupings of metrics that share common display parameters
+    contents:
+      - ann_rep_chla_c
+      - ann_rep_doc_c
+      - ann_rep_grp1_c
+      - ann_rep_grp3_c
+      - ann_rep_secchi_c
+      - ann_rep_si_c
+  - title: "Plots and tables for specific groupings of metrics - Swan river"
+    desc: >
+      Functions for creating plots and tables for the annual report for specific
+      groupings of metrics that share common display parameters
+    contents:
+      - ann_rep_chla_s
+      - ann_rep_grp1_s
+      - ann_rep_grp2_s
+      - ann_rep_grp3_s
+      - ann_rep_secchi_s
+  - title: "Internal helper functions"
+    desc: >
+      Internal helper functions with various outcomes
+    contents:
+      - data_finder
+      - dynamic_ylim
+      - get_legend
+      - just_nums
+      - sonde_reader
+      - surfer_cols
+  - title: "Under development"
+    desc: >
+      Functions in development stage for future work incorporating CKAN and
+      BIOSYS.
+    contents:
+      - CKAN_canning_surfR
+      - CKAN_swan_surfR
+
+url: https://Bartesto.github.io/rivRmon
+
+
