@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How to make surfer profile plots • rivRmon</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rivRmon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -57,12 +57,25 @@
       <a href="../articles/annual_reports.html">How to make plots and tables for annual reports</a>
     </li>
     <li>
+      <a href="../articles/phyto.html">How to use the phyto functions</a>
+    </li>
+    <li>
       <a href="../articles/surfr.html">How to make surfer profile plots</a>
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/Bartesto/rivRmon">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -78,9 +91,9 @@
       <h1>How to make surfer profile plots</h1>
                         <h4 class="author">Bart Huntley</h4>
             
-            <h4 class="date">2019-09-09</h4>
+            <h4 class="date">2019-09-10</h4>
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/Bartesto/rivRmon/blob/master/vignettes/surfr.Rmd"><code>vignettes/surfr.Rmd</code></a></small>
       <div class="hidden name"><code>surfr.Rmd</code></div>
 
     </div>
@@ -112,7 +125,7 @@
 <div id="canning-river-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#canning-river-example" class="anchor"></a>Canning river example</h2>
-<p>This plot was produced using the parameters as described above on data from 23/07/2019. Note that the block-like structure downstream of site KEN represents the Kent street weir in an open position. The function will interpret the status of the weir from the sonde data and plot it accordingly.</p>
+<p>This plot was produced using the parameters as described above on data from 23/07/2019 using the <code><a href="../reference/canning_surfR.html">canning_surfR()</a></code> function. Note that the block-like structure downstream of site KEN represents the Kent street weir in an open position. The function will interpret the status of the weir from the sonde data and plot it accordingly.</p>
 <p><img src="plots/canning.PNG"></p>
 </div>
 <div id="swan-river-examples" class="section level2">
@@ -132,7 +145,7 @@
 <li><p>The current functions can handle the outputs from YSI and EXO sondes and can handle most of the historical differences in metric naming conventions and output formats. It is recommended however that the current conventions in place for naming and editing the sonde outputs should be maintained. Any major deviations or additions will likely result in errors.</p></li>
 <li><p>The rendering of the “river bottom” is designed around long term monitoring locations. If a new site needs to be added this will require some rewriting of various parts of the base code and internal data sets. If this need arises please contact the author.</p></li>
 <li><p>The “river bottom” has been created by extracting depths from the Corporate bathymetry data along a reckoned navigation route that attempts to stick to the deepest sections of the river and intersects the sampling sites. Additional extraction points are generated at 100 meter intervals along this route.</p></li>
-<li><p>When the <code><a href="../reference/canning_surfR.html">canning_surfR()</a></code> function detects that the weir is closed (by the presence of cannoxy site data), it performs two interpolations to ensure that the weir is used as a barrier to the calculations.</p></li>
+<li><p>When the <code><a href="../reference/canning_surfR.html">canning_surfR()</a></code> function detects that the weir is closed (by the presence of cannoxy site data), it performs two interpolations to ensure that the weir is used as a barrier to the interpolations.</p></li>
 <li><p>A thin plate spline is used to calculate the interpolation of data between the sampling sites.</p></li>
 <li><p>Remember that this is a visualisation tool only. Obtaining precise measurements of metrics outside of sampling sites can only be obtained by physically sampling those areas. Any interpolation can only be an estimation, particularly with such sparse input data.</p></li>
 </ul>
