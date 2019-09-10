@@ -369,10 +369,16 @@ C_blockdf_weir <- C_blockdf_all
 C_blockdf_weir[4, 4] <- 11.3 # for CASMID xmax
 C_blockdf_weir[5, 3] <- 11.3 # for KEN xmin
 
+# phytoplankton colours
+phyto_cols <- c(Chlorophytes = "#008000", Cyanophytes = "#0000FF",
+                Diatoms = "#FFFF00", Dinoflagellates = "#C00000",
+                Cryptophyta = "#666699", Other = "#000000")
+
 
 ## Save out sysdtat.rda
 usethis::use_data(sal_brk, do_mg_l_brk, chl_brk, temp_brk, S_sitesdf, C_sitesdf,
                   S_oxy_locs, C_oxy_locs, S_bottom, S_bottom_nar, C_bottom_open,
                   C_bottom_weir, S_grd_all, S_grd_nar, C_grd_low, C_grd_up,
                   C_grd_all, reclass_matrices, oxy_grob, S_blockdf_all, S_blockdf_nar,
-                  C_blockdf_all, C_blockdf_weir, internal = TRUE, overwrite = TRUE)
+                  C_blockdf_all, C_blockdf_weir, phyto_cols, internal = TRUE,
+                  overwrite = TRUE)
