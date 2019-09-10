@@ -49,13 +49,13 @@ formatting (for automatic reading and variable naming etc) so these functions
 are very specific to the current export format. Should this format change these 
 functions will fail and require some editing.
 
-When the report is read in it is tidied the following also occurs:
+When the report is read in it is tidied with the following occuring:
 
 + variable names are standardised
 + values are checked for "<" or ">":
   + a value following a "<" is halved
   + a value following a ">" is left as is
-+ the variable emz (ecological management zone) is created based on site
++ the variable emz is created based on site
 
 Once the data is read in and tidied it is exported as a csv with the format
 "XX-X-XXXXX_annual_report_data_for_YYY.csv" where:
@@ -86,7 +86,8 @@ swan_WIN_report_data(inpath= "C:blah\\blah\\annual_data_location",
 **outpath** is a character file path to desired export location for writing of 
 the csv files
 
-The output from this stage will be the input for the next two stages.
+This function needs to be run each year to set up the data for the annual 
+report. The output from this stage will be the input for the next two stages.
 
 # Stage Two - Creating plots and tables
 There is a separate function for each estuary. These are essentially wrapper 
@@ -114,6 +115,7 @@ swan_reportR(inpath = "C:blah\\blah\\somewhere",
 
 **inpath** a character file path to pre-made annual report data (the out path from 
 Stage 1 above)
+
 **outpath** a character file path to desired export location
 
 The parameters **surface**, **bottom** and **chloro** can take a named colour or 
@@ -121,7 +123,7 @@ a [hex colour code](http://instant-eyedropper.com/info/html_color_code/). The
 defaults produce colours similar to those produced in prior reports, however 
 access to these parameters allows users to tweak if required. **surface** 
 relates to surface measurements, **bottom** to bottom measurements and 
-**chloro** to integrated measurements.
+**chloro** to integrated measurements specific only to chlorophyll plots.
 
 ### Examples
 Canning estuary total oxidised nitrogen.
@@ -197,7 +199,7 @@ As these functions are written to be internal to the wrapper they need to be run
 in the following manner in order to read in the correct data.
 
 ```{r eval=FALSE}
-#setup a file path to the annual report data
+#setup a file path to the annual report data (i.e. csv from Stage One)
 inpath <- "C:path/to/anuual_report_data"
 
 #get the full name and pathrow to the required data - change pattern as required

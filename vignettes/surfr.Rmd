@@ -65,9 +65,10 @@ swan_surfR(path = "C:blah\\blah\\data_location", ovit = "blue", ocav = "red")
 ## Canning river example
 
 This plot was produced using the parameters as described above on data from 
-23/07/2019. Note that the block-like structure downstream of site KEN represents
-the Kent street weir in an open position. The function will interpret the status 
-of the weir from the sonde data and plot it accordingly.
+23/07/2019 using the `canning_surfR()` function. Note that the block-like 
+structure downstream of site KEN represents the Kent street weir in an open 
+position. The function will interpret the status of the weir from the sonde data 
+and plot it accordingly.
 
 ![](plots/canning.PNG)
 
@@ -114,7 +115,7 @@ extraction points are generated at 100 meter intervals along this route.
 
 + When the `canning_surfR()` function detects that the weir is closed (by the 
 presence of cannoxy site data), it performs two interpolations to ensure that 
-the weir is used as a barrier to the calculations.
+the weir is used as a barrier to the interpolations.
 
 + A thin plate spline is used to calculate the interpolation of data between the 
 sampling sites.
