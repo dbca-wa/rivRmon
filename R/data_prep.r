@@ -228,3 +228,33 @@ just_nums <- function(n){
                     TRUE ~ "th")
   paste0(n, suff)
 }
+
+#' Creates file paths to raw phytoplankton xlsx spreadsheets
+#'
+#' \code{phyto_finder} takes a file path to raw phytoplankton xlsx spreadsheets
+#'     and returns a full filepath for use in other functions.
+#'
+#' @details This is a helper function to set up correct file paths to the
+#'     appropriate data xlsx spreadsheets.
+#'
+#' @param pathin a character filepath to the location of the raw xlsx
+#'     spreadsheets
+#'
+#' @examples
+#' \dontrun{
+#' phyto_finder(pathin = "C:/path/to/raw_data")
+#' }
+#'
+#' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' {the rivRmon website}
+#'
+#' @importFrom stringr str_detect
+phyto_finder <- function(pathin){
+  excels <- list.files(path = pathin, pattern = ".xlsx$")
+  excel_clean <- excels[stringr::str_detect(excels, "^\\d{8}")] #starts with digits only
+  out <- excel_clean[stringr::str_detect(tolower(excel_clean), "raw")] #change to use on test data - "phyto" "raw"
+  file.path(pathin, out)
+}
+
