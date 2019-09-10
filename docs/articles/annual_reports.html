@@ -251,19 +251,22 @@
 <li>"_e" is the estuary ("_c" or "_s")</li>
 </ul>
 <p>As these functions are written to be internal to the wrapper they need to be run in the following manner in order to read in the correct data.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">#setup a file path to the annual report data (i.e. csv from Stage One)</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">inpath &lt;-<span class="st"> "C:path/to/anuual_report_data"</span></a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">#load additional packages</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#get the full name and pathrow to the required data - change pattern as required</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">file &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="dt">path =</span> inpath, <span class="dt">pattern =</span> <span class="st">"SG-E-CANEST_annual_report"</span>, </a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">                   <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#create parameter variables for the function you want to use</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">outpath &lt;-<span class="st"> "C:path/to/desired_export_location"</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> file, <span class="dt">guess_max =</span> <span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#run function - here we have chosen group 1 variables for the Swan</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="kw"><a href="../reference/ann_rep_grp1_s.html">ann_rep_grp1_s</a></span>(outpath, data, <span class="dt">surface =</span> <span class="st">"blue"</span>, <span class="dt">bottom =</span> <span class="st">"red"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#setup a file path to the annual report data (i.e. csv from Stage One)</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">inpath &lt;-<span class="st"> "C:path/to/anuual_report_data"</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#get the full name and pathrow to the required data - change pattern as required</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">file &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="dt">path =</span> inpath, <span class="dt">pattern =</span> <span class="st">"SG-E-CANEST_annual_report"</span>, </a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">                   <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#create parameter variables for the function you want to use</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">outpath &lt;-<span class="st"> "C:path/to/desired_export_location"</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">data &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>(<span class="dt">file =</span> file, <span class="dt">guess_max =</span> <span class="dv">10000</span>)</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#run function - here we have chosen group 1 variables for the Swan</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="kw"><a href="../reference/ann_rep_grp1_s.html">ann_rep_grp1_s</a></span>(outpath, data, <span class="dt">surface =</span> <span class="st">"blue"</span>, <span class="dt">bottom =</span> <span class="st">"red"</span>)</a></code></pre></div>
 </div>
   </div>
 

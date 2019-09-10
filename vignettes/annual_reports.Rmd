@@ -199,6 +199,9 @@ As these functions are written to be internal to the wrapper they need to be run
 in the following manner in order to read in the correct data.
 
 ```{r eval=FALSE}
+#load additional packages
+library(tidyverse)
+
 #setup a file path to the annual report data (i.e. csv from Stage One)
 inpath <- "C:path/to/anuual_report_data"
 
@@ -208,7 +211,7 @@ file <- list.files(path = inpath, pattern = "SG-E-CANEST_annual_report",
 
 #create parameter variables for the function you want to use
 outpath <- "C:path/to/desired_export_location"
-data <- read_csv(file = file, guess_max = 10000)
+data <- readr::read_csv(file = file, guess_max = 10000)
 
 #run function - here we have chosen group 1 variables for the Swan
 ann_rep_grp1_s(outpath, data, surface = "blue", bottom = "red")
