@@ -1,8 +1,17 @@
 template:
   params:
-    bootswatch: cerulean
+    bootswatch: flatly
 
 destination: docs
+
+articles:
+  - title: Helpful guides
+    desc: >
+      Helpful guides that describe useful worflows utilising the rivRmon package
+    contents:
+      - surfr
+      - annual_reports
+      - phyto
 
 reference:
   - title: "Generating surfer plots"
@@ -47,6 +56,12 @@ reference:
       - ann_rep_grp2_s
       - ann_rep_grp3_s
       - ann_rep_secchi_s
+  - title: "Functions to visualise phytoplankton summaries"
+    desc: >
+      Functions that create summaries and plot phytoplankton barcharts by site
+    contents:
+    - phyto_groupR
+    - phyto_plotR
   - title: "Internal helper functions"
     desc: >
       Internal helper functions with various outcomes
@@ -55,6 +70,7 @@ reference:
       - dynamic_ylim
       - get_legend
       - just_nums
+      - phyto_finder
       - sonde_reader
       - surfer_cols
   - title: "Under development"
