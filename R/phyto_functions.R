@@ -49,7 +49,7 @@ phyto_groupR <- function(pathin, pathout){
     loc <- locations[i]
     sheet <- readxl::excel_sheets(loc)[stringr::str_sub(stringr::str_to_lower(readxl::excel_sheets(loc)), 1, 1) != "e"]
     dat <- readxl::read_excel(loc, sheet = sheet)
-    names(dat) <- stringr::tolower(names(dat))
+    names(dat) <- tolower(names(dat))
     samp_date <- as.character(dat[[1,1]])
     project <- dat[[1,5]]
     outpath <- paste0(folder, "/")
