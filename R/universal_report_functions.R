@@ -47,6 +47,8 @@ get_legend<-function(myggplot){
 #' {the rivRmon website}
 #'
 #' @import dplyr
+#'
+#' @export
 
 dynamic_ylim <- function(x){
   val1 <- dplyr::ungroup(x) %>% dplyr::filter(rep_per == "background") %>%
