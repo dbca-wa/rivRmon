@@ -17,9 +17,11 @@ the Canning and Swan estuaries. There is a two stage process with details below.
 
 # Stage One - Create summary data
 Phytoplankton count data in its raw form (hereafter called raw data) provides 
-count and other information for a multitude of species. In order to visualise 
-the data it benefits from some summarising into larger groupings. This first 
-stage undertakes this process and outputs summaries that are used in stage two.
+count and other information for a multitude of species. This data is analysed 
+and provided to us by the Department of Water and Environmental Regulation's 
+Phytoplankton Ecology unit. In order to visualise the data it benefits from some 
+summarising into larger groupings. This first stage undertakes this process and 
+outputs summaries that are used in stage two.
 
 After loading the `rivRmon` package, two file paths are provided to the 
 `phyto_groupR()` function. A file path to the raw data xlsx spreadsheets and a 

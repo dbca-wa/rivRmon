@@ -108,7 +108,7 @@
 <div id="stage-one---create-summary-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#stage-one---create-summary-data" class="anchor"></a>Stage One - Create summary data</h1>
-<p>Phytoplankton count data in its raw form (hereafter called raw data) provides count and other information for a multitude of species. In order to visualise the data it benefits from some summarising into larger groupings. This first stage undertakes this process and outputs summaries that are used in stage two.</p>
+<p>Phytoplankton count data in its raw form (hereafter called raw data) provides count and other information for a multitude of species. This data is analysed and provided to us by the Department of Water and Environmental Regulation’s Phytoplankton Ecology unit. In order to visualise the data it benefits from some summarising into larger groupings. This first stage undertakes this process and outputs summaries that are used in stage two.</p>
 <p>After loading the <code>rivRmon</code> package, two file paths are provided to the <code><a href="../reference/phyto_groupR.html">phyto_groupR()</a></code> function. A file path to the raw data xlsx spreadsheets and a file path to the desired location of the exported summary data. This summary data will be written to a <code>summaries/</code> directory and if it doesn’t already exist it will be created.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#load the package</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rivRmon)</a>
@@ -135,6 +135,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>

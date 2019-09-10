@@ -75,9 +75,9 @@ canning_WIN_report_data(inpath = "C:blah/blah/annual_data_location",
                         outpath = "C:blah/blah/somewhere")
 
 #Swan estuary - backslash example
-swan_WIN_report_data(inpath= "C:blah\\blah\\annual_data_location", 
+swan_WIN_report_data(inpath = "C:blah\\blah\\annual_data_location", 
                      reportingYear = 2019, 
-                     outpath = = "C:blah\\blah\\somewhere")
+                     outpath = "C:blah\\blah\\somewhere")
 
 ```
 
