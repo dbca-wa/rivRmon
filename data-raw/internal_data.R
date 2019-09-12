@@ -24,7 +24,7 @@ sites <- readOGR(dsn = "../vectors/swan100",
                  layer = "SwanDepthDistProfile_MGA50_100m",
                  stringsAsFactors = FALSE)
 S_sitesdf <- as.data.frame(sites@data) %>%
-  dplyr::mutate(site = ifelse(site == "BWR10", "BWR", site)) %>%
+  # dplyr::mutate(site = ifelse(site == "BWR10", "BWR", site)) %>%
   dplyr::arrange(dist_mouth)
 
 ## Create oxygen location sites
