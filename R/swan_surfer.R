@@ -85,8 +85,7 @@ swan_surfR <- function(path, ovit, ocav){
       # join and delete and rename prob sites
       samp_data <- dplyr::bind_rows(lower_clean, upper_clean) %>%
         janitor::clean_names() %>%
-        dplyr::mutate(site = ifelse(site == "MULB FARM", "MUL",
-                                    ifelse(site == "BWR10", "BWR", site))) %>%
+        dplyr::mutate(site = ifelse(site == "MULB FARM", "MUL",site)) %>%
         dplyr::filter(site != "FP2.1")
 
       # join sites to WQ data
@@ -135,7 +134,7 @@ swan_surfR <- function(path, ovit, ocav){
         tps_list_all[[i]] <- idw1_dfall
       }
 
-      ######POSSIBLY NO NEED FOR THIS
+
       # # for narrows up TPS
       for(i in seq_along(vals)){
         val <- vals[i]
@@ -164,7 +163,11 @@ swan_surfR <- function(path, ovit, ocav){
 
       site_labs <- S_sitesdf %>%
         dplyr::filter(site != "SRP_RSSA") %>%
-        dplyr::filter(site != "BWR" & site != "KMO" & site != "VIT")
+        dplyr::filter(site != "BWR10" & site != "KMO" & site != "VIT")
+
+      site_labs_upper <- S_sitesdf %>%
+        dplyr::filter(site != "SRP_RSSA") %>%
+        dplyr::filter(site != "VIT")
 
       # construct pretty date
       sday <- just_nums(as.numeric(substr(samp_date, 7, 8)))
@@ -509,7 +512,7 @@ swan_surfR <- function(path, ovit, ocav){
                    aes(x = x, y = - y),
                    colour = "black",
                    size = 0.5) +
-        geom_text(data = filter(site_labs, dist_mouth/1000 >= 21),
+        geom_text(data = filter(site_labs_upper, dist_mouth/1000 >= 21),
                   aes(x = dist_mouth/1000, y = 0.7, label = site, fontface=2),
                   size = 4.5,
                   colour = "black",
