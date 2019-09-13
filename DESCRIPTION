@@ -31,7 +31,7 @@ Imports:
     scales,
     stringr,
     sp,
-    tidyr,
+    tidyr (>= 0.8.3),
     tidyverse,
     unpivotr
 RoxygenNote: 6.1.1
