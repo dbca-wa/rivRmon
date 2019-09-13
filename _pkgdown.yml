@@ -1,6 +1,7 @@
 template:
   params:
     bootswatch: flatly
+    ganalytics: UA-147906534-1
 
 destination: docs
 
