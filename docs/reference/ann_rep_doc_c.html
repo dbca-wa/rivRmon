@@ -9,10 +9,12 @@
 <title>Function for annual Canning River report plots and tables for dissolved
 organic carbon. — ann_rep_doc_c • rivRmon</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -33,13 +35,14 @@ organic carbon. — ann_rep_doc_c • rivRmon</title>
 
 
 
+
 <meta property="og:title" content="Function for annual Canning River report plots and tables for dissolved
 organic carbon. — ann_rep_doc_c" />
-
 <meta property="og:description" content="ann_rep_doc_c takes an export filepath, data, and surface
     plot colour and produces panel plots and tables for dissolved organic
     carbon" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -52,6 +55,16 @@ organic carbon. — ann_rep_doc_c" />
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-147990841-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-147990841-1');
+</script>
 
 
   </head>
@@ -107,7 +120,6 @@ organic carbon. — ann_rep_doc_c" />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/Bartesto/rivRmon">
@@ -135,15 +147,13 @@ organic carbon.</h1>
     </div>
 
     <div class="ref-description">
-    
     <p><code>ann_rep_doc_c</code> takes an export filepath, data, and surface
     plot colour and produces panel plots and tables for dissolved organic
     carbon</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>ann_rep_doc_c</span>(<span class='no'>outpath</span>, <span class='no'>data</span>, <span class='no'>surface</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -160,18 +170,16 @@ organic carbon.</h1>
       <td><p>colour for surface plots. Can be named colour or hex format.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a  panel plot for dissolved organic carbon and a csv of metrics for
     inclusion to a table.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Outputs will be exported to two folders  at the outpath
     location. `c_panels/` for plots and `c_tables/` for data tables. These
     will need to be created if they don't exist.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
@@ -181,11 +189,8 @@ organic carbon.</h1>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
