@@ -9,6 +9,15 @@
 status](https://travis-ci.org/Bartesto/rivRmon.svg?branch=master)](https://travis-ci.org/Bartesto/rivRmon)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/Bartesto/rivRmon?branch=master&svg=true)](https://ci.appveyor.com/project/Bartesto/rivRmon)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![GitHub
+issues](https://img.shields.io/github/issues/Bartesto/rivRmon.svg?style=popout)](https://github.com/Bartesto/rivRmon/issues/)
+[![Github top
+language](https://img.shields.io/github/languages/top/Bartesto/rivRmon.svg)](https://github.com/Bartesto/rivRmon/)
+[![Last-changedate](https://img.shields.io/github/last-commit/Bartesto/rivRmon.svg)](https://github.com/Bartesto/rivRmon/commits/master)
+[![DOI](https://zenodo.org/badge/202643428.svg)](https://zenodo.org/badge/latestdoi/202643428)
 <!-- badges: end -->
 
 The goal of rivRmon is to provide tools to aid in data munging and
