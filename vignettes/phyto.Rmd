@@ -47,7 +47,7 @@ is below.
 # Stage Two - Creating the barcharts and running sheet
 This next stage reads in all the summary data csv's and based on date provided, 
 generates two barcharts, arranged vertically, in the one output. The top 
-barchart is for the date provided and the bottom barchart is for the week prior. 
+barchart is for the date provided and the bottom barchart is for the prior sample. 
 As sampling of the estuaries occurs on different days, the choice of date will 
 only plot data for a single estuary. In other words it won't get confused when 
 summary csv's exist for both estuaries.
@@ -72,7 +72,8 @@ separators (e.g. "2019/07/15" or "2019-07-15").
 An example of a barchart follows. This one is for the Swan estuary (identified 
 by its name and the sites present). The date provided is that in the code 
 snippet above and is used in creating the top barchart. The function finds the 
-summary data for the week prior and uses that to plot the bottom barchart.
+summary data for the prior sampling effort and uses that to plot the bottom 
+barchart.
 
 ![](plots/phyto.PNG)
 

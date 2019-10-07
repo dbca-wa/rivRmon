@@ -15,13 +15,13 @@ barchart in the format "yyyymmdd".}
 }
 \description{
 \code{phyto_plotR} takes a file path to summary data and a date and produces
-    "present" and "last week" barcharts of phytoplankton counts per site.
+    "present" and "prior sample" barcharts of phytoplankton counts per site.
 }
 \details{
 This function can only be run on data created by running the
     (\code{\link{phyto_groupR}}) function. It will read in all the summary
     data then based on the provided date, produce a barchart for that date
-    and the prior weeks summary in the one output.
+    and the prior sample's summary in the one output.
 
     As data is gathered for each estuary on consecutive days, the choice of
     date will determine which river summaries will be plotted. That choice

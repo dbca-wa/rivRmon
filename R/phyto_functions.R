@@ -77,12 +77,12 @@ phyto_groupR <- function(pathin, pathout){
 #' Creates barcharts from phytoplankton summary data
 #'
 #' \code{phyto_plotR} takes a file path to summary data and a date and produces
-#'     "present" and "last week" barcharts of phytoplankton counts per site.
+#'     "present" and "prior sample" barcharts of phytoplankton counts per site.
 #'
 #' @details This function can only be run on data created by running the
 #'     (\code{\link{phyto_groupR}}) function. It will read in all the summary
 #'     data then based on the provided date, produce a barchart for that date
-#'     and the prior weeks summary in the one output.
+#'     and the prior sample's summary in the one output.
 #'
 #'     As data is gathered for each estuary on consecutive days, the choice of
 #'     date will determine which river summaries will be plotted. That choice
@@ -130,83 +130,104 @@ phyto_plotR <- function(summary, date){
     dat <- dplyr::bind_rows(dat, dat2)
   }
 
-  if(sum(stringr::str_detect(dat$date,
-                    as.character(ymd(date)))) > 0 &
-     sum(stringr::str_detect(dat$date,
-                    as.character(ymd(date) - 7))) > 0){
-    current <- lubridate::ymd(date)
+  # unique dates in summaries
+  udates <- lubridate::ymd(unique(dat$date))
 
-    dat$family <- factor(dat$family, levels = c("Other", "Cyanophytes", "Dinoflagellates",
-                                                "Chlorophytes", "Cryptophyta", "Diatoms"),
-                         ordered = TRUE)
+  # user entered current date
+  current <- lubridate::ymd(date)
 
-    dat$site<- factor(dat$site, levels = c("BLA", "ARM", "HEA", "NAR", "NIL", "STJ", "MAY",
-                                           "RON", "KIN", "SUC", "WMP", "MSB", "SCB2", "SAL",
-                                           "RIV", "CASMID", "KEN", "BAC", "NIC", "ELL"),
-                      ordered = TRUE)
-
-    now <- dat %>%
-      dplyr::filter(date == current)
-
-    prior <- dat %>%
-      dplyr::filter(date == current - 7)
-
-    nmax <- now %>%
-      dplyr::group_by(site) %>%
-      dplyr::summarise(total = sum(count)) %>%
-      dplyr::summarise(m = max(total))
-
-    pmax <- prior %>%
-      dplyr::group_by(site) %>%
-      dplyr::summarise(total = sum(count)) %>%
-      dplyr::summarise(m = max(total))
-
-    current_project <- now[1, "project"]
-
-    ymax <- max(nmax, pmax) + 2000
-
-    n_plot <- ggplot(now) +
-      geom_bar(aes(x = site, y = count, fill = family), stat = "identity") +
-      scale_fill_manual(name = "",
-                        values = phyto_cols,
-                        limits = c("Diatoms", "Dinoflagellates", "Cyanophytes",
-                                   "Chlorophytes", "Cryptophyta", "Other")) +
-      ylim(c(0, ymax)) +
-      labs(x = "",
-           y = "",
-           title = format(current, "%d %B %Y")) +
-      theme_bw()+
-      theme(panel.grid.major.x = element_blank(),
-            panel.grid.major.y = element_line( size=.1))
-
-    p_plot <- ggplot(prior) +
-      geom_bar(aes(x = site, y = count, fill = family), stat = "identity") +
-      scale_fill_manual(name = "",
-                        values = phyto_cols,
-                        limits = c("Diatoms", "Dinoflagellates", "Cyanophytes",
-                                   "Chlorophytes", "Cryptophyta", "Other")) +
-      ylim(c(0, ymax)) +
-      labs(x = "",
-           y = "",
-           title = format(current - 7, "%d %B %Y")) +
-      theme_bw()+
-      theme(panel.grid.major.x = element_blank(),
-            panel.grid.major.y = element_line( size=.1))
-
-    # save the plot
-    phytos <- ggpubr::ggarrange(n_plot, p_plot, ncol = 1, common.legend = TRUE, legend = "bottom")
-    pdf_name <- file.path(folder, paste0(current,"_", now[1,5],"_summary_plots.pdf"))
-    ggsave(plot = phytos, filename = pdf_name)
-
-    # running datasheet
-    datout <- dat %>%
-      tidyr::spread(family, count) %>%
-      dplyr::filter(date <= current & project == current_project) %>%
-      replace(., is.na(.), 0)
-
-    outpath <- paste0(folder, "/")
-    readr::write_csv(datout, paste0(outpath, current_project, "_running_datasheet.csv"))
+  # test if current date in data
+  if(current %in% udates){
+    #create other dates vector of less than current date
+    odates <- udates[udates < current]
   } else {
-    stop("There is a problem with the date you have selected")
+    stop("Your date is not in the data")
   }
+
+  # test if there is a prior date and select it
+  if(sum(odates < current) > 0){
+    #get closest prior date to current date
+    closest_index <- which(abs(odates - current) == min(abs(odates - current)))
+    last <- odates[closest_index]
+  } else {
+    stop("No data in summaries for prior plot")
+  }
+
+  now <- dat %>%
+    dplyr::filter(date == current)
+
+  prior <- dat %>%
+    dplyr::filter(date == last)
+  current <- lubridate::ymd(date)
+
+  dat$family <- factor(dat$family, levels = c("Other", "Cyanophytes",
+                                              "Dinoflagellates",
+                                              "Chlorophytes", "Cryptophyta",
+                                              "Diatoms"), ordered = TRUE)
+
+  dat$site<- factor(dat$site, levels = c("BLA", "ARM", "HEA", "NAR", "NIL",
+                                         "STJ", "MAY", "RON", "KIN", "SUC",
+                                         "WMP", "MSB", "SCB2", "SAL","RIV",
+                                         "CASMID", "KEN", "BAC", "NIC",
+                                         "ELL"), ordered = TRUE)
+
+  nmax <- now %>%
+    dplyr::group_by(site) %>%
+    dplyr::summarise(total = sum(count)) %>%
+    dplyr::summarise(m = max(total))
+
+  pmax <- prior %>%
+    dplyr::group_by(site) %>%
+    dplyr::summarise(total = sum(count)) %>%
+    dplyr::summarise(m = max(total))
+
+  current_project <- now[1, "project"]
+
+  ymax <- max(nmax, pmax) + 2000
+
+  n_plot <- ggplot(now) +
+    geom_bar(aes(x = site, y = count, fill = family), stat = "identity") +
+    scale_fill_manual(name = "",
+                      values = phyto_cols,
+                      limits = c("Diatoms", "Dinoflagellates", "Cyanophytes",
+                                 "Chlorophytes", "Cryptophyta", "Other")) +
+    ylim(c(0, ymax)) +
+    labs(x = "",
+         y = "",
+         title = format(current, "%d %B %Y")) +
+    theme_bw()+
+    theme(panel.grid.major.x = element_blank(),
+          panel.grid.major.y = element_line( size=.1))
+
+  p_plot <- ggplot(prior) +
+    geom_bar(aes(x = site, y = count, fill = family), stat = "identity") +
+    scale_fill_manual(name = "",
+                      values = phyto_cols,
+                      limits = c("Diatoms", "Dinoflagellates", "Cyanophytes",
+                                 "Chlorophytes", "Cryptophyta", "Other")) +
+    ylim(c(0, ymax)) +
+    labs(x = "",
+         y = "",
+         title = format(last, "%d %B %Y")) +
+    theme_bw()+
+    theme(panel.grid.major.x = element_blank(),
+          panel.grid.major.y = element_line( size=.1))
+
+  # save the plot
+  phytos <- ggpubr::ggarrange(n_plot, p_plot, ncol = 1, common.legend = TRUE,
+                              legend = "bottom")
+  pdf_name <- file.path(folder, paste0(current,"_", now[1,5],
+                                       "_summary_plots.pdf"))
+  ggsave(plot = phytos, filename = pdf_name)
+
+  # running datasheet
+  datout <- dat %>%
+    tidyr::spread(family, count) %>%
+    dplyr::filter(date <= current & project == current_project) %>%
+    replace(., is.na(.), 0)
+
+  outpath <- paste0(folder, "/")
+  readr::write_csv(datout, paste0(outpath, current_project,
+                                  "_running_datasheet.csv"))
+
 }
