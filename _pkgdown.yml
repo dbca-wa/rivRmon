@@ -74,6 +74,11 @@ reference:
       - phyto_finder
       - sonde_reader
       - surfer_cols
+  - title: "Oxy KPI"
+    desc: >
+      Functions to aid in generating and visualising dissolved oxygen KPI's.
+    contents:
+      -oxy_wranglR
   - title: "Under development"
     desc: >
       Functions in development stage for future work incorporating CKAN and
