@@ -7,7 +7,7 @@ previously a stand alone function called `oxy_kpi4`.
 date for subsetting data for the prior plot. Issue arose when public holidays
 delay a sampling run. Function now checks that the user entered date is 
 available and that there is data for a prior plot in the summary data and then 
-selects the closest preceding date out of all available. (GitHub #2, @ Bartesto).
+selects the closest preceding date out of all available. (GitHub #2, @Bartesto).
 
 
 # rivRmon 1.0.0
