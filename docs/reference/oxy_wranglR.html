@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function to read and format water quality data obtained from the WIR water
-portal for use in annual reporting for the Swan River — swan_WIN_report_data • rivRmon</title>
+<title>Reads in curated Oxy KPI sonde data and exports cummulative Oxy KPI plots
+and stats for the purpose of weekly updates. — oxy_wranglR • rivRmon</title>
 
 
 <!-- jquery -->
@@ -36,11 +36,12 @@ portal for use in annual reporting for the Swan River — swan_WIN_report_data �
 
 
 
-<meta property="og:title" content="Function to read and format water quality data obtained from the WIR water
-portal for use in annual reporting for the Swan River — swan_WIN_report_data" />
-<meta property="og:description" content="swan_WIN_report_data reads in all xlsx downloaded files from WIR
-    and based on a reporting year, formats the data for use in generating the
-    annual report." />
+<meta property="og:title" content="Reads in curated Oxy KPI sonde data and exports cummulative Oxy KPI plots
+and stats for the purpose of weekly updates. — oxy_wranglR" />
+<meta property="og:description" content="oxy_wranglR takes a file path to a Project folder that contains
+    a `data/` directory containing curated dissolved oxygen sonde data.
+    The function summarises the data producing stats, saved as a csv to
+    `data/` and KPI plots saved to a `plots/` directory." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -140,51 +141,65 @@ portal for use in annual reporting for the Swan River — swan_WIN_report_data" 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Function to read and format water quality data obtained from the WIR water
-portal for use in annual reporting for the Swan River</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Bartesto/rivRmon/blob/master/R/universal_report_functions.R'><code>R/universal_report_functions.R</code></a></small>
-    <div class="hidden name"><code>swan_WIN_report_data.Rd</code></div>
+    <h1>Reads in curated Oxy KPI sonde data and exports cummulative Oxy KPI plots
+and stats for the purpose of weekly updates.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Bartesto/rivRmon/blob/master/R/oxy_wranglR.R'><code>R/oxy_wranglR.R</code></a></small>
+    <div class="hidden name"><code>oxy_wranglR.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>swan_WIN_report_data</code> reads in all xlsx downloaded files from WIR
-    and based on a reporting year, formats the data for use in generating the
-    annual report.</p>
+    <p><code>oxy_wranglR</code> takes a file path to a Project folder that contains
+    a `data/` directory containing curated dissolved oxygen sonde data.
+    The function summarises the data producing stats, saved as a csv to
+    `data/` and KPI plots saved to a `plots/` directory.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>swan_WIN_report_data</span>(<span class='no'>inpath</span>, <span class='kw'>reportingYear</span> <span class='kw'>=</span> <span class='fl'>2019</span>, <span class='no'>outpath</span>)</pre>
+    <pre class="usage"><span class='fu'>oxy_wranglR</span>(<span class='no'>path</span>, <span class='kw'>weir_open</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>weir_closed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>inpath</th>
-      <td><p>character filepath to the downloaded data xlsx files.</p></td>
+      <th>path</th>
+      <td><p>Character string file path to location of the `data/`
+directory.</p></td>
     </tr>
     <tr>
-      <th>reportingYear</th>
-      <td><p>4 digit numerical representing current reporting year.</p></td>
+      <th>weir_open</th>
+      <td><p>Character string representing the date ("yyyy-mm-dd") the
+Canning Weir was opened (if appropriate), default: NULL</p></td>
     </tr>
     <tr>
-      <th>outpath</th>
-      <td><p>character filepath to desired export location.</p></td>
+      <th>weir_closed</th>
+      <td><p>Character string representing the date ("yyyy-mm-dd") the
+Canning Weir was closed (if appropriate), default: NULL</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a csv export named SG-E-SWANEST_annual_report_data_for_YYYY.</p>
+    <p>Three PNG Oxy KPI plots saved to `plots/` directory and a csv
+    file of the current Oxy KPI stats saved tp `data/` directory.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Original source data must be downloaded from
-    <a href='http://wir.water.wa.gov.au/Pages/Water-Information-Reporting.aspx'>http://wir.water.wa.gov.au/Pages/Water-Information-Reporting.aspx</a>
-    using the keyword "SG-E-SWANEST" and requesting "Water Quality (discrete)
-    for Site(s) cross-tabulated". These datasets are then read in and
-    reformatted for ease of use in the annual report.</p>
+    <p>The curated data consists of a csv file that has edited data
+    appended to it on a weekly basis. The function expects 4 columns:
+    Site Code, Date, Depth and ODO and the file should have the naming
+    convention: "River_yyyy-yy_oxy_kpi.csv". Please NOTE that the date format
+    for the Date column should be "dd-mm-yyyy".</p>
+<p>When run the function outputs weekly operational targets and cummulative
+    annual KPI's for both 2 mg/L and 4 mg/L concentrations of dissolved
+    oxygen.</p>
+<p>The Function also creates 3 plots. A cummulative DO concentration plot,
+    a DO &gt; 2 mg/L plot and a DO &gt; 4 mg/L plot. Format is PNG in the
+    knowledge that they will need to be opened in Windows Paint to allow
+    copying and pasting into a weekly update email.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>swan_WIN_report_data</span>(<span class='no'>inpath</span>, <span class='kw'>reportYear</span> <span class='kw'>=</span> <span class='fl'>2019</span>, <span class='no'>outpath</span>)}</div></pre>
+<span class='fu'>oxy_wranglR</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"Z:/DEC/MonitoringProgram/Oxy"</span>, <span class='kw'>weir_open</span> <span class='kw'>=</span> <span class='st'>"2018-12-24"</span>,
+<span class='kw'>weir_closed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -195,10 +210,6 @@ portal for use in annual reporting for the Swan River</h1>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
-    <h2>Author</h2>
-    <p>Bart Huntley, <a href='mailto:bart.huntley@dbca.wa.gov.au'>bart.huntley@dbca.wa.gov.au</a></p>
-<p>For more details see  <a href='https://Bartesto.github.io/rivRmon/index.html'>https://Bartesto.github.io/rivRmon/index.html</a>
-the rivRmon website</p>
   </div>
 </div>
 

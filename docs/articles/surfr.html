@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rivRmon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -97,7 +97,7 @@
       <h1>How to make surfer profile plots</h1>
                         <h4 class="author">Bart Huntley</h4>
             
-            <h4 class="date">2019-09-18</h4>
+            <h4 class="date">2019-10-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Bartesto/rivRmon/blob/master/vignettes/surfr.Rmd"><code>vignettes/surfr.Rmd</code></a></small>
       <div class="hidden name"><code>surfr.Rmd</code></div>
@@ -120,14 +120,14 @@
 <p>To run the functions make sure the package is loaded. The path variable is a character string of the file path to the locations of the sonde data for the day you wish to plot. As described above there should be two excel spreadsheets. Make sure that you have the right data for the right function. Sonde data has a “c” in the name for the Canning and a “s” for the Swan. Please ensure that if you copy and paste in a file path from a Windows OS you will need to either double up the backslashes or convert them to a single forward slash.</p>
 <p>The other two parameters supplied to either function relate to the oxygenation status at two locations and are specific to each river. Permissable colours are green, blue and red.</p>
 <p>When run the function will read in the sonde data, process the interpolations and generate the plots. The plots will be written to a directory created at the same location as the sonde data, called “plots”. Examples below.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#load the package</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rivRmon)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#Canning river - forward slash example</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="../reference/canning_surfR.html">canning_surfR</a></span>(<span class="dt">path =</span> <span class="st">"C:blah/blah/data_location"</span>, <span class="dt">obac =</span> <span class="st">"green"</span>, <span class="dt">onic =</span> <span class="st">"red"</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#Swan river - backslash example</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw"><a href="../reference/swan_surfR.html">swan_surfR</a></span>(<span class="dt">path =</span> <span class="st">"C:blah</span><span class="ch">\\</span><span class="st">blah</span><span class="ch">\\</span><span class="st">data_location"</span>, <span class="dt">ovit =</span> <span class="st">"blue"</span>, <span class="dt">ocav =</span> <span class="st">"red"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co">#load the package</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rivRmon)</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">#Canning river - forward slash example</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw"><a href="../reference/canning_surfR.html">canning_surfR</a></span>(<span class="dt">path =</span> <span class="st">"C:blah/blah/data_location"</span>, <span class="dt">obac =</span> <span class="st">"green"</span>, <span class="dt">onic =</span> <span class="st">"red"</span>)</a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">#Swan river - backslash example</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="kw"><a href="../reference/swan_surfR.html">swan_surfR</a></span>(<span class="dt">path =</span> <span class="st">"C:blah</span><span class="ch">\\</span><span class="st">blah</span><span class="ch">\\</span><span class="st">data_location"</span>, <span class="dt">ovit =</span> <span class="st">"blue"</span>, <span class="dt">ocav =</span> <span class="st">"red"</span>)</a></code></pre></div>
 <div id="canning-river-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#canning-river-example" class="anchor"></a>Canning river example</h2>

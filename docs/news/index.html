@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rivRmon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -138,9 +138,17 @@
       <small>Source: <a href='https://github.com/Bartesto/rivRmon/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="rivrmon-1-0-0" class="section level1">
+    <div id="rivrmon-110" class="section level1">
 <h1 class="page-header">
-<a href="#rivrmon-1-0-0" class="anchor"></a>rivRmon 1.0.0</h1>
+<a href="#rivrmon-110" class="anchor"></a>rivRmon 1.1.0</h1>
+<ul>
+<li><p><code>oxy_wranglR</code> function (GitHub <a href='https://github.com/Bartesto/rivRmon/issues/1'>#1</a>, <a href='https://github.com/Bartesto'>@Bartesto</a>) has been added. This was previously a stand alone function called <code>oxy_kpi4</code>.</p></li>
+<li><p><code>phyto_plotR</code> is not restricted to finding data 7 days prior to user entered date for subsetting data for the prior plot. Issue arose when public holidays delay a sampling run. Function now checks that the user entered date is available and that there is data for a prior plot in the summary data and then selects the closest preceding date out of all available. (GitHub <a href='https://github.com/Bartesto/rivRmon/issues/2'>#2</a>, <a href='https://github.com/Bartesto'>@Bartesto</a>).</p></li>
+</ul>
+</div>
+    <div id="rivrmon-100" class="section level1">
+<h1 class="page-header">
+<a href="#rivrmon-100" class="anchor"></a>rivRmon 1.0.0</h1>
 <ul>
 <li>Initial release of rivRmon.</li>
 <li>Functions from two other development packages have been amalgamated into rivRmon (monitoR and reportR) along with 3 phyto functions.</li>
@@ -153,7 +161,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#rivrmon-1-0-0">1.0.0</a></li>
+        <li><a href="#rivrmon-110">1.1.0</a></li>
+        <li><a href="#rivrmon-100">1.0.0</a></li>
       </ul>
     </div>
   </div>

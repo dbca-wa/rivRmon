@@ -37,7 +37,7 @@
 
 <meta property="og:title" content="Creates barcharts from phytoplankton summary data — phyto_plotR" />
 <meta property="og:description" content="phyto_plotR takes a file path to summary data and a date and produces
-    &quot;present&quot; and &quot;last week&quot; barcharts of phytoplankton counts per site." />
+    &quot;present&quot; and &quot;prior sample&quot; barcharts of phytoplankton counts per site." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rivRmon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -144,7 +144,7 @@
 
     <div class="ref-description">
     <p><code>phyto_plotR</code> takes a file path to summary data and a date and produces
-    "present" and "last week" barcharts of phytoplankton counts per site.</p>
+    "present" and "prior sample" barcharts of phytoplankton counts per site.</p>
     </div>
 
     <pre class="usage"><span class='fu'>phyto_plotR</span>(<span class='no'>summary</span>, <span class='no'>date</span>)</pre>
@@ -169,7 +169,7 @@ barchart in the format "yyyymmdd".</p></td>
     <p>This function can only be run on data created by running the
     (<code><a href='phyto_groupR.html'>phyto_groupR</a></code>) function. It will read in all the summary
     data then based on the provided date, produce a barchart for that date
-    and the prior weeks summary in the one output.</p>
+    and the prior sample's summary in the one output.</p>
 <p>As data is gathered for each estuary on consecutive days, the choice of
     date will determine which river summaries will be plotted. That choice
     will be reflected in the sites plotted in the barcharts. These barcharts
