@@ -43,7 +43,6 @@
 #'
 #' @import dplyr
 #' @importFrom  lubridate dmy ymd
-#' @importFrom forcats as_factor
 #' @import tidyr
 #' @import scales
 #'
@@ -117,10 +116,13 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
 
 
   ## Set up horizontal zone colours for weekly means
-  weekly_means_rect <- data.frame(state = forcats::as_factor(c("Well Oxygenated",
-                                                               "Oxygenated",
-                                                               "Low DO",
-                                                               "Hypoxic")),
+  weekly_means_rect <- data.frame(state = factor(c("Well Oxygenated",
+                                                   "Oxygenated", "Low DO",
+                                                   "Hypoxic"),
+                                                 levels = c("Well Oxygenated",
+                                                            "Oxygenated",
+                                                            "Low DO",
+                                                            "Hypoxic")),
                                   xmin = full_summary[1,1],
                                   xmax = tail(full_summary[,1], 1),
                                   ymin = c(6, 4, 2, 0),
@@ -128,8 +130,9 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
                                   stringsAsFactors = FALSE)
 
   ## Set up horizontal zone colours for weekly > 2mg/L
-  weekly_2_rect <- data.frame(state = forcats::as_factor(c("Good", "Acceptable",
-                                                  "Review")),
+  weekly_2_rect <- data.frame(state = factor(c("Good", "Acceptable","Review"),
+                                             levels = c("Good", "Acceptable",
+                                                        "Review")),
                               xmin = full_summary[1,1],
                               xmax = tail(full_summary[,1], 1),
                               ymin = c(90, 80, 40),
@@ -137,8 +140,9 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
                               stringsAsFactors = FALSE)
 
   ## Set up horizontal zone colours for weekly > 4mg/L
-  weekly_4_rect <- data.frame(state = forcats::as_factor(c("Good", "Acceptable",
-                                                  "Review")),
+  weekly_4_rect <- data.frame(state = factor(c("Good", "Acceptable","Review"),
+                                             levels = c("Good", "Acceptable",
+                                                        "Review")),
                               xmin = full_summary[1,1],
                               xmax = tail(full_summary[,1], 1),
                               ymin = c(80, 70, 40),
