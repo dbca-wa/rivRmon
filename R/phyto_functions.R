@@ -153,12 +153,7 @@ phyto_plotR <- function(summary, date){
     stop("No data in summaries for prior plot")
   }
 
-  now <- dat %>%
-    dplyr::filter(date == current)
 
-  prior <- dat %>%
-    dplyr::filter(date == last)
-  current <- lubridate::ymd(date)
 
   dat$family <- factor(dat$family, levels = c("Other", "Cyanophytes",
                                               "Dinoflagellates",
@@ -170,6 +165,13 @@ phyto_plotR <- function(summary, date){
                                          "WMP", "MSB", "SCB2", "SAL","RIV",
                                          "CASMID", "KEN", "BAC", "NIC",
                                          "ELL"), ordered = TRUE)
+
+  now <- dat %>%
+    dplyr::filter(date == current)
+
+  prior <- dat %>%
+    dplyr::filter(date == last)
+  current <- lubridate::ymd(date)
 
   nmax <- now %>%
     dplyr::group_by(site) %>%
