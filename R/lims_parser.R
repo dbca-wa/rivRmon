@@ -30,25 +30,37 @@
 #' {the rivRmon website}
 #'
 #' @importFrom readr read_csv write_csv
-#' @import dplyr
+#' @importFrom tibble tibble
 #' @importFrom hms as_hms
 #' @importFrom lubridate dmy
-#'
+#' @import dplyr
+#' 
 #' @export
 lims_parsR <- function(path, skip = 8){
   # find names for full paths to a weeks worth of data sets
-  data_todo <- list.files(path = data_location, pattern = ".csv",
+  data_todo <- list.files(path = path, pattern = ".csv",
                           full.names = TRUE)
+  
+  # check for 3 csv
+  if(length(data_todo) == 3){
+    #get closest prior date to current date
+    data_todo <- data_todo
+  } else {
+    stop("Not the correct number of input csv's")
+  }
   
   # set up site df's in correct upriver order
   s_names <- c("BLA", "ARM", "HEA", "NAR", "NIL", "STJ", "MAY", "RON", "KIN", 
                "SUC", "WMP", "MSB")
   c_names <- c("SCB2", "SAL", "SHELL", "RIV", "CASMID", "KEN", "BAC", "NIC", "ELL")
-  df_swan <- dplyr::data_frame(site = s_names)
-  df_cann <- dplyr::data_frame(site = c_names)
+  # df_swan <- dplyr::data_frame(site = s_names)
+  # df_cann <- dplyr::data_frame(site = c_names)
+  
+  df_swan <- tibble::tibble(site = s_names)
+  df_cann <- tibble::tibble(site = c_names)
   
   # create summary of all sites for week
-  df_summary <- dplyr::data_frame()
+  df_summary <- tibble::tibble()
   
   for(i in seq_along(data_todo)){
     # get column headers
@@ -85,7 +97,7 @@ lims_parsR <- function(path, skip = 8){
   c <- dplyr::bind_rows(a, b)
   
   # create appropriate name and save results
-  out_name <- paste0(data_location, "/", 
+  out_name <- paste0(path, "/", 
                      dplyr::pull(c[1, 2]), "_interim_pigment_results.csv")
   readr::write_csv(c, out_name)
 }
