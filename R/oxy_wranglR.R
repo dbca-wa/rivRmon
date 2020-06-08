@@ -43,10 +43,11 @@
 #'
 #' @importFrom readr read_csv write_csv
 #' @importFrom stringr str_split
+#' @importFrom forcats as_factor
+#' @importFrom tidyr pivot_longer pivot_wider separate
 #' @import dplyr
 #' @import lubridate
 #' @import ggplot2
-#' @importFrom tidyr pivot_longer pivot_wider separate
 #' @import scales
 #'
 #' @export
@@ -118,7 +119,7 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
   
   
   ## Set up horizontal zone colours for weekly means
-  weekly_means_rect <- data.frame(state = as_factor(c("Well Oxygenated", "Oxygenated", 
+  weekly_means_rect <- data.frame(state = forcats::as_factor(c("Well Oxygenated", "Oxygenated", 
                                                       "Low DO", "Hypoxic")),
                                   xmin = full_summary[1,1],
                                   xmax = tail(full_summary[,1], 1),
@@ -127,7 +128,7 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
                                   stringsAsFactors = FALSE)
   
   ## Set up horizontal zone colours for weekly > 2mg/L
-  weekly_2_rect <- data.frame(state = as_factor(c("Good", "Acceptable", 
+  weekly_2_rect <- data.frame(state = forcats::as_factor(c("Good", "Acceptable", 
                                                   "Review")),
                               xmin = full_summary[1,1],
                               xmax = tail(full_summary[,1], 1),
@@ -136,7 +137,7 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
                               stringsAsFactors = FALSE)
   
   ## Set up horizontal zone colours for weekly > 4mg/L
-  weekly_4_rect <- data.frame(state = as_factor(c("Good", "Acceptable", 
+  weekly_4_rect <- data.frame(state = forcats::as_factor(c("Good", "Acceptable", 
                                                   "Review")),
                               xmin = full_summary[1,1],
                               xmax = tail(full_summary[,1], 1),
