@@ -4,14 +4,17 @@
 \alias{phyto_groupR}
 \title{Creates summary phytoplankton data for plotting}
 \usage{
-phyto_groupR(pathin, pathout)
+phyto_groupR(pathin, pathout, skip = 5)
 }
 \arguments{
 \item{pathin}{a character filepath to the location of the raw phytoplankton
-xlsx spreadsheets}
+xlsx spreadsheets i.e. the PEU data.}
 
 \item{pathout}{a character filepath to the location of the desired directory
-for the summary csv files}
+for the summary csv files.}
+
+\item{skip}{numeric number of lines to skip at beginning of PEU data ingest.
+Defaults to 5 which suits current PEU format, change only if required}
 }
 \description{
 \code{phyto_groupR} takes a file path to raw phytoplankton xlsx spreadsheets
@@ -30,7 +33,7 @@ This is a precursor function to be run prior to using
 }
 \examples{
 \dontrun{
-phyto_groupR(pathin = "C:/path/to/raw_data", pathout = "C:/path/for_export")
+phyto_groupR(pathin = "C:/path/to/raw_data", pathout = "C:/path/for_export", skip = 5)
 }
 
 }
