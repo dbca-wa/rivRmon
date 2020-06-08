@@ -253,7 +253,7 @@ just_nums <- function(n){
 #' @importFrom stringr str_detect
 phyto_finder <- function(pathin){
   excels <- list.files(path = pathin, pattern = ".xlsx$")
-  excel_clean <- excels[stringr::str_detect(excels, "^\\d{8}")] #starts with digits only
+  excel_clean <- excels[stringr::str_detect(excels, "^\\d{6}")] #starts with digits only
   out <- excel_clean[stringr::str_detect(tolower(excel_clean), "raw")] #change to use on test data - "phyto" "raw"
   file.path(pathin, out)
 }
