@@ -16,6 +16,7 @@ LazyData: true
 Imports: 
     dplyr,
     fields,
+    forcats,
     ggplot2,
     ggthemes,
     ggpubr,
@@ -38,7 +39,7 @@ Imports:
     tidyr (>= 0.8.3),
     tidyverse,
     unpivotr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Suggests: 
     rmarkdown,
     knitr
