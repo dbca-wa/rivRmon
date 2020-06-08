@@ -179,6 +179,7 @@ hab_groupR <- function (pathin, pathout, mngt_triggers, skip = 5, shell = FALSE)
 #' @importFrom rlang call2
 #' @importFrom tibble tibble
 #' @importFrom ggpubr ggarrange
+#' @importFrom forcats fct_inorder
 #' @import dplyr
 #' @import ggplot2
 #' @import huxtable 
@@ -259,7 +260,7 @@ hab_tablR <- function(hab_tables, date, mngt_triggers){
   
   # add in upper and lower breaks for values
   t_table_fn <- readr::read_csv(mngt_triggers) %>%
-    dplyr::mutate(table_name = fct_inorder(table_name)) %>%
+    dplyr::mutate(table_name = forcats::fct_inorder(table_name)) %>%
     dplyr::group_by(table_name) %>%
     dplyr::summarise(surveillance = mean(surveillance),
                      notification = mean(notification)) %>%
@@ -307,7 +308,7 @@ hab_tablR <- function(hab_tables, date, mngt_triggers){
   huxtable::font_size(hux_df2) <- 10
   
   # make appropriate name
-  out_name <- file.path(hab_tables, paste0("HAB_report_week_", est, "_", 
+  out_name <- file.path(fp, paste0("HAB_report_week_", est, "_", 
                                            current, ".pptx"))
   # save out as pptx
   huxtable::quick_pptx(hux_df2, file = out_name)
