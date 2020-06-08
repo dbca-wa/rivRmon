@@ -185,7 +185,8 @@ hab_groupR <- function (pathin, pathout, mngt_triggers, skip = 5, shell = FALSE)
 #'
 #' @export
 hab_tablR <- function(hab_tables, date, mngt_triggers){
-  files <- file.path(hab_tables, list.files(hab_tables, "HAB_data.csv"))
+  fp <- file.path(hab_tables, "HAB_tables")
+  files <- file.path(fp, list.files(fp, "HAB_data.csv"))
   #dynamic length due to unknown file path
   d_length <- length(stringr::str_split(files[1], "/")[[1]])
   est <- substr(sapply(stringr::str_split(files[1], "/"), "[[", d_length), 12, 
