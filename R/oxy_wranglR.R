@@ -106,9 +106,22 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
   #remove from tail months of july
   weeks <- data.frame(Date = all_weeks54[1:(54 - sum(month(tail(all_weeks54, 4)) >= 7))])
   
-  full_summary <- dplyr::full_join(weeks, summary, by = "Date") %>%
-    dplyr::arrange(Date)
+  # full_summary <- dplyr::full_join(weeks, summary, by = "Date") %>%
+  #   dplyr::arrange(Date)
   
+  ## logic to insert NA's for weir open period
+  if(is.character(weir_open) & is.character(weir_closed)){
+    wo <- lubridate::ymd(weir_open)
+    wc <- lubridate::ymd(weir_closed)
+    df_na <- weeks %>%
+      dplyr::filter(Date > wo & Date < wc)
+    
+    summary <- summary %>%
+      full_join(df_na, by = "Date") %>%
+      dplyr::arrange(Date)
+  } else {
+    summary <- summary
+  }
   
   
   ## Set up auto complete date range for plot
@@ -120,27 +133,27 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
   
   ## Set up horizontal zone colours for weekly means
   weekly_means_rect <- data.frame(state = forcats::as_factor(c("Well Oxygenated", "Oxygenated", 
-                                                      "Low DO", "Hypoxic")),
-                                  xmin = full_summary[1,1],
-                                  xmax = tail(full_summary[,1], 1),
+                                                               "Low DO", "Hypoxic")),
+                                  xmin = weeks[1,1],
+                                  xmax = tail(weeks[,1], 1),
                                   ymin = c(6, 4, 2, 0),
                                   ymax = c(12, 6, 4, 2),
                                   stringsAsFactors = FALSE)
   
   ## Set up horizontal zone colours for weekly > 2mg/L
   weekly_2_rect <- data.frame(state = forcats::as_factor(c("Good", "Acceptable", 
-                                                  "Review")),
-                              xmin = full_summary[1,1],
-                              xmax = tail(full_summary[,1], 1),
+                                                           "Review")),
+                              xmin = weeks[1,1],
+                              xmax = tail(weeks[,1], 1),
                               ymin = c(90, 80, 40),
                               ymax = c(100, 90, 80),
                               stringsAsFactors = FALSE)
   
   ## Set up horizontal zone colours for weekly > 4mg/L
   weekly_4_rect <- data.frame(state = forcats::as_factor(c("Good", "Acceptable", 
-                                                  "Review")),
-                              xmin = full_summary[1,1],
-                              xmax = tail(full_summary[,1], 1),
+                                                           "Review")),
+                              xmin = weeks[1,1],
+                              xmax = tail(weeks[,1], 1),
                               ymin = c(80, 70, 40),
                               ymax = c(100, 80, 70),
                               stringsAsFactors = FALSE)
