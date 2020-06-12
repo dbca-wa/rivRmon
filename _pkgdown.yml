@@ -13,6 +13,7 @@ articles:
       - surfr
       - annual_reports
       - phyto
+      - hab
 
 reference:
   - title: "Generating surfer plots"
@@ -79,6 +80,18 @@ reference:
       Functions to aid in generating and visualising dissolved oxygen KPI's.
     contents:
       - oxy_wranglR
+  - title: "HAB Tables"
+    desc: >
+      Functions to produce conditionally formatted pptx files for HAB reporting
+    contents:
+      - hab_groupR
+      - hab_tablR
+      - mngt_response_triggers
+  - title: "LIMs Data"
+    desc: >
+      Functions to parse and summarise weekly LIMs data
+    contents:
+      - lims_parsR
   - title: "Under development"
     desc: >
       Functions in development stage for future work incorporating CKAN and
