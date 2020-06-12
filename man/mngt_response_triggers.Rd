@@ -4,14 +4,16 @@
 \name{mngt_response_triggers}
 \alias{mngt_response_triggers}
 \title{Management Response Triggers}
-\format{a data.frame with 5 variables:
+\format{
+a data.frame with 5 variables:
 \describe{
 \item{table_ord}{numeric index of the desired order of reportable groups}
 \item{table_name}{character representing the reportable group name as it is intended for the output}
 \item{spp_name}{character representing the exact species name/s that compromise the reportable group}
 \item{surveillance}{numeric values below this are categorised as surveillance}
 \item{notification}{numeric values equal to or above are categorised as notification}
-}}
+}
+}
 \usage{
 mngt_response_triggers
 }
