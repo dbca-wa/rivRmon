@@ -177,7 +177,7 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
                         values = c( "blue", "darkgreen", "red")) +
     scale_y_continuous(breaks = seq(0, 12, by = 2),
                        labels = seq(0, 12, by = 2),
-                       limits = c(0, 12),
+                       limits = c(0, 13),
                        expand = c(0, 0)) +
     scale_x_date(breaks = plot_dates,
                  labels = plot_dates,
