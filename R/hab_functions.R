@@ -230,10 +230,12 @@ hab_tablR <- function(hab_tables, date, mngt_triggers){
   now <- dat %>%
     dplyr::filter(date == current)
   
+  names(now) <- paste0(names(now), "_1")
+  
   # check 'now' data has been created by intended mngt triggers
-  if(now[["mngt"]][1] == mngt_curr){
+  if(now[["mngt_1"]][1] == mngt_curr){
     # all good remove trigger info
-    now <- dplyr::select(now, -mngt)
+    now <- dplyr::select(now, -mngt_1)
   } else {
     stop("Current week HAB data not created with current trigger info")
   }
@@ -251,11 +253,13 @@ hab_tablR <- function(hab_tables, date, mngt_triggers){
   }
   
   # set up empty tibble to add alternating columns to
-  weeks_df <- tibble(table_name = now[,1])
+  weeks_df <- tibble(table_name = prior[,1])
   
-  for(i in 2:length(now)-1){
-    df1 <- dplyr::bind_cols(prior[i], now[i])
-    weeks_df <- dplyr::bind_cols(weeks_df, df1)
+  for(i in 2:(length(now)-1)){
+    df1 <- cbind(prior[i], now[i])
+    # df1 <- dplyr::bind_cols(prior[i], now[i])
+    weeks_df <- cbind(weeks_df, df1)
+    # weeks_df <- dplyr::bind_cols(weeks_df, df1)
   }
   
   # add in upper and lower breaks for values
@@ -269,7 +273,7 @@ hab_tablR <- function(hab_tables, date, mngt_triggers){
   
   # clean and setup initial huxtable object
   hux_df <- weeks_df %>%
-    dplyr::select(-table_name1, -table_name2) %>%
+    #dplyr::select(-table_name1, -table_name2) %>%
     huxtable::as_huxtable(add_colnames = TRUE) %>% 
     huxtable::set_bold(1, everywhere, TRUE)
   
