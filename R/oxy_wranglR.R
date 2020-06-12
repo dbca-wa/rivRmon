@@ -137,7 +137,7 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
                                   xmin = weeks[1,1],
                                   xmax = tail(weeks[,1], 1),
                                   ymin = c(6, 4, 2, 0),
-                                  ymax = c(12, 6, 4, 2),
+                                  ymax = c(13, 6, 4, 2),
                                   stringsAsFactors = FALSE)
   
   ## Set up horizontal zone colours for weekly > 2mg/L
