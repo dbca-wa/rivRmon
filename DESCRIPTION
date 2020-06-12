@@ -39,7 +39,7 @@ Imports:
     tidyr (>= 0.8.3),
     tidyverse,
     unpivotr
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Suggests: 
     rmarkdown,
     knitr
