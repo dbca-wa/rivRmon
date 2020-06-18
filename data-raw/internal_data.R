@@ -122,21 +122,21 @@ gridded(S_grd_nar) <- TRUE
 # salinity
 aSal <- seq(0, 42, 2)
 bSal <- rep(aSal, each = 3)
-reclass_dfSal <- c(-Inf, bSal, 44, 44)
+reclass_dfSal <- c(-Inf, bSal, Inf, 44)
 reclass_mSal <- matrix(reclass_dfSal,
                        ncol = 3,
                        byrow = TRUE)
 # dissolved oxygen
-aDo <- seq(0, 17, 1)
+aDo <- seq(0, 16, 1)
 bDo <- rep(aDo, each = 3)
-reclass_dfDo <- c(-Inf, bDo, 18, 18)
+reclass_dfDo <- c(-Inf, bDo, Inf, 17)
 reclass_mDo <- matrix(reclass_dfDo,
                       ncol = 3,
                       byrow = TRUE)
 # temperature
 aT <- seq(0, 33, 1)
 bT <- rep(aT, each = 3)
-reclass_dfT <- c(-Inf, bT, 34, 34)
+reclass_dfT <- c(-Inf, bT, Inf, 34)
 reclass_mT <- matrix(reclass_dfT,
                      ncol = 3,
                      byrow = TRUE)
@@ -145,7 +145,7 @@ aC <- seq(20, 80, 20)
 bC <- rep(aC, each = 3)
 #reclass_dfC <- c(0, bC, 120, 120, 120, 200, 200, 200, 400, 400, 400, 1000, 1000)
 reclass_dfC <- c(-Inf, bC, 120, 120, 120, 160, 160, 160, 200, 200, 200,
-                 300, 300, 300, 400, 400, 400, 1000, 1000)
+                 300, 300, 300, 400, 400, 400, Inf, 1000)
 reclass_mChl <- matrix(reclass_dfC,
                        ncol = 3,
                        byrow = TRUE)
