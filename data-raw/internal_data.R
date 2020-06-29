@@ -17,6 +17,8 @@ library(tidyxl)
 library(unpivotr)
 library(splancs)
 library(gtable)
+library(sf)
+library(nngeo)
 
 #####Swan River
 ## Create site data - locations, depths and distances
@@ -373,6 +375,32 @@ C_blockdf_weir[5, 3] <- 11.3 # for KEN xmin
 phyto_cols <- c(Chlorophytes = "#008000", Cyanophytes = "#0000FF",
                 Diatoms = "#FFFF00", Dinoflagellates = "#C00000",
                 Cryptophyta = "#666699", Other = "#000000")
+
+
+# ############ Code to find nearest bottom site to hijack and name as new site
+# # below ex for adding SHELL to canning river 
+# 
+# # grab appropriate bottom distance shape file
+# dist = "../vectors/canning100/CanningDepthDistProfile_MGA50_100m.shp"
+# # read existing points
+# d <- sf::st_read(dsn = dist)
+# # get crs
+# c <- st_crs(d)
+# # create new site from new location co-ords as provided
+# n_point <- st_point(c(115.901366, -32.022782))
+# # give native crs - presuming to be WGS84
+# n_pointGeo <- st_sfc(n_point, crs = 4326)
+# # transform to crs of existing points
+# n_pointMGA50 <- st_transform(n_pointGeo, c)
+# # write to shape file if desired
+# st_write(n_pointMGA50, dsn = "./SHELL_MGA50.shp")
+# # find nearest neighbour
+# nn <- unlist(nngeo::st_nn(n_pointMGA50, d))
+# # to rename the nn site to new site name, filter appropriate "bottom" data on 
+# # "ord" column - done in logic structure in appropriate surfer function
+# # sanity check below out put to filtered row to double check
+# d_drop <- st_drop_geometry(d)[nn,]
+
 
 
 ## Save out sysdtat.rda
