@@ -118,19 +118,20 @@ phyto_groupR <- function(pathin, pathout, skip = 5){
 #' @importFrom readr read_csv write_csv
 #' @importFrom tidyr gather
 #' @importFrom stringr str_split str_detect
-#' @importFrom lubridate ymd
+#' @importFrom lubridate ymd parse_date_time
 #' @importFrom ggpubr ggarrange
 #' @import dplyr
 #' @import ggplot2
 #'
 #' @export
-phyto_plotR <- function(summary, date){
+phyto_plotR <- function(summary, date, SHELL = FALSE){
   folder <- file.path(summary, "summaries")
   files <- file.path(folder, list.files(folder, "summary.csv"))
   justfiles <- list.files(folder, "summary.csv")
   dat <- data.frame()
   for(i in seq_along(files)){
-    dat1 <- readr::read_csv(files[i])
+    dat1 <- readr::read_csv(files[i]) %>%
+      dplyr::mutate(date = lubridate::parse_date_time(date, c("ymd", "dmy")))
     dat2 <- tidyr::gather(dat1, "family", "count", 3:max(length(names(dat1))))
     dat2$project <- stringr::str_split(justfiles[i], "_")[[1]][2]
     dat <- dplyr::bind_rows(dat, dat2)
@@ -159,21 +160,35 @@ phyto_plotR <- function(summary, date){
     stop("No data in summaries for prior plot")
   }
   
-  dat$family <- factor(dat$family, levels = c("Other", "Cyanophytes",
-                                              "Dinoflagellates",
-                                              "Chlorophytes", "Cryptophyta",
-                                              "Diatoms"), ordered = TRUE)
   
-  dat$site<- factor(dat$site, levels = c("BLA", "ARM", "HEA", "NAR", "NIL",
-                                         "STJ", "MAY", "RON", "KIN", "SUC",
-                                         "WMP", "MSB", "SCB2", "SAL","RIV",
-                                         "CASMID", "KEN", "BAC", "NIC",
-                                         "ELL"), ordered = TRUE)
+  datp <- dat
+  datp$family <- factor(datp$family, levels = c("Other", "Cyanophytes",
+                                                "Dinoflagellates",
+                                                "Chlorophytes", "Cryptophyta",
+                                                "Diatoms"), ordered = TRUE)
   
-  now <- dat %>%
+  # logic for include SHELL or not
+  if(SHELL == TRUE){
+    datp$site <- factor(datp$site, levels = c("BLA", "ARM", "HEA", "NAR", "NIL",
+                                              "STJ", "MAY", "RON", "KIN", "SUC",
+                                              "WMP", "MSB", "SCB2", "SAL", "SHELL",
+                                              "RIV","CASMID", "KEN", "BAC", "NIC",
+                                              "ELL"), ordered = TRUE)
+  } else {
+    datp$site <- factor(datp$site, levels = c("BLA", "ARM", "HEA", "NAR", "NIL",
+                                              "STJ", "MAY", "RON", "KIN", "SUC",
+                                              "WMP", "MSB", "SCB2", "SAL","RIV",
+                                              "CASMID", "KEN", "BAC", "NIC",
+                                              "ELL"), ordered = TRUE)
+  }
+  # required to remove NA site when not in list of site factors
+  datp <- datp %>%
+    dplyr::filter(!is.na(site))
+  
+  now <- datp %>%
     dplyr::filter(date == current)
   
-  prior <- dat %>%
+  prior <- datp %>%
     dplyr::filter(date == last)
   current <- lubridate::ymd(date)
   
