@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Helper function for extracting legend from a plot — get_legend • rivRmon</title>
+<title>Creates conditionally formatted table as a pptx file from summary HAB data — hab_tablR • rivRmon</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Helper function for extracting legend from a plot — get_legend" />
-<meta property="og:description" content="get_legend takes a ggplot object and returns the legend grob" />
+<meta property="og:title" content="Creates conditionally formatted table as a pptx file from summary HAB data — hab_tablR" />
+<meta property="og:description" content="hab_tablR takes a file path to summary HAB data and a date and produces
+    &quot;present&quot; and &quot;prior sample&quot; table of phytoplankton counts per site." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -139,39 +140,62 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Helper function for extracting legend from a plot</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Bartesto/rivRmon/blob/master/R/universal_report_functions.R'><code>R/universal_report_functions.R</code></a></small>
-    <div class="hidden name"><code>get_legend.Rd</code></div>
+    <h1>Creates conditionally formatted table as a pptx file from summary HAB data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Bartesto/rivRmon/blob/master/R/hab_functions.R'><code>R/hab_functions.R</code></a></small>
+    <div class="hidden name"><code>hab_tablR.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>get_legend</code> takes a ggplot object and returns the legend grob</p>
+    <p><code>hab_tablR</code> takes a file path to summary HAB data and a date and produces
+    "present" and "prior sample" table of phytoplankton counts per site.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_legend</span>(<span class='no'>myggplot</span>)</pre>
+    <pre class="usage"><span class='fu'>hab_tablR</span>(<span class='no'>hab_tables</span>, <span class='no'>date</span>, <span class='no'>mngt_triggers</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>myggplot</th>
-      <td><p>a ggplot object that contains a legend</p></td>
+      <th>hab_tables</th>
+      <td><p>a character file path to the location of the `HAB_tables/`
+directory.</p></td>
+    </tr>
+    <tr>
+      <th>date</th>
+      <td><p>a character representation of the date chosen for the "present"
+sampling week in the format "yyyymmdd".</p></td>
+    </tr>
+    <tr>
+      <th>mngt_triggers</th>
+      <td><p>a character filepath and name of the 
+`mngt_response_triggers_YYYY.csv` data file that indicates group names, 
+species names and trigger thresholds for management action. See package
+example dataset `mngt_response_triggers` for example of format required.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>a legend grob</p>
+    <p>This function can only be run on data created by running the
+    (<code><a href='hab_groupR.html'>hab_groupR</a></code>) function. It will read in all the summary
+    data then based on the provided date, produce a conditionally formatted 
+    table for that date. Values are coloured according to "investigate" or 
+    "notification" count level for river sites for specific species. The prior
+    sample's data is reported so comparisons can be made.</p>
+<p>Data is exported as pptx file to the `HAB_tables/` directory. It can be 
+    dragged and dropped into a PowerPoint template with some minor resizing.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>get_legend</span>(<span class='no'>myggplot</span>)}</div></pre>
+<span class='fu'>hab_tablR</span>(<span class='kw'>summary</span> <span class='kw'>=</span> <span class='st'>"C:/path/to/HAB_tables"</span>, <span class='kw'>date</span> <span class='kw'>=</span> <span class='st'>"20190910"</span>,
+<span class='kw'>mngt_triggers</span> <span class='kw'>=</span> <span class='st'>"./mngt_response_triggers_2020.csv"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

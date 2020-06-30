@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Helper function for extracting legend from a plot — get_legend • rivRmon</title>
+<title>Creates summary LIMs data for interim reporting — lims_parsR • rivRmon</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Helper function for extracting legend from a plot — get_legend" />
-<meta property="og:description" content="get_legend takes a ggplot object and returns the legend grob" />
+<meta property="og:title" content="Creates summary LIMs data for interim reporting — lims_parsR" />
+<meta property="og:description" content="lims_parsR takes a file path to raw LIMS xlsx spreadsheets
+    and creates summary data." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -139,39 +140,53 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Helper function for extracting legend from a plot</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Bartesto/rivRmon/blob/master/R/universal_report_functions.R'><code>R/universal_report_functions.R</code></a></small>
-    <div class="hidden name"><code>get_legend.Rd</code></div>
+    <h1>Creates summary LIMs data for interim reporting</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Bartesto/rivRmon/blob/master/R/lims_parser.R'><code>R/lims_parser.R</code></a></small>
+    <div class="hidden name"><code>lims_parsR.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>get_legend</code> takes a ggplot object and returns the legend grob</p>
+    <p><code>lims_parsR</code> takes a file path to raw LIMS xlsx spreadsheets
+    and creates summary data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_legend</span>(<span class='no'>myggplot</span>)</pre>
+    <pre class="usage"><span class='fu'>lims_parsR</span>(<span class='no'>path</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>8</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>myggplot</th>
-      <td><p>a ggplot object that contains a legend</p></td>
+      <th>skip</th>
+      <td><p>numeric number of lines to skip at beginning of LIMS data ingest.
+Defaults to 8 which suits current LIMS format, change only if required.</p></td>
+    </tr>
+    <tr>
+      <th>pathin</th>
+      <td><p>a character filepath to the location of the week's raw LIMS 
+data. Expects 3 CSV files, 2 for the Swan and one for the Canning. Data 
+summary is written to this location.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>a legend grob</p>
+    <p>It takes a file path to 3 raw CSV files comprising of a week's 
+    worth of sampling as output from the Chem Centre. It then outputs a 
+    summary CSV data file, categorising chlorophyll a values into low, medium 
+    and high. "Low" is &lt; 4ug, "medium" is 4 to 10ug and higher represents the 
+    "high" category. Summary output is combined for both rivers. Output has 
+    first day's date of sampling week and "interim_pigment_result" in the name.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>get_legend</span>(<span class='no'>myggplot</span>)}</div></pre>
+<span class='fu'>lims_parsR</span>(<span class='kw'>pathin</span> <span class='kw'>=</span> <span class='st'>"C:/path/to/raw_data"</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>8</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
