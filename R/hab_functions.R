@@ -184,7 +184,7 @@ hab_groupR <- function (pathin, pathout, skip = 5, mngt_triggers, shell = FALSE)
 #' @importFrom forcats fct_inorder
 #' @import dplyr
 #' @import ggplot2
-#' @importFrom huxtable as_huxtable set_bold map_text_color by_ranges set_background_color set_all_borders number_format font_size quick_pptx
+#' @import huxtable 
 #'
 #' @export
 hab_tablR <- function(hab_tables, focus_date, mngt_triggers){
