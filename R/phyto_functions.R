@@ -51,7 +51,7 @@ phyto_groupR <- function(pathin, pathout, skip = 5){
   for(i in seq_along(locations)){
     loc <- locations[i]
     sheet <- readxl::excel_sheets(loc)[stringr::str_sub(stringr::str_to_lower(readxl::excel_sheets(loc)), 1, 1) != "e"]
-    sheet1 <- sheet[sheet != "Sheet1"] # in case of blank work sheet
+    sheet1 <- sheet[stringr::str_detect(sheet, pattern = "Routine")]# looking for this only
     dat <- readxl::read_excel(loc, sheet = sheet1, skip = skip)
     names(dat) <- tolower(names(dat))
     loc_splt <- stringr::str_split(loc, pattern = "/")
