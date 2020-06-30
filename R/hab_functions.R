@@ -187,9 +187,8 @@ hab_groupR <- function (pathin, pathout, skip = 5, mngt_triggers, shell = FALSE)
 #' @import huxtable 
 #'
 #' @export
-hab_tablR <- function(hab_tables, date, mngt_triggers){
-  fp <- file.path(hab_tables, "HAB_tables")
-  files <- file.path(fp, list.files(fp, "HAB_data.csv"))
+hab_tablR <- function(hab_tables, focus_date, mngt_triggers){
+  files <- file.path(hab_tables, list.files(hab_tables, "HAB_data.csv"))
   #dynamic length due to unknown file path
   d_length <- length(stringr::str_split(files[1], "/")[[1]])
   est <- substr(sapply(stringr::str_split(files[1], "/"), "[[", d_length), 12, 
@@ -206,7 +205,7 @@ hab_tablR <- function(hab_tables, date, mngt_triggers){
   udates <-unique(dat$date)
   
   # user entered current date
-  current <- lubridate::ymd(date)
+  current <- lubridate::ymd(focus_date)
   
   # test if current date in data
   if(current %in% udates){
@@ -232,12 +231,10 @@ hab_tablR <- function(hab_tables, date, mngt_triggers){
   now <- dat %>%
     dplyr::filter(date == current)
   
-  names(now) <- paste0(names(now), "_1")
-  
   # check 'now' data has been created by intended mngt triggers
-  if(now[["mngt_1"]][1] == mngt_curr){
+  if(now[["mngt"]][1] == mngt_curr){
     # all good remove trigger info
-    now <- dplyr::select(now, -mngt_1)
+    now <- dplyr::select(now, -mngt)
   } else {
     stop("Current week HAB data not created with current trigger info")
   }
@@ -255,13 +252,11 @@ hab_tablR <- function(hab_tables, date, mngt_triggers){
   }
   
   # set up empty tibble to add alternating columns to
-  weeks_df <- tibble(table_name = prior[,1])
+  weeks_df <- tibble(table_name = now[,1])
   
-  for(i in 2:(length(now)-1)){
-    df1 <- cbind(prior[i], now[i])
-    # df1 <- dplyr::bind_cols(prior[i], now[i])
-    weeks_df <- cbind(weeks_df, df1)
-    # weeks_df <- dplyr::bind_cols(weeks_df, df1)
+  for(i in 2:length(now)-1){
+    df1 <- dplyr::bind_cols(prior[i], now[i])
+    weeks_df <- dplyr::bind_cols(weeks_df, df1)
   }
   
   # add in upper and lower breaks for values
@@ -274,8 +269,12 @@ hab_tablR <- function(hab_tables, date, mngt_triggers){
                   b_u = notification)
   
   # clean and setup initial huxtable object
+  names(weeks_df) <- gsub(pattern = "\\...", "_", names(weeks_df))
+  names(weeks_df)[-c(1:3)] <- sapply(str_split(names(weeks_df)[-c(1:3)], "_"), "[", 1) %>%
+    paste0(c("", "1"))
   hux_df <- weeks_df %>%
-    #dplyr::select(-table_name1, -table_name2) %>%
+    dplyr::select(-table_name_1, -table_name_2) %>%
+    dplyr::rename(table_name = table_name_3) %>%
     huxtable::as_huxtable(add_colnames = TRUE) %>% 
     huxtable::set_bold(1, everywhere, TRUE)
   
@@ -314,7 +313,7 @@ hab_tablR <- function(hab_tables, date, mngt_triggers){
   huxtable::font_size(hux_df2) <- 10
   
   # make appropriate name
-  out_name <- file.path(fp, paste0("HAB_report_week_", est, "_", 
+  out_name <- file.path(hab_tables, paste0("HAB_report_week_", est, "_", 
                                            current, ".pptx"))
   # save out as pptx
   huxtable::quick_pptx(hux_df2, file = out_name)
