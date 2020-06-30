@@ -30,13 +30,13 @@
 #' @param skip numeric number of lines to skip at beginning of PEU data ingest.
 #'     Defaults to 5 which suits current PEU format, change only if required
 #'     
-#' @param shell logical. Include Canning River site "Shell". Defaults to FALSE, 
+#' @param SHELL logical. Include Canning River site "Shell". Defaults to FALSE, 
 #'     change if required
 #'
 #' @examples
 #' \dontrun{
 #' phyto_groupR(pathin = "C:/path/to/raw_data", pathout = "C:/path/for_export",
-#' mngt_triggers = "./mngt_response_triggers_2020.csv", skip = 5, shell = FALSE)
+#' mngt_triggers = "./mngt_response_triggers_2020.csv", skip = 5, SHELL = FALSE)
 #' }
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
@@ -53,7 +53,7 @@
 #' @importFrom readr write_csv
 #'
 #' @export
-hab_groupR <- function (pathin, pathout, skip = 5, mngt_triggers, shell = FALSE){
+hab_groupR <- function (pathin, pathout, skip = 5, mngt_triggers, SHELL = FALSE){
   
   locations <- phyto_finder(pathin)
   # make folder for outputs
@@ -79,10 +79,10 @@ hab_groupR <- function (pathin, pathout, skip = 5, mngt_triggers, shell = FALSE)
     outpath_hab <- paste0(hab_folder, "/") ##
     
     # wiggy stuff here to work out river and supply names
-    if(project == "SG-E-CANEST" & shell == FALSE){
+    if(project == "SG-E-CANEST" & SHELL == FALSE){
       site_df <- tibble(site = c("SCB2", "SAL", "RIV", "CASMID", "KEN", "BAC", 
                                  "NIC",  "ELL"))
-    } else if(project == "SG-E-CANEST" & shell == TRUE){
+    } else if(project == "SG-E-CANEST" & SHELL == TRUE){
       site_df <- tibble(site = c("SCB2", "SAL", "SHELL", "RIV", "CASMID", "KEN", 
                                  "BAC", "NIC", "ELL"))
     } else if(project == "SG-E-SWANEST"){
