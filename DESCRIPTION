@@ -1,7 +1,7 @@
 Package: rivRmon
 Type: Package
 Title: Functions to aid in reporting on the Swan and Canning Rivers
-Version: 1.1.0
+Version: 2.0.0
 Authors@R: person("Bart", "Huntley", email = "bart.huntley@dbca.wa.gov.au",
                   role = c("aut", "cre", "prg", "res"),
                   comment = c(ORCID = "0000-0002-9519-4105"))
@@ -16,25 +16,30 @@ LazyData: true
 Imports: 
     dplyr,
     fields,
+    forcats,
     ggplot2,
     ggthemes,
     ggpubr,
     grid,
     gridExtra,
     gtable,
+    hms,
+    huxtable,
     janitor,
     lubridate,
     metR,
     raster,
     readr,
     readxl,
+    rlang,
     scales,
     stringr,
     sp,
+    tibble,
     tidyr (>= 0.8.3),
     tidyverse,
     unpivotr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Suggests: 
     rmarkdown,
     knitr
