@@ -55,7 +55,7 @@
 #' @export
 hab_groupR <- function (pathin, pathout, skip = 5, mngt_triggers, shell = FALSE){
   
-  locations <- phyto_finder_new2(pathin)
+  locations <- phyto_finder(pathin)
   # make folder for outputs
   hab_folder <- file.path(pathout, "HAB_tables") ##
   if (!file.exists(hab_folder)) {
