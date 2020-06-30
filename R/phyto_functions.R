@@ -16,14 +16,17 @@
 #'     exist, it is created.
 #'
 #' @param pathin a character filepath to the location of the raw phytoplankton
-#'     xlsx spreadsheets
+#'     xlsx spreadsheets i.e. the PEU data.
 #'
 #' @param pathout a character filepath to the location of the desired directory
-#'     for the summary csv files
+#'     for the summary csv files.
+#'     
+#' @param skip numeric number of lines to skip at beginning of PEU data ingest.
+#'     Defaults to 5 which suits current PEU format, change only if required
 #'
 #' @examples
 #' \dontrun{
-#' phyto_groupR(pathin = "C:/path/to/raw_data", pathout = "C:/path/for_export")
+#' phyto_groupR(pathin = "C:/path/to/raw_data", pathout = "C:/path/for_export", skip = 5)
 #' }
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
@@ -38,7 +41,7 @@
 #' @importFrom readr write_csv
 #'
 #' @export
-phyto_groupR <- function(pathin, pathout){
+phyto_groupR <- function(pathin, pathout, skip = 5){
   locations <- phyto_finder(pathin)
   # make folder for output
   folder <- file.path(pathout, "summaries")
@@ -48,29 +51,33 @@ phyto_groupR <- function(pathin, pathout){
   for(i in seq_along(locations)){
     loc <- locations[i]
     sheet <- readxl::excel_sheets(loc)[stringr::str_sub(stringr::str_to_lower(readxl::excel_sheets(loc)), 1, 1) != "e"]
-    dat <- readxl::read_excel(loc, sheet = sheet)
+    sheet1 <- sheet[stringr::str_detect(sheet, pattern = "Routine")]# looking for this only
+    dat <- readxl::read_excel(loc, sheet = sheet1, skip = skip)
     names(dat) <- tolower(names(dat))
-    samp_date <- as.character(dat[[1,1]])
-    project <- dat[[1,5]]
+    loc_splt <- stringr::str_split(loc, pattern = "/")
+    samp_date <- lubridate::ymd(substr(loc_splt[[1]][length(loc_splt[[1]])], 1, 8))
+    project <- dat[[1, "project"]]
     outpath <- paste0(folder, "/")
     short_dat <- dat %>%
-      dplyr::select(datecollected, siterefname, species_name, groupname,
-                    `species density cells/ml`) %>%
-      dplyr::rename(date = datecollected, site = siterefname, species = species_name,
-                    group = groupname, density = `species density cells/ml`) %>%
-      dplyr::mutate(group = tolower(group)) %>%
+      dplyr::select(siterefname, species_name, groupname,
+                    species_density_cells_per_ml) %>%
+      dplyr::rename(site = siterefname, species = species_name,
+                    group = groupname, density = species_density_cells_per_ml) %>%
+      dplyr::mutate(group = tolower(group),
+                    date = samp_date) %>%
       dplyr::mutate(family = case_when(
-        str_detect(group, "chloro") | str_detect(group, "prasino") ~ "Chlorophytes",
-        str_detect(group, "cryptophyta") ~ "Cryptophyta",
-        str_detect(group, "diatoms") ~ "Diatoms",
-        str_detect(group, "dinophyta") ~ "Dinoflagellates",
-        str_detect(group, "cyanophyta") ~ "Cyanophytes",
+        stringr::str_detect(group, "chloro") | str_detect(group, "prasino") ~ "Chlorophytes",
+        stringr::str_detect(group, "cryptophyta") ~ "Cryptophyta",
+        stringr::str_detect(group, "diatoms")  | str_detect(group, "bacillariophyta")  ~ "Diatoms",
+        stringr::str_detect(group, "dinophyta") ~ "Dinoflagellates",
+        stringr::str_detect(group, "cyanophyta") ~ "Cyanophytes",
         TRUE ~ "Other")) %>%
       dplyr::group_by(date, site, family) %>%
       dplyr::summarise(count = sum(density)) %>%
       tidyr::spread(family, count) %>%
       replace(., is.na(.), 0)
     readr::write_csv(short_dat, paste0(outpath, samp_date, "_", project, "_phyto_summary.csv"))
+    
   }
 }
 
@@ -111,31 +118,31 @@ phyto_groupR <- function(pathin, pathout){
 #' @importFrom readr read_csv write_csv
 #' @importFrom tidyr gather
 #' @importFrom stringr str_split str_detect
-#' @importFrom lubridate ymd
+#' @importFrom lubridate ymd parse_date_time
 #' @importFrom ggpubr ggarrange
 #' @import dplyr
 #' @import ggplot2
 #'
 #' @export
-
-phyto_plotR <- function(summary, date){
+phyto_plotR <- function(summary, date, SHELL = FALSE){
   folder <- file.path(summary, "summaries")
   files <- file.path(folder, list.files(folder, "summary.csv"))
   justfiles <- list.files(folder, "summary.csv")
   dat <- data.frame()
   for(i in seq_along(files)){
-    dat1 <- readr::read_csv(files[i])
+    dat1 <- readr::read_csv(files[i]) %>%
+      dplyr::mutate(date = lubridate::parse_date_time(date, c("ymd", "dmy")))
     dat2 <- tidyr::gather(dat1, "family", "count", 3:max(length(names(dat1))))
     dat2$project <- stringr::str_split(justfiles[i], "_")[[1]][2]
     dat <- dplyr::bind_rows(dat, dat2)
   }
-
+  
   # unique dates in summaries
   udates <- lubridate::ymd(unique(dat$date))
-
+  
   # user entered current date
   current <- lubridate::ymd(date)
-
+  
   # test if current date in data
   if(current %in% udates){
     #create other dates vector of less than current date
@@ -143,7 +150,7 @@ phyto_plotR <- function(summary, date){
   } else {
     stop("Your date is not in the data")
   }
-
+  
   # test if there is a prior date and select it
   if(sum(odates < current) > 0){
     #get closest prior date to current date
@@ -152,41 +159,53 @@ phyto_plotR <- function(summary, date){
   } else {
     stop("No data in summaries for prior plot")
   }
-
-
-
-  dat$family <- factor(dat$family, levels = c("Other", "Cyanophytes",
-                                              "Dinoflagellates",
-                                              "Chlorophytes", "Cryptophyta",
-                                              "Diatoms"), ordered = TRUE)
-
-  dat$site<- factor(dat$site, levels = c("BLA", "ARM", "HEA", "NAR", "NIL",
-                                         "STJ", "MAY", "RON", "KIN", "SUC",
-                                         "WMP", "MSB", "SCB2", "SAL","RIV",
-                                         "CASMID", "KEN", "BAC", "NIC",
-                                         "ELL"), ordered = TRUE)
-
-  now <- dat %>%
+  
+  
+  datp <- dat
+  datp$family <- factor(datp$family, levels = c("Other", "Cyanophytes",
+                                                "Dinoflagellates",
+                                                "Chlorophytes", "Cryptophyta",
+                                                "Diatoms"), ordered = TRUE)
+  
+  # logic for include SHELL or not
+  if(SHELL == TRUE){
+    datp$site <- factor(datp$site, levels = c("BLA", "ARM", "HEA", "NAR", "NIL",
+                                              "STJ", "MAY", "RON", "KIN", "SUC",
+                                              "WMP", "MSB", "SCB2", "SAL", "SHELL",
+                                              "RIV","CASMID", "KEN", "BAC", "NIC",
+                                              "ELL"), ordered = TRUE)
+  } else {
+    datp$site <- factor(datp$site, levels = c("BLA", "ARM", "HEA", "NAR", "NIL",
+                                              "STJ", "MAY", "RON", "KIN", "SUC",
+                                              "WMP", "MSB", "SCB2", "SAL","RIV",
+                                              "CASMID", "KEN", "BAC", "NIC",
+                                              "ELL"), ordered = TRUE)
+  }
+  # required to remove NA site when not in list of site factors
+  datp <- datp %>%
+    dplyr::filter(!is.na(site))
+  
+  now <- datp %>%
     dplyr::filter(date == current)
-
-  prior <- dat %>%
+  
+  prior <- datp %>%
     dplyr::filter(date == last)
   current <- lubridate::ymd(date)
-
+  
   nmax <- now %>%
     dplyr::group_by(site) %>%
     dplyr::summarise(total = sum(count)) %>%
     dplyr::summarise(m = max(total))
-
+  
   pmax <- prior %>%
     dplyr::group_by(site) %>%
     dplyr::summarise(total = sum(count)) %>%
     dplyr::summarise(m = max(total))
-
+  
   current_project <- now[1, "project"]
-
+  
   ymax <- max(nmax, pmax) + 2000
-
+  
   n_plot <- ggplot(now) +
     geom_bar(aes(x = site, y = count, fill = family), stat = "identity") +
     scale_fill_manual(name = "",
@@ -197,10 +216,12 @@ phyto_plotR <- function(summary, date){
     labs(x = "",
          y = "",
          title = format(current, "%d %B %Y")) +
-    theme_bw()+
+    theme_bw() +
     theme(panel.grid.major.x = element_blank(),
-          panel.grid.major.y = element_line( size=.1))
-
+          panel.grid.major.y = element_line( size=.1),
+          axis.text = element_text(color="black", size=9))
+  
+  
   p_plot <- ggplot(prior) +
     geom_bar(aes(x = site, y = count, fill = family), stat = "identity") +
     scale_fill_manual(name = "",
@@ -213,23 +234,33 @@ phyto_plotR <- function(summary, date){
          title = format(last, "%d %B %Y")) +
     theme_bw()+
     theme(panel.grid.major.x = element_blank(),
-          panel.grid.major.y = element_line( size=.1))
-
-  # save the plot
+          panel.grid.major.y = element_line( size=.1),
+          axis.text = element_text(color="black", size=9))
+  
+  ## save the plot
   phytos <- ggpubr::ggarrange(n_plot, p_plot, ncol = 1, common.legend = TRUE,
                               legend = "bottom")
+  
+  # first as PDF
   pdf_name <- file.path(folder, paste0(current,"_", now[1,5],
                                        "_summary_plots.pdf"))
-  ggsave(plot = phytos, filename = pdf_name)
-
+  ggsave(plot = phytos, filename = pdf_name, width = 7.55, height = 4.99, 
+         units = "in")
+  
+  # next as PNG
+  png_name <- file.path(folder, paste0(current,"_", now[1,5],
+                                       "_summary_plots.png"))
+  ggsave(plot = phytos, filename = png_name, width = 4, height = 3.5, 
+         units = "in", scale = 1.5)
+  
   # running datasheet
   datout <- dat %>%
     tidyr::spread(family, count) %>%
     dplyr::filter(date <= current & project == current_project) %>%
     replace(., is.na(.), 0)
-
+  
   outpath <- paste0(folder, "/")
   readr::write_csv(datout, paste0(outpath, current_project,
                                   "_running_datasheet.csv"))
-
+  
 }
