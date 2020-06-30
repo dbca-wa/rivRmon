@@ -1,3 +1,45 @@
+# rivRmon 2.0.0
+
+### Updates to functions
+
+* `oxy_wranglR` has been updated:
+     + to fix unwanted inclusion of gaps in plotted lines where data. 
+     points were not one week apart (i.e. when public holidays delayed sampling)
+     + to output all weekly and seasonal statistics.
+     
+* `phyto_finder` (internal function) has been updated:
+     + to search for data beginning with at least 6 digits. There is a naming 
+     discrepancy between original data as output from the PEU and how RE archive
+     this data. This ensures it can use either as source data.
+     + to additionally search for the term "raw" in the source data file. This 
+     is additional security to use original data and not an internally edited 
+     one.
+     
+* `phyto_groupR` has been updated:
+     + to address new PEU data delivery format (GitHub #9, @Bartesto).
+     + to ignore any additonal sheets in workbook (i.e. "edited").
+     + "bacillariophyta" now included in Diatom group.
+     + to now take date from file name rather than from that reported inside the
+     workbook. This addresses weird intermittent date format issues on reading of 
+     the data.
+     
+* `phyto_plotR` has been updated:
+     + export plots as PNG format so to aid inclusion in Microsoft products 
+     (GitHub#6, @Bartesto)
+     
+### New functions
+     
+* `hab_groupR` is a new function! It reads in the same PEU data and summarises 
+the data according to HAB reporting species and outputs a weekly summary to CSV 
+file.
+
+* `hab_tablR` is a new function! It takes the weekly summary HAB data and 
+creates a conditionally formatted table as a PPTX output according to HAB 
+reportable triggers.
+
+* `lims_parsR` is a new function! It takes 3 interim weekly chlorophyll a result 
+workbooks as supplied from the Chem Centre, summarises and outputs them to CSV.
+
 # rivRmon 1.1.0
 
 * `oxy_wranglR` function (GitHub #1, @Bartesto) has been added. This was 
@@ -16,6 +58,3 @@ selects the closest preceding date out of all available. (GitHub #2, @Bartesto).
 * Functions from two other development packages have been amalgamated into 
 rivRmon (monitoR and reportR) along with 3 phyto functions.
 * CKAN functions are in development. Please do not use.
-
-
-
