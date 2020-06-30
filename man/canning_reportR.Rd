@@ -5,8 +5,13 @@
 \title{Function to create all of the plots and tables for the annual Canning River
 report.}
 \usage{
-canning_reportR(inpath, outpath, surface = "blue", bottom = "red",
-  chloro = "darkgreen")
+canning_reportR(
+  inpath,
+  outpath,
+  surface = "blue",
+  bottom = "red",
+  chloro = "darkgreen"
+)
 }
 \arguments{
 \item{inpath}{character filepath to premade annual report data

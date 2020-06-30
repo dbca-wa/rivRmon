@@ -36,7 +36,7 @@ The curated data consists of a csv file that has edited data
 
     When run the function outputs weekly operational targets and cummulative
     annual KPI's for both 2 mg/L and 4 mg/L concentrations of dissolved
-    oxygen.
+    oxygen, as csv files.
 
     The Function also creates 3 plots. A cummulative DO concentration plot,
     a DO > 2 mg/L plot and a DO > 4 mg/L plot. Format is PNG in the

@@ -38,7 +38,7 @@ Surfer plots display a
     interpolated between sonde locations. Thin plate spline has
     been used for the interpolation.
 
-A river "bottom" is displayed which puts the interpolation in context.
+    A river "bottom" is displayed which puts the interpolation in context.
     The river bottom has been derived from a combination of historical
     maximum depths at sampling locations as well as station points extracted
     from a "best" navigation line over the latest corporate bathymetry. See
