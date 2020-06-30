@@ -155,7 +155,7 @@ hab_groupR <- function (pathin, pathout, skip = 5, mngt_triggers, shell = FALSE)
 #' @param hab_tables a character file path to the location of the `HAB_tables/`
 #'     directory.
 #'
-#' @param date a character representation of the date chosen for the "present"
+#' @param focus_date a character representation of the date chosen for the "present"
 #'     sampling week in the format "yyyymmdd".
 #'     
 #' @param mngt_triggers a character filepath and name of the 
