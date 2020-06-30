@@ -2,9 +2,10 @@ pandoc: 2.7.2
 pkgdown: 1.4.0
 pkgdown_sha: ~
 articles:
-  annual_reports: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon/vignettes/annual_reports.html
-  phyto: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon/vignettes/phyto.html
-  surfr: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon/vignettes/surfr.html
+  annual_reports: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon_next_release/vignettes/annual_reports.html
+  hab: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon_next_release/vignettes/hab.html
+  phyto: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon_next_release/vignettes/phyto.html
+  surfr: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon_next_release/vignettes/surfr.html
 urls:
   reference: https://Bartesto.github.io/rivRmon/reference
   article: https://Bartesto.github.io/rivRmon/articles

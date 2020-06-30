@@ -61,7 +61,19 @@
     <loc>https://Bartesto.github.io/rivRmon/reference/get_legend.html</loc>
   </url>
   <url>
+    <loc>https://Bartesto.github.io/rivRmon/reference/hab_groupR.html</loc>
+  </url>
+  <url>
+    <loc>https://Bartesto.github.io/rivRmon/reference/hab_tablR.html</loc>
+  </url>
+  <url>
     <loc>https://Bartesto.github.io/rivRmon/reference/just_nums.html</loc>
+  </url>
+  <url>
+    <loc>https://Bartesto.github.io/rivRmon/reference/lims_parsR.html</loc>
+  </url>
+  <url>
+    <loc>https://Bartesto.github.io/rivRmon/reference/mngt_response_triggers.html</loc>
   </url>
   <url>
     <loc>https://Bartesto.github.io/rivRmon/reference/oxy_wranglR.html</loc>
@@ -92,6 +104,9 @@
   </url>
   <url>
     <loc>https://Bartesto.github.io/rivRmon/articles/annual_reports.html</loc>
+  </url>
+  <url>
+    <loc>https://Bartesto.github.io/rivRmon/articles/hab.html</loc>
   </url>
   <url>
     <loc>https://Bartesto.github.io/rivRmon/articles/phyto.html</loc>
