@@ -4,7 +4,7 @@
 \alias{phyto_plotR}
 \title{Creates barcharts from phytoplankton summary data}
 \usage{
-phyto_plotR(summary, date)
+phyto_plotR(summary, date, SHELL = FALSE)
 }
 \arguments{
 \item{summary}{a character file path to the location of the `summaries/`

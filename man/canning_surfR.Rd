@@ -5,7 +5,7 @@
 \title{Reads in external data, combines with internal datasets and produces Canning
 River surfer plots}
 \usage{
-canning_surfR(path, obac, onic)
+canning_surfR(path, obac, onic, SHELL = FALSE)
 }
 \arguments{
 \item{path}{Character string filepath to location of sonde data xlsx
@@ -16,6 +16,9 @@ oxygenation plant status at site BAC.}
 
 \item{onic}{Character string ("green", "blue" or "red") indicating
 oxygenation plant status at site NIC.}
+
+\item{SHELL}{Logical (TRUE/FALSE) indicating whether to include the Shelley
+Bridge site.}
 }
 \value{
 A pdf format four panel surfer plot of the Canning River. Saved to
@@ -44,7 +47,7 @@ Surfer plots display a
 }
 \examples{
 \dontrun{
-canning_surfR(path = "Z:/DEC/MonitoringProgram/Data", obac = "green", onic = "red")
+canning_surfR(path = "Z:/DEC/MonitoringProgram/Data", obac = "green", onic = "red", SHELL = TRUE)
 }
 
 }

@@ -4,19 +4,19 @@
 \alias{hab_tablR}
 \title{Creates conditionally formatted table as a pptx file from summary HAB data}
 \usage{
-hab_tablR(hab_tables, date, mngt_triggers)
+hab_tablR(hab_tables, focus_date, mngt_triggers)
 }
 \arguments{
 \item{hab_tables}{a character file path to the location of the `HAB_tables/`
 directory.}
 
-\item{date}{a character representation of the date chosen for the "present"
-sampling week in the format "yyyymmdd".}
-
 \item{mngt_triggers}{a character filepath and name of the 
 `mngt_response_triggers_YYYY.csv` data file that indicates group names, 
 species names and trigger thresholds for management action. See package
 example dataset `mngt_response_triggers` for example of format required.}
+
+\item{date}{a character representation of the date chosen for the "present"
+sampling week in the format "yyyymmdd".}
 }
 \description{
 \code{hab_tablR} takes a file path to summary HAB data and a date and produces

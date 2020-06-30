@@ -4,7 +4,7 @@
 \alias{hab_groupR}
 \title{Creates summary HAB data for conditionally formatted table export}
 \usage{
-hab_groupR(pathin, pathout, mngt_triggers, skip = 5, shell = FALSE)
+hab_groupR(pathin, pathout, skip = 5, mngt_triggers, shell = FALSE)
 }
 \arguments{
 \item{pathin}{a character filepath to the location of the raw phytoplankton
@@ -13,13 +13,13 @@ xlsx spreadsheets i.e. the PEU data}
 \item{pathout}{a character filepath to the location of the desired directory
 for the summary csv files, suggest same as `pathin`}
 
+\item{skip}{numeric number of lines to skip at beginning of PEU data ingest.
+Defaults to 5 which suits current PEU format, change only if required}
+
 \item{mngt_triggers}{a character filepath and name of the 
 `mngt_response_triggers_2020.csv` data file that indicates group names, 
 species names and trigger thresholds for management action. See package
 example dataset `mngt_response_triggers` for example of format required.}
-
-\item{skip}{numeric number of lines to skip at beginning of PEU data ingest.
-Defaults to 5 which suits current PEU format, change only if required}
 
 \item{shell}{logical. Include Canning River site "Shell". Defaults to FALSE, 
 change if required}
