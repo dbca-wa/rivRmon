@@ -137,7 +137,7 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
                                   xmin = weeks[1,1],
                                   xmax = tail(weeks[,1], 1),
                                   ymin = c(6, 4, 2, 0),
-                                  ymax = c(13, 6, 4, 2),
+                                  ymax = c(12, 6, 4, 2),
                                   stringsAsFactors = FALSE)
   
   ## Set up horizontal zone colours for weekly > 2mg/L
@@ -177,7 +177,7 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
                         values = c( "blue", "darkgreen", "red")) +
     scale_y_continuous(breaks = seq(0, 12, by = 2),
                        labels = seq(0, 12, by = 2),
-                       limits = c(0, 13),
+                       limits = c(0, 12),
                        expand = c(0, 0)) +
     scale_x_date(breaks = plot_dates,
                  labels = plot_dates,
@@ -288,5 +288,4 @@ oxy_wranglR <- function(path, weir_open = NULL, weir_closed = NULL){
   ggsave(w1, filename = w1_name, width = 6, height = 3.8, units = "in")
   ggsave(w2, filename = w2_name, width = 6, height = 3.8, units = "in")
   ggsave(w3, filename = w3_name, width = 6, height = 3.8, units = "in")
-  
 }
