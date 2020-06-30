@@ -4,7 +4,7 @@
 \alias{hab_groupR}
 \title{Creates summary HAB data for conditionally formatted table export}
 \usage{
-hab_groupR(pathin, pathout, skip = 5, mngt_triggers, shell = FALSE)
+hab_groupR(pathin, pathout, skip = 5, mngt_triggers, SHELL = FALSE)
 }
 \arguments{
 \item{pathin}{a character filepath to the location of the raw phytoplankton
@@ -21,7 +21,7 @@ Defaults to 5 which suits current PEU format, change only if required}
 species names and trigger thresholds for management action. See package
 example dataset `mngt_response_triggers` for example of format required.}
 
-\item{shell}{logical. Include Canning River site "Shell". Defaults to FALSE, 
+\item{SHELL}{logical. Include Canning River site "Shell". Defaults to FALSE, 
 change if required}
 }
 \description{
@@ -43,7 +43,7 @@ This is a precursor function to be run prior to using
 \examples{
 \dontrun{
 phyto_groupR(pathin = "C:/path/to/raw_data", pathout = "C:/path/for_export",
-mngt_triggers = "./mngt_response_triggers_2020.csv", skip = 5, shell = FALSE)
+mngt_triggers = "./mngt_response_triggers_2020.csv", skip = 5, SHELL = FALSE)
 }
 
 }
