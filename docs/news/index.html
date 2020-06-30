@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rivRmon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
       </span>
     </div>
 
@@ -101,6 +101,9 @@
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/annual_reports.html">How to make plots and tables for annual reports</a>
+    </li>
+    <li>
+      <a href="../articles/hab.html">How to use the HAB functions</a>
     </li>
     <li>
       <a href="../articles/phyto.html">How to use the phyto functions</a>
@@ -138,6 +141,54 @@
       <small>Source: <a href='https://github.com/Bartesto/rivRmon/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="rivrmon-200" class="section level1">
+<h1 class="page-header">
+<a href="#rivrmon-200" class="anchor"></a>rivRmon 2.0.0</h1>
+<div id="updates-to-functions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#updates-to-functions" class="anchor"></a>Updates to functions</h3>
+<ul>
+<li>
+<code>oxy_wranglR</code> has been updated:
+<ul>
+<li>to fix unwanted inclusion of gaps in plotted lines where data. points were not one week apart (i.e. when public holidays delayed sampling)</li>
+<li>to output all weekly and seasonal statistics.</li>
+</ul>
+</li>
+<li>
+<code>phyto_finder</code> (internal function) has been updated:
+<ul>
+<li>to search for data beginning with at least 6 digits. There is a naming discrepancy between original data as output from the PEU and how RE archive this data. This ensures it can use either as source data.</li>
+<li>to additionally search for the term “raw” in the source data file. This is additional security to use original data and not an internally edited one.</li>
+</ul>
+</li>
+<li>
+<code>phyto_groupR</code> has been updated:
+<ul>
+<li>to address new PEU data delivery format (GitHub <a href='https://github.com/Bartesto/rivRmon/issues/9'>#9</a>, <a href='https://github.com/Bartesto'>@Bartesto</a>).</li>
+<li>to ignore any additonal sheets in workbook (i.e. “edited”).</li>
+<li>“bacillariophyta” now included in Diatom group.</li>
+<li>to now take date from file name rather than from that reported inside the workbook. This addresses weird intermittent date format issues on reading of the data.</li>
+</ul>
+</li>
+<li>
+<code>phyto_plotR</code> has been updated:
+<ul>
+<li>export plots as PNG format so to aid inclusion in Microsoft products (GitHub<a href='https://github.com/Bartesto/rivRmon/issues/6'>#6</a>, <a href='https://github.com/Bartesto'>@Bartesto</a>)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="new-functions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#new-functions" class="anchor"></a>New functions</h3>
+<ul>
+<li><p><code>hab_groupR</code> is a new function! It reads in the same PEU data and summarises the data according to HAB reporting species and outputs a weekly summary to CSV file.</p></li>
+<li><p><code>hab_tablR</code> is a new function! It takes the weekly summary HAB data and creates a conditionally formatted table as a PPTX output according to HAB reportable triggers.</p></li>
+<li><p><code>lims_parsR</code> is a new function! It takes 3 interim weekly chlorophyll a result workbooks as supplied from the Chem Centre, summarises and outputs them to CSV.</p></li>
+</ul>
+</div>
+</div>
     <div id="rivrmon-110" class="section level1">
 <h1 class="page-header">
 <a href="#rivrmon-110" class="anchor"></a>rivRmon 1.1.0</h1>
@@ -161,6 +212,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#rivrmon-200">2.0.0</a></li>
         <li><a href="#rivrmon-110">1.1.0</a></li>
         <li><a href="#rivrmon-100">1.0.0</a></li>
       </ul>
