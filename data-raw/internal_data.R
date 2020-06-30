@@ -17,6 +17,8 @@ library(tidyxl)
 library(unpivotr)
 library(splancs)
 library(gtable)
+library(sf)
+library(nngeo)
 
 #####Swan River
 ## Create site data - locations, depths and distances
@@ -37,15 +39,15 @@ S_oxy_locs <- S_sitesdf %>%
 ## Bottoms for plotting
 S_bottom <- data.frame(x = c(-1, S_sitesdf$dist_mouth/1000,
                              51.6, 51.6, -1),
-                     y = c(-10 ,S_sitesdf$adj_depth,
-                           -1.9, -22.1, -22.1),
-                     id = 1)
+                       y = c(-10 ,S_sitesdf$adj_depth,
+                             -1.9, -22.1, -22.1),
+                       id = 1)
 
 S_bottom_nar <- data.frame(x = c(20.95 , S_sitesdf[S_sitesdf$dist_mouth/1000 >= 21, 8]/1000,
                                  51.6, 51.6, 20.95),
-                         y = c(-3.9 , S_sitesdf[S_sitesdf$dist_mouth/1000 >= 21, 9],
-                               -1.9, -10.05, -10.05),
-                         id = 1)
+                           y = c(-3.9 , S_sitesdf[S_sitesdf$dist_mouth/1000 >= 21, 9],
+                                 -1.9, -10.05, -10.05),
+                           id = 1)
 ## Irregular grid creation
 # for all river
 b_all <- data.frame(x = c(-1.1, S_sitesdf$dist_mouth/1000,
@@ -122,21 +124,21 @@ gridded(S_grd_nar) <- TRUE
 # salinity
 aSal <- seq(0, 42, 2)
 bSal <- rep(aSal, each = 3)
-reclass_dfSal <- c(-Inf, bSal, 44, 44)
+reclass_dfSal <- c(-Inf, bSal, Inf, 44)
 reclass_mSal <- matrix(reclass_dfSal,
                        ncol = 3,
                        byrow = TRUE)
 # dissolved oxygen
-aDo <- seq(0, 17, 1)
+aDo <- seq(0, 16, 1)
 bDo <- rep(aDo, each = 3)
-reclass_dfDo <- c(-Inf, bDo, 18, 18)
+reclass_dfDo <- c(-Inf, bDo, Inf, 17)
 reclass_mDo <- matrix(reclass_dfDo,
                       ncol = 3,
                       byrow = TRUE)
 # temperature
 aT <- seq(0, 33, 1)
 bT <- rep(aT, each = 3)
-reclass_dfT <- c(-Inf, bT, 34, 34)
+reclass_dfT <- c(-Inf, bT, Inf, 34)
 reclass_mT <- matrix(reclass_dfT,
                      ncol = 3,
                      byrow = TRUE)
@@ -145,7 +147,7 @@ aC <- seq(20, 80, 20)
 bC <- rep(aC, each = 3)
 #reclass_dfC <- c(0, bC, 120, 120, 120, 200, 200, 200, 400, 400, 400, 1000, 1000)
 reclass_dfC <- c(-Inf, bC, 120, 120, 120, 160, 160, 160, 200, 200, 200,
-                 300, 300, 300, 400, 400, 400, 1000, 1000)
+                 300, 300, 300, 400, 400, 400, Inf, 1000)
 reclass_mChl <- matrix(reclass_dfC,
                        ncol = 3,
                        byrow = TRUE)
@@ -373,6 +375,32 @@ C_blockdf_weir[5, 3] <- 11.3 # for KEN xmin
 phyto_cols <- c(Chlorophytes = "#008000", Cyanophytes = "#0000FF",
                 Diatoms = "#FFFF00", Dinoflagellates = "#C00000",
                 Cryptophyta = "#666699", Other = "#000000")
+
+
+# ############ Code to find nearest bottom site to hijack and name as new site
+# # below ex for adding SHELL to canning river
+#
+# # grab appropriate bottom distance shape file
+# dist = "../vectors/canning100/CanningDepthDistProfile_MGA50_100m.shp"
+# # read existing points
+# d <- sf::st_read(dsn = dist)
+# # get crs
+# c <- st_crs(d)
+# # create new site from new location co-ords as provided
+# n_point <- st_point(c(115.901366, -32.022782))
+# # give native crs - presuming to be WGS84
+# n_pointGeo <- st_sfc(n_point, crs = 4326)
+# # transform to crs of existing points
+# n_pointMGA50 <- st_transform(n_pointGeo, c)
+# # write to shape file if desired
+# st_write(n_pointMGA50, dsn = "./SHELL_MGA50.shp")
+# # find nearest neighbour
+# nn <- unlist(nngeo::st_nn(n_pointMGA50, d))
+# # to rename the nn site to new site name, filter appropriate "bottom" data on
+# # "ord" column - done in logic structure in appropriate surfer function
+# # sanity check below out put to filtered row to double check
+# d_drop <- st_drop_geometry(d)[nn,]
+
 
 
 ## Save out sysdtat.rda
