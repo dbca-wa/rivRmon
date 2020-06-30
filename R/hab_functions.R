@@ -53,9 +53,9 @@
 #' @importFrom readr write_csv
 #'
 #' @export
-hab_groupR <- function (pathin, pathout, mngt_triggers, skip = 5, shell = FALSE){
+hab_groupR <- function (pathin, pathout, skip = 5, mngt_triggers, shell = FALSE){
   
-  locations <- phyto_finder(pathin)
+  locations <- phyto_finder_new2(pathin)
   # make folder for outputs
   hab_folder <- file.path(pathout, "HAB_tables") ##
   if (!file.exists(hab_folder)) {
@@ -67,7 +67,7 @@ hab_groupR <- function (pathin, pathout, mngt_triggers, skip = 5, shell = FALSE)
   for (i in seq_along(locations)) {
     loc <- locations[i]
     sheet <- readxl::excel_sheets(loc)[stringr::str_sub(stringr::str_to_lower(readxl::excel_sheets(loc)), 1, 1) != "e"]
-    sheet1 <- sheet[sheet != "Sheet1"] # in case of blank work sheet
+    sheet1 <- sheet[str_detect(sheet, pattern = "Routine")]# looking for this only
     dat <- readxl::read_excel(loc, sheet = sheet1, skip = skip)
     names(dat) <- tolower(names(dat))
     
@@ -115,6 +115,8 @@ hab_groupR <- function (pathin, pathout, mngt_triggers, skip = 5, shell = FALSE)
       dplyr::group_by(site, table_ord, table_name, surveillance, notification, date) %>%
       dplyr::summarise(density = sum(density, na.rm = TRUE)) %>%
       dplyr::ungroup()
+    
+    hab_dat3$density <- round(hab_dat3$density, digits = 0)
     
     
     # add in version of mngt triggers
