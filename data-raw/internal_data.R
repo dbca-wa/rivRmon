@@ -39,15 +39,15 @@ S_oxy_locs <- S_sitesdf %>%
 ## Bottoms for plotting
 S_bottom <- data.frame(x = c(-1, S_sitesdf$dist_mouth/1000,
                              51.6, 51.6, -1),
-                       y = c(-10 ,S_sitesdf$adj_depth,
-                             -1.9, -22.1, -22.1),
-                       id = 1)
+                     y = c(-10 ,S_sitesdf$adj_depth,
+                           -1.9, -22.1, -22.1),
+                     id = 1)
 
 S_bottom_nar <- data.frame(x = c(20.95 , S_sitesdf[S_sitesdf$dist_mouth/1000 >= 21, 8]/1000,
                                  51.6, 51.6, 20.95),
-                           y = c(-3.9 , S_sitesdf[S_sitesdf$dist_mouth/1000 >= 21, 9],
-                                 -1.9, -10.05, -10.05),
-                           id = 1)
+                         y = c(-3.9 , S_sitesdf[S_sitesdf$dist_mouth/1000 >= 21, 9],
+                               -1.9, -10.05, -10.05),
+                         id = 1)
 ## Irregular grid creation
 # for all river
 b_all <- data.frame(x = c(-1.1, S_sitesdf$dist_mouth/1000,
@@ -378,8 +378,8 @@ phyto_cols <- c(Chlorophytes = "#008000", Cyanophytes = "#0000FF",
 
 
 # ############ Code to find nearest bottom site to hijack and name as new site
-# # below ex for adding SHELL to canning river
-#
+# # below ex for adding SHELL to canning river 
+# 
 # # grab appropriate bottom distance shape file
 # dist = "../vectors/canning100/CanningDepthDistProfile_MGA50_100m.shp"
 # # read existing points
@@ -396,7 +396,7 @@ phyto_cols <- c(Chlorophytes = "#008000", Cyanophytes = "#0000FF",
 # st_write(n_pointMGA50, dsn = "./SHELL_MGA50.shp")
 # # find nearest neighbour
 # nn <- unlist(nngeo::st_nn(n_pointMGA50, d))
-# # to rename the nn site to new site name, filter appropriate "bottom" data on
+# # to rename the nn site to new site name, filter appropriate "bottom" data on 
 # # "ord" column - done in logic structure in appropriate surfer function
 # # sanity check below out put to filtered row to double check
 # d_drop <- st_drop_geometry(d)[nn,]
