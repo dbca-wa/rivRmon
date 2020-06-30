@@ -5,8 +5,13 @@
 \title{Function to create all of the plots and tables for the annual Swan River
 report.}
 \usage{
-swan_reportR(inpath, outpath, surface = "blue", bottom = "red",
-  chloro = "darkgreen")
+swan_reportR(
+  inpath,
+  outpath,
+  surface = "blue",
+  bottom = "red",
+  chloro = "darkgreen"
+)
 }
 \arguments{
 \item{inpath}{character filepath to premade annual report data
