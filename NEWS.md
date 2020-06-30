@@ -6,32 +6,42 @@
      + to fix unwanted inclusion of gaps in plotted lines where data. 
      points were not one week apart (i.e. when public holidays delayed sampling)
      + to output all weekly and seasonal statistics.
+     + names outputs in stats to sensible names.
      
 * `phyto_finder` (internal function) has been updated:
      + to search for data beginning with at least 6 digits. There is a naming 
      discrepancy between original data as output from the PEU and how RE archive
      this data. This ensures it can use either as source data.
-     + to additionally search for the term "raw" in the source data file. This 
-     is additional security to use original data and not an internally edited 
-     one.
      
 * `phyto_groupR` has been updated:
      + to address new PEU data delivery format (GitHub #9, @Bartesto).
-     + to ignore any additonal sheets in workbook (i.e. "edited").
+     + to only focus on a sheet with "Routine" in the name (seems to be most 
+     unchangeable element in the raw data).
      + "bacillariophyta" now included in Diatom group.
      + to now take date from file name rather than from that reported inside the
      workbook. This addresses weird intermittent date format issues on reading of 
-     the data.
+     the input data.
      
 * `phyto_plotR` has been updated:
      + export plots as PNG format so to aid inclusion in Microsoft products 
-     (GitHub#6, @Bartesto)
+     (GitHub#6, @Bartesto).
+     + can now include site "SHELL" if needed.
+     
+* `swan_surfR` and `canning_surfR` have been updated:
+     + removed titles (they are titled within the report headers).
+     + removed oxygen plant status legend (had been too cramped and small and 
+     info appears in the report).
+     + ability to add in the site "SHELL" if needed in the Canning River plots.
+     + exports plots in PNG format for easier inclusion without resizing to 
+     reports, removed margins and made any transparent.
+     + river bottom at site locations now adjusts to the data (+ 20cm).
+     + updated colour ramps to fix white "blob" issue (GitHub#4).
      
 ### New functions
      
 * `hab_groupR` is a new function! It reads in the same PEU data and summarises 
 the data according to HAB reporting species and outputs a weekly summary to CSV 
-file.
+file. Also coded to include site "SHELL" if needed.
 
 * `hab_tablR` is a new function! It takes the weekly summary HAB data and 
 creates a conditionally formatted table as a PPTX output according to HAB 
