@@ -3,7 +3,7 @@
 ### Updates to functions
 
 * `oxy_wranglR` has been updated:
-     + to fix unwanted inclusion of gaps in plotted lines where data. 
+     + to fix unwanted inclusion of gaps in plotted lines where data 
      points were not one week apart (i.e. when public holidays delayed sampling)
      + to output all weekly and seasonal statistics.
      + names outputs in stats to sensible names.
