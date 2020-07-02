@@ -31,7 +31,7 @@
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -309,7 +309,7 @@ ann_rep_grp1_c <- function(outpath, data, surface, bottom){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -508,7 +508,7 @@ ann_rep_si_c <- function(outpath, data, surface){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -711,7 +711,7 @@ ann_rep_doc_c <- function(outpath, data, surface){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -994,7 +994,7 @@ ann_rep_grp3_c <- function(outpath, data, surface, bottom){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -1270,7 +1270,7 @@ ann_rep_chla_c <- function(outpath, data, surface, chloro){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -1467,7 +1467,7 @@ ann_rep_secchi_c <- function(outpath, data, surface){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse

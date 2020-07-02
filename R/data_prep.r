@@ -24,7 +24,7 @@
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @importFrom stringr str_detect
@@ -71,7 +71,7 @@ data_finder <- function(path, river){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @importFrom readxl read_excel
@@ -161,7 +161,7 @@ sonde_reader <- function(path){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 surfer_cols <- function(metric){
   if(metric == "sal"){
@@ -215,7 +215,7 @@ surfer_cols <- function(metric){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @importFrom dplyr case_when
@@ -247,7 +247,7 @@ just_nums <- function(n){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @importFrom stringr str_detect

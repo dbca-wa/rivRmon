@@ -12,7 +12,7 @@
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import ggplot2
@@ -43,7 +43,7 @@ get_legend<-function(myggplot){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import dplyr
@@ -86,7 +86,7 @@ dynamic_ylim <- function(x){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -238,7 +238,7 @@ canning_WIN_report_data <- function(inpath, reportingYear = 2019, outpath){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse

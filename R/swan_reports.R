@@ -31,7 +31,7 @@
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -359,7 +359,7 @@ ann_rep_grp1_s <- function(outpath, data, surface, bottom){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -592,7 +592,7 @@ ann_rep_grp2_s <- function(outpath, data, surface){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -967,7 +967,7 @@ ann_rep_grp3_s <- function(outpath, data, surface, bottom){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -1293,7 +1293,7 @@ ann_rep_chla_s <- function(outpath, data, surface, chloro){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse
@@ -1538,7 +1538,7 @@ ann_rep_secchi_s <- function(outpath, data, surface){
 #'
 #' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
 #'
-#' For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 #' {the rivRmon website}
 #'
 #' @import tidyverse

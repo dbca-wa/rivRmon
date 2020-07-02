@@ -40,6 +40,11 @@
 #' oxy_wranglR(path = "Z:/DEC/MonitoringProgram/Oxy", weir_open = "2018-12-24",
 #' weir_closed = NULL)
 #' }
+#' 
+#' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
+#' {the rivRmon website} 
 #'
 #' @importFrom readr read_csv write_csv
 #' @importFrom stringr str_split
