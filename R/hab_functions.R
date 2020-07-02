@@ -198,11 +198,15 @@ hab_tablR <- function(hab_tables, focus_date, mngt_triggers){
                   23)
 
     dat <- data.frame()
-    for(i in seq_along(files)){
-      dat1 <- readr::read_csv(files[i])
-      dat1$date <- lubridate::ymd(stringr::str_split(files[i], "/")[[1]][d_length])
-      dat <- dplyr::bind_rows(dat, dat1)
-    }
+
+    suppressMessages({
+      for(i in seq_along(files)){
+        dat1 <- readr::read_csv(files[i])
+        dat1$date <- lubridate::ymd(stringr::str_split(files[i], "/")[[1]][d_length])
+        dat <- dplyr::bind_rows(dat, dat1)
+      }
+    })
+
 
     # unique dates in summaries
     udates <-unique(dat$date)
