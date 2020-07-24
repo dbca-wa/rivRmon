@@ -157,14 +157,14 @@ Defaults to 5 which suits current PEU format, change only if required</p></td>
     </tr>
     <tr>
       <th>mngt_triggers</th>
-      <td><p>a character filepath and name of the 
-`mngt_response_triggers_2020.csv` data file that indicates group names, 
+      <td><p>a character filepath and name of the
+`mngt_response_triggers_2020.csv` data file that indicates group names,
 species names and trigger thresholds for management action. See package
 example dataset `mngt_response_triggers` for example of format required.</p></td>
     </tr>
     <tr>
       <th>SHELL</th>
-      <td><p>logical. Include Canning River site "Shell". Defaults to FALSE, 
+      <td><p>logical. Include Canning River site "Shell". Defaults to FALSE,
 change if required</p></td>
     </tr>
     </table>
@@ -173,9 +173,9 @@ change if required</p></td>
 
     <p>This is a precursor function to be run prior to using
     (<code><a href='hab_tablR.html'>hab_tablR</a></code>). It takes a file path to raw xlsx
-    phytoplankton data, i.e. PEU data, creates cummulative counts on specific 
-    reportable phytoplankton groups and outputs a summary csv file. The 
-    groups are determined from an input file of management species and 
+    phytoplankton data, i.e. PEU data, creates cummulative counts on specific
+    reportable phytoplankton groups and outputs a summary csv file. The
+    groups are determined from an input file of management species and
     trigger levels.</p>
 <p>Summary csv files are exported to a `HAB_tables/` directory and are named
     with the date, estuary and the words "HAB_data". If the directory doesn't
