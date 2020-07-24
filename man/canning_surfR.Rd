@@ -54,6 +54,6 @@ canning_surfR(path = "Z:/DEC/MonitoringProgram/Data", obac = "green", onic = "re
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
 
-For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 {the rivRmon website}
 }

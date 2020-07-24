@@ -16,12 +16,12 @@ for the summary csv files, suggest same as `pathin`}
 \item{skip}{numeric number of lines to skip at beginning of PEU data ingest.
 Defaults to 5 which suits current PEU format, change only if required}
 
-\item{mngt_triggers}{a character filepath and name of the 
-`mngt_response_triggers_2020.csv` data file that indicates group names, 
+\item{mngt_triggers}{a character filepath and name of the
+`mngt_response_triggers_2020.csv` data file that indicates group names,
 species names and trigger thresholds for management action. See package
 example dataset `mngt_response_triggers` for example of format required.}
 
-\item{SHELL}{logical. Include Canning River site "Shell". Defaults to FALSE, 
+\item{SHELL}{logical. Include Canning River site "Shell". Defaults to FALSE,
 change if required}
 }
 \description{
@@ -31,9 +31,9 @@ change if required}
 \details{
 This is a precursor function to be run prior to using
     (\code{\link{hab_tablR}}). It takes a file path to raw xlsx
-    phytoplankton data, i.e. PEU data, creates cummulative counts on specific 
-    reportable phytoplankton groups and outputs a summary csv file. The 
-    groups are determined from an input file of management species and 
+    phytoplankton data, i.e. PEU data, creates cummulative counts on specific
+    reportable phytoplankton groups and outputs a summary csv file. The
+    groups are determined from an input file of management species and
     trigger levels.
 
     Summary csv files are exported to a `HAB_tables/` directory and are named
@@ -50,6 +50,6 @@ mngt_triggers = "./mngt_response_triggers_2020.csv", skip = 5, SHELL = FALSE)
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
 
-For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 {the rivRmon website}
 }

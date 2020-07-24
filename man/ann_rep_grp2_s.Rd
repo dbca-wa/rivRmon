@@ -38,6 +38,6 @@ ann_rep_grp2_s(outpath, data, surface = "blue")}
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
 
-For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 {the rivRmon website}
 }

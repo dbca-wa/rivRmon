@@ -13,8 +13,8 @@ directory.}
 \item{focus_date}{a character representation of the date chosen for the "present"
 sampling week in the format "yyyymmdd".}
 
-\item{mngt_triggers}{a character filepath and name of the 
-`mngt_response_triggers_YYYY.csv` data file that indicates group names, 
+\item{mngt_triggers}{a character filepath and name of the
+`mngt_response_triggers_YYYY.csv` data file that indicates group names,
 species names and trigger thresholds for management action. See package
 example dataset `mngt_response_triggers` for example of format required.}
 }
@@ -25,12 +25,12 @@ example dataset `mngt_response_triggers` for example of format required.}
 \details{
 This function can only be run on data created by running the
     (\code{\link{hab_groupR}}) function. It will read in all the summary
-    data then based on the provided date, produce a conditionally formatted 
-    table for that date. Values are coloured according to "investigate" or 
+    data then based on the provided date, produce a conditionally formatted
+    table for that date. Values are coloured according to "investigate" or
     "notification" count level for river sites for specific species. The prior
     sample's data is reported so comparisons can be made.
 
-    Data is exported as pptx file to the `HAB_tables/` directory. It can be 
+    Data is exported as pptx file to the `HAB_tables/` directory. It can be
     dragged and dropped into a PowerPoint template with some minor resizing.
 }
 \examples{
@@ -43,6 +43,6 @@ mngt_triggers = "./mngt_response_triggers_2020.csv")
 \author{
 Bart Huntley, \email{bart.huntley@dbca.wa.gov.au}
 
-For more details see  \url{https://Bartesto.github.io/rivRmon/index.html}
+For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
 {the rivRmon website}
 }
