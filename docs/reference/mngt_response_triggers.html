@@ -85,7 +85,7 @@ what values constitute differing levels of management action." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rivRmon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@ what values constitute differing levels of management action." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -110,7 +110,7 @@ what values constitute differing levels of management action." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/dbca-wa/rivRmon/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -139,12 +139,12 @@ functions. Values in this dataset determine which species are summarised and
 what values constitute differing levels of management action.</p>
     </div>
 
-    <pre class="usage"><span class='no'>mngt_response_triggers</span></pre>
+    <pre class="usage"><span class='va'>mngt_response_triggers</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>a data.frame with 5 variables:</p><dl'>
+    <p>a data.frame with 5 variables:</p><dl>
 <dt>table_ord</dt><dd><p>numeric index of the desired order of reportable groups</p></dd>
 <dt>table_name</dt><dd><p>character representing the reportable group name as it is intended for the output</p></dd>
 <dt>spp_name</dt><dd><p>character representing the exact species name/s that compromise the reportable group</p></dd>
@@ -162,21 +162,22 @@ that values falling between surveillance and notification are classified as
 investigate.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mngt_response_triggers</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 12 x 5</span><span>
+    <pre class="examples"><div class='input'><span class='va'>mngt_response_triggers</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 12 x 5</span><span>
 #&gt;    table_ord table_name         spp_name               surveillance notification
-#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>         1 Alex spp           alexandrium_spp                   5           10
-#&gt; </span><span style='color: #555555;'> 2</span><span>         2 Dino spp           dinophysis_acuminata             23          230
-#&gt; </span><span style='color: #555555;'> 3</span><span>         2 Dino spp           dinophysis_caudata               23          230
-#&gt; </span><span style='color: #555555;'> 4</span><span>         2 Dino spp           dinophysis_acuta                 23          230
-#&gt; </span><span style='color: #555555;'> 5</span><span>         2 Dino spp           dinophysis_fortii                23          230
-#&gt; </span><span style='color: #555555;'> 6</span><span>         3 karenia spp        karenia_spp                      50          500
-#&gt; </span><span style='color: #555555;'> 7</span><span>         4 karlo spp          karlodinium_spp               </span><span style='text-decoration: underline;'>10</span><span>000        </span><span style='text-decoration: underline;'>30</span><span>000
-#&gt; </span><span style='color: #555555;'> 8</span><span>         5 Pn seriata group   pseudonitzschia_seria~           10          100
-#&gt; </span><span style='color: #555555;'> 9</span><span>         6 Pn delicatissima ~ pseudonitzschia_delic~          100          500
-#&gt; </span><span style='color: #555555;'>10</span><span>         6 Pn delicatissima ~ pseudonitzschia_spp             100          500
-#&gt; </span><span style='color: #555555;'>11</span><span>         7 H akashiwo         heterosigma_akashiwo          </span><span style='text-decoration: underline;'>20</span><span>000        </span><span style='text-decoration: underline;'>40</span><span>000
-#&gt; </span><span style='color: #555555;'>12</span><span>         8 F japonica         fibrocapsa_japonica           </span><span style='text-decoration: underline;'>20</span><span>000        </span><span style='text-decoration: underline;'>40</span><span>000</div></span></pre>
+#&gt;        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span>         1 Alex spp           alexandrium_spp                   5           10
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span>         2 Dino spp           dinophysis_acuminata             23          230
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span>         2 Dino spp           dinophysis_caudata               23          230
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span>         2 Dino spp           dinophysis_acuta                 23          230
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span>         2 Dino spp           dinophysis_fortii                23          230
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span>         3 karenia spp        karenia_spp                      50          500
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span>         4 karlo spp          karlodinium_spp               </span><span style='text-decoration: underline;'>10</span><span>000        </span><span style='text-decoration: underline;'>30</span><span>000
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span>         5 Pn seriata group   pseudonitzschia_seria~           10          100
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span>         6 Pn delicatissima ~ pseudonitzschia_delic~          100          500
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span>         6 Pn delicatissima ~ pseudonitzschia_spp             100          500
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span>         7 H akashiwo         heterosigma_akashiwo          </span><span style='text-decoration: underline;'>20</span><span>000        </span><span style='text-decoration: underline;'>40</span><span>000
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span>         8 F japonica         fibrocapsa_japonica           </span><span style='text-decoration: underline;'>20</span><span>000        </span><span style='text-decoration: underline;'>40</span><span>000</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -192,7 +193,7 @@ investigate.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rivRmon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -45,7 +45,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -62,7 +62,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/dbca-wa/rivRmon/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -82,7 +82,7 @@
       <h1 data-toc-skip>How to make surfer profile plots</h1>
                         <h4 class="author">Bart Huntley</h4>
             
-            <h4 class="date">2020-07-24</h4>
+            <h4 class="date">2021-02-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dbca-wa/rivRmon/blob/master/vignettes/surfr.Rmd"><code>vignettes/surfr.Rmd</code></a></small>
       <div class="hidden name"><code>surfr.Rmd</code></div>
@@ -96,37 +96,44 @@
 <a href="#introduction" class="anchor"></a>Introduction</h1>
 <p>Surfer or profile plots are visualisations of 4 physical and chemical metrics along the Swan and Canning rivers. These metrics are, salinity, dissolved oxygen, chlorophyll and temperature and are interpolated along the river length to give a seamless visualisation.</p>
 <p>Two sections of the Swan/Canning river system are monitored on a weekly basis. The Canning river estuary (between South Canning Bridge and Ellison drive) and the Swan river estuary (between Blackwall Reach and the Power Line crossing in West Swan).</p>
-<p>The raw input to create these plots comes from sonde data recorders deployed on consecutive days each week. Due to the length of time needed sample either of the rivers, two vessels start at different locations to enable recording of data in the one day. Therefore the raw data for one day’s sampling is two excel spreadsheets.</p>
+<p>The raw input to create these plots comes from sonde data recorders deployed on consecutive days each week. Due to the length of time needed sample either of the rivers, two vessels start at different locations to enable recording of data in the one day. Therefore the raw data for one day's sampling is two excel spreadsheets.</p>
 </div>
 <div id="creating-a-surfer-plot" class="section level1">
 <h1 class="hasAnchor">
 <a href="#creating-a-surfer-plot" class="anchor"></a>Creating a surfer plot</h1>
 <p>The functions to create the surfer plots are slightly different internally. It is important to note that these functions are very specific to the river and the expected inputs and parameters.</p>
-<p>To run the functions make sure the package is loaded. The path variable is a character string of the file path to the locations of the sonde data for the day you wish to plot. As described above there should be two excel spreadsheets. Make sure that you have the right data for the right function. Sonde data has a “c” in the name for the Canning and a “s” for the Swan. Please ensure that if you copy and paste in a file path from a Windows OS you will need to either double up the backslashes or convert them to a single forward slash.</p>
+<p>To run the functions make sure the package is loaded. The path variable is a character string of the file path to the locations of the sonde data for the day you wish to plot. As described above there should be two excel spreadsheets. Make sure that you have the right data for the right function. Sonde data has a "c" in the name for the Canning and a "s" for the Swan. Please ensure that if you copy and paste in a file path from a Windows OS you will need to either double up the backslashes or convert them to a single forward slash.</p>
 <p>The other two parameters supplied to either function relate to the oxygenation status at two locations and are specific to each river. Permissable colours are green, blue and red.</p>
-<p>When run the function will read in the sonde data, process the interpolations and generate the plots. The plots will be written to a directory created at the same location as the sonde data, called “plots”. Examples below.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co">#load the package</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rivRmon</span>)
+<p>When run the function will read in the sonde data, process the interpolations and generate the plots. The plots will be written to a directory created at the same location as the sonde data, called "plots". Examples below.</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#load the package</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbca-wa/rivRmon">rivRmon</a></span><span class="op">)</span>
 
 <span class="co">#Canning river - forward slash example</span>
-<span class="fu"><a href="../reference/canning_surfR.html">canning_surfR</a></span>(<span class="kw">path</span> <span class="kw">=</span> <span class="st">"C:blah/blah/data_location"</span>, <span class="kw">obac</span> <span class="kw">=</span> <span class="st">"green"</span>, <span class="kw">onic</span> <span class="kw">=</span> <span class="st">"red"</span>)
+<span class="fu"><a href="../reference/canning_surfR.html">canning_surfR</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"C:blah/blah/data_location"</span>, obac <span class="op">=</span> <span class="st">"green"</span>, onic <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
 
 <span class="co">#Swan river - backslash example</span>
-<span class="fu"><a href="../reference/swan_surfR.html">swan_surfR</a></span>(<span class="kw">path</span> <span class="kw">=</span> <span class="st">"C:blah\\blah\\data_location"</span>, <span class="kw">ovit</span> <span class="kw">=</span> <span class="st">"blue"</span>, <span class="kw">ocav</span> <span class="kw">=</span> <span class="st">"red"</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/swan_surfR.html">swan_surfR</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"C:blah\\blah\\data_location"</span>, ovit <span class="op">=</span> <span class="st">"blue"</span>, ocav <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
 <div id="canning-river-example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#canning-river-example" class="anchor"></a>Canning river example</h2>
 <p>This plot was produced using the parameters as described above on data from 23/07/2019 using the <code><a href="../reference/canning_surfR.html">canning_surfR()</a></code> function. Note that the block-like structure downstream of site KEN represents the Kent street weir in an open position. The function will interpret the status of the weir from the sonde data and plot it accordingly.</p>
-<p><img src="plots/canning.PNG"></p>
+<div class="figure">
+<img src="plots/canning.PNG">
+</div>
 </div>
 <div id="swan-river-examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#swan-river-examples" class="anchor"></a>Swan river examples</h2>
 <p>When the <code><a href="../reference/swan_surfR.html">swan_surfR()</a></code> function is run, it produces two outputs. One is a visualisation of the whole river from the river mouth to the Power Lines and the other is a zoomed view from the Narrows to the Power Lines. This to enable a more detailed view of the shallower waters.</p>
 <p>Again these examples are run using the parameters as described above. Note the blacked out portions at the beginning of the plot. Blacked out regions cover sections of the river where data was not collected on that date. The sites here (FP1 and FP7) are within the Port of Fremantle and data is sometimes provided. Other sections of the river may be blacked out from time to time and could be due to equipment malfunction or more generally an inability to hold station at a site due to conditions on the day (strong wind, strong current etc).</p>
-<p><img src="plots/swan.PNG"></p>
+<div class="figure">
+<img src="plots/swan.PNG">
+</div>
 <p>And here is an example of the middle and upper Swan showing greater detail.</p>
-<p><img src="plots/upper.PNG"></p>
+<div class="figure">
+<img src="plots/upper.PNG">
+</div>
 </div>
 </div>
 <div id="things-to-note" class="section level1">
@@ -134,8 +141,8 @@
 <a href="#things-to-note" class="anchor"></a>Things to note</h1>
 <ul>
 <li><p>The current functions can handle the outputs from YSI and EXO sondes and can handle most of the historical differences in metric naming conventions and output formats. It is recommended however that the current conventions in place for naming and editing the sonde outputs should be maintained. Any major deviations or additions will likely result in errors.</p></li>
-<li><p>The rendering of the “river bottom” is designed around long term monitoring locations. If a new site needs to be added this will require some rewriting of various parts of the base code and internal data sets. If this need arises please contact the author.</p></li>
-<li><p>The “river bottom” has been created by extracting depths from the Corporate bathymetry data along a reckoned navigation route that attempts to stick to the deepest sections of the river and intersects the sampling sites. Additional extraction points are generated at 100 meter intervals along this route.</p></li>
+<li><p>The rendering of the "river bottom" is designed around long term monitoring locations. If a new site needs to be added this will require some rewriting of various parts of the base code and internal data sets. If this need arises please contact the author.</p></li>
+<li><p>The "river bottom" has been created by extracting depths from the Corporate bathymetry data along a reckoned navigation route that attempts to stick to the deepest sections of the river and intersects the sampling sites. Additional extraction points are generated at 100 meter intervals along this route.</p></li>
 <li><p>When the <code><a href="../reference/canning_surfR.html">canning_surfR()</a></code> function detects that the weir is closed (by the presence of cannoxy site data), it performs two interpolations to ensure that the weir is used as a barrier to the interpolations.</p></li>
 <li><p>A thin plate spline is used to calculate the interpolation of data between the sampling sites.</p></li>
 <li><p>Remember that this is a visualisation tool only. Obtaining precise measurements of metrics outside of sampling sites can only be obtained by physically sampling those areas. Any interpolation can only be an estimation, particularly with such sparse input data.</p></li>
@@ -158,7 +165,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

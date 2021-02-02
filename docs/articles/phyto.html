@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rivRmon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -45,7 +45,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -62,7 +62,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/dbca-wa/rivRmon/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -82,7 +82,7 @@
       <h1 data-toc-skip>How to use the phyto functions</h1>
                         <h4 class="author">Bart Huntley</h4>
             
-            <h4 class="date">2020-07-24</h4>
+            <h4 class="date">2021-02-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dbca-wa/rivRmon/blob/master/vignettes/phyto.Rmd"><code>vignettes/phyto.Rmd</code></a></small>
       <div class="hidden name"><code>phyto.Rmd</code></div>
@@ -99,29 +99,37 @@
 <div id="stage-one---create-summary-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#stage-one---create-summary-data" class="anchor"></a>Stage One - Create summary data</h1>
-<p>Phytoplankton count data in its raw form (hereafter called raw data) provides count and other information for a multitude of species. This data is analysed and provided to us by the Department of Water and Environmental Regulation’s Phytoplankton Ecology unit. In order to visualise the data it benefits from some summarising into larger groupings. This first stage undertakes this process and outputs summaries that are used in stage two.</p>
-<p>After loading the <code>rivRmon</code> package, two file paths are provided to the <code><a href="../reference/phyto_groupR.html">phyto_groupR()</a></code> function. A file path to the raw data xlsx spreadsheets and a file path to the desired location of the exported summary data. This summary data will be written to a <code>summaries/</code> directory and if it doesn’t already exist it will be created.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co">#load the package</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rivRmon</span>)
+<p>Phytoplankton count data in its raw form (hereafter called raw data) provides count and other information for a multitude of species. This data is analysed and provided to us by the Department of Water and Environmental Regulation's Phytoplankton Ecology unit. In order to visualise the data it benefits from some summarising into larger groupings. This first stage undertakes this process and outputs summaries that are used in stage two.</p>
+<p>After loading the <code>rivRmon</code> package, two file paths are provided to the <code><a href="../reference/phyto_groupR.html">phyto_groupR()</a></code> function. A file path to the raw data xlsx spreadsheets and a file path to the desired location of the exported summary data. This summary data will be written to a <code>summaries/</code> directory and if it doesn't already exist it will be created.</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#load the package</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbca-wa/rivRmon">rivRmon</a></span><span class="op">)</span>
 
 <span class="co">#run the phyto_groupR function</span>
-<span class="fu"><a href="../reference/phyto_groupR.html">phyto_groupR</a></span>(<span class="kw">pathin</span> <span class="kw">=</span> <span class="st">"C:/path/to/raw_data"</span>, <span class="kw">pathout</span> <span class="kw">=</span> <span class="st">"C:/path/for_export"</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/phyto_groupR.html">phyto_groupR</a></span><span class="op">(</span>pathin <span class="op">=</span> <span class="st">"C:/path/to/raw_data"</span>, pathout <span class="op">=</span> <span class="st">"C:/path/for_export"</span><span class="op">)</span></code></pre></div>
 <p>The only thing to be careful of is ensuring that if you are copying a fiile path from a Windows OS you will need to double all the backslashes for the path to be recognised. The above example is the alternative method where the backslashes are converted to a single forward slash. An example of an exported summary csv is below.</p>
-<p><img src="plots/summary.PNG"></p>
+<div class="figure">
+<img src="plots/summary.PNG">
+</div>
 </div>
 <div id="stage-two---creating-the-barcharts-and-running-sheet" class="section level1">
 <h1 class="hasAnchor">
 <a href="#stage-two---creating-the-barcharts-and-running-sheet" class="anchor"></a>Stage Two - Creating the barcharts and running sheet</h1>
-<p>This next stage reads in all the summary data csv’s and based on date provided, generates two barcharts, arranged vertically, in the one output. The top barchart is for the date provided and the bottom barchart is for the prior sample. As sampling of the estuaries occurs on different days, the choice of date will only plot data for a single estuary. In other words it won’t get confused when summary csv’s exist for both estuaries.</p>
-<p>The input for the <code><a href="../reference/phyto_plotR.html">phyto_plotR()</a></code> function is a file path to the location of the <code>summaries/</code> directory not the summary csv’s themselves. This is essentially the <strong>pathout</strong> parameter that you specified when running <code><a href="../reference/phyto_groupR.html">phyto_groupR()</a></code>. The barcharts (as pdf) will be exported here along with a “running datasheet”.</p>
+<p>This next stage reads in all the summary data csv's and based on date provided, generates two barcharts, arranged vertically, in the one output. The top barchart is for the date provided and the bottom barchart is for the prior sample. As sampling of the estuaries occurs on different days, the choice of date will only plot data for a single estuary. In other words it won't get confused when summary csv's exist for both estuaries.</p>
+<p>The input for the <code><a href="../reference/phyto_plotR.html">phyto_plotR()</a></code> function is a file path to the location of the <code>summaries/</code> directory not the summary csv's themselves. This is essentially the <strong>pathout</strong> parameter that you specified when running <code><a href="../reference/phyto_groupR.html">phyto_groupR()</a></code>. The barcharts (as pdf) will be exported here along with a "running datasheet".</p>
 <p>The running datasheet is a csv that is exported with all the summary data up to and including the date provided for that estuary. To run the function.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co">#run the phyto_plotR function</span>
-<span class="fu"><a href="../reference/phyto_plotR.html">phyto_plotR</a></span>(<span class="kw">summary</span> <span class="kw">=</span> <span class="st">"C:/path/for_export"</span>, <span class="kw">date</span> <span class="kw">=</span> <span class="st">"20190715"</span>)</pre></body></html></div>
-<p>Only two things to watch out for here. Again ensure that you have handled the character filepath correctly. Also provide the date as a character string in the format “yyyymmdd”. It can be presented as above in the code snippet or contain separators (e.g. “2019/07/15” or “2019-07-15”).</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#run the phyto_plotR function</span>
+<span class="fu"><a href="../reference/phyto_plotR.html">phyto_plotR</a></span><span class="op">(</span>summary <span class="op">=</span> <span class="st">"C:/path/for_export"</span>, date <span class="op">=</span> <span class="st">"20190715"</span><span class="op">)</span></code></pre></div>
+<p>Only two things to watch out for here. Again ensure that you have handled the character filepath correctly. Also provide the date as a character string in the format "yyyymmdd". It can be presented as above in the code snippet or contain separators (e.g. "2019/07/15" or "2019-07-15").</p>
 <p>An example of a barchart follows. This one is for the Swan estuary (identified by its name and the sites present). The date provided is that in the code snippet above and is used in creating the top barchart. The function finds the summary data for the prior sampling effort and uses that to plot the bottom barchart.</p>
-<p><img src="plots/phyto.PNG"></p>
+<div class="figure">
+<img src="plots/phyto.PNG">
+</div>
 <p>Lastly an example of a portion of a running datasheet.</p>
-<p><img src="plots/run.PNG"></p>
+<div class="figure">
+<img src="plots/run.PNG">
+</div>
 </div>
   </div>
 
@@ -140,7 +148,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

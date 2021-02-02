@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rivRmon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -108,7 +108,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/dbca-wa/rivRmon/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -135,7 +135,7 @@
     complete filepaths to specified river data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>data_finder</span>(<span class='no'>path</span>, <span class='no'>river</span>)</pre>
+    <pre class="usage"><span class='fu'>data_finder</span><span class='op'>(</span><span class='va'>path</span>, <span class='va'>river</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,10 +161,17 @@ River.</p></td>
 
     <p>The function presumes data to be in xlsx format and the river designator,
 within the name of the file, to be preceded by 8 digits (date).</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Bart Huntley, <a href='mailto:bart.huntley@dbca.wa.gov.au'>bart.huntley@dbca.wa.gov.au</a></p>
+<p>For more details see  <a href='https://dbca-wa.github.io/rivRmon/index.html'>https://dbca-wa.github.io/rivRmon/index.html</a>
+the rivRmon website</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>data_finder</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"Z:/DEC/MonitoringProgram/Data"</span>, <span class='kw'>river</span> <span class='kw'>=</span> <span class='st'>"c"</span>)}</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>data_finder</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"Z:/DEC/MonitoringProgram/Data"</span>, river <span class='op'>=</span> <span class='st'>"c"</span><span class='op'>)</span><span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -180,7 +187,7 @@ within the name of the file, to be preceded by 8 digits (date).</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

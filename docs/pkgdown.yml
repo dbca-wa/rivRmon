@@ -1,12 +1,12 @@
-pandoc: 2.7.2
-pkgdown: 1.5.1
+pandoc: 1.19.2.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  annual_reports: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon/vignettes/annual_reports.html
-  hab: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon/vignettes/hab.html
-  phyto: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon/vignettes/phyto.html
-  surfr: ../../../../../../../../Z:/DEC/SwanCanningRiversMonitoringProgram_SP2018-072/DATA/Working/rivRmon/vignettes/surfr.html
-last_built: 2020-07-24T05:53Z
+  annual_reports: annual_reports.html
+  hab: hab.html
+  phyto: phyto.html
+  surfr: surfr.html
+last_built: 2021-02-02T07:48Z
 urls:
   reference: https://dbca-wa.github.io/rivRmon/reference
   article: https://dbca-wa.github.io/rivRmon/articles

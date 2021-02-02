@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rivRmon</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.1</span>
       </span>
     </div>
 
@@ -45,7 +45,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -62,7 +62,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/dbca-wa/rivRmon/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -82,7 +82,7 @@
       <h1 data-toc-skip>How to make plots and tables for annual reports</h1>
                         <h4 class="author">Bart Huntley</h4>
             
-            <h4 class="date">2020-07-24</h4>
+            <h4 class="date">2021-02-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dbca-wa/rivRmon/blob/master/vignettes/annual_reports.Rmd"><code>vignettes/annual_reports.Rmd</code></a></small>
       <div class="hidden name"><code>annual_reports.Rmd</code></div>
@@ -94,10 +94,10 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>All water quality data, historical and present, is accessed through the Water Information Reporting portal maintained by the Department of Water and Environment <a href="http://wir.water.wa.gov.au/Pages/Water-Information-Reporting.aspx">link</a>. Data should be downloaded for the Canning Estuary and the Swan Estuary sites using the keywords search terms “SG-E-CANEST” and “SG-E-SWANEST” respectively. Data requested should be “Water Quality (discrete) for Site(s) cross-tabulated” and as the data size is large, requests should be split into appropriate yearly chunks. This data is the starting point for using the functions that follow to produce plots and tables for the annual reports. It is suggested that the original downloads be kept and the data simply updated yearly.</p>
+<p>All water quality data, historical and present, is accessed through the Water Information Reporting portal maintained by the Department of Water and Environment <a href="http://wir.water.wa.gov.au/Pages/Water-Information-Reporting.aspx">link</a>. Data should be downloaded for the Canning Estuary and the Swan Estuary sites using the keywords search terms "SG-E-CANEST" and "SG-E-SWANEST" respectively. Data requested should be "Water Quality (discrete) for Site(s) cross-tabulated" and as the data size is large, requests should be split into appropriate yearly chunks. This data is the starting point for using the functions that follow to produce plots and tables for the annual reports. It is suggested that the original downloads be kept and the data simply updated yearly.</p>
 <p>The plots created by the functions are output as panel plots and follow the same format as previous annual reports. A panel is based on a variable and contains a separate plot for each combination of ecological management zone (emz) and sampling method. Visualisation consists of:</p>
 <ul>
-<li>a “ribbon” designating the 10th and 90th percentiles of the background data</li>
+<li>a "ribbon" designating the 10th and 90th percentiles of the background data</li>
 <li>a line showing the background data median</li>
 <li>points showing the current reporting period medians</li>
 </ul>
@@ -111,52 +111,51 @@
 <p>When the report is read in it is tidied with the following occuring:</p>
 <ul>
 <li>variable names are standardised</li>
-<li>values are checked for “&lt;” or “&gt;”:
-<ul>
-<li>a value following a “&lt;” is halved</li>
-<li>a value following a “&gt;” is left as is</li>
-</ul>
-</li>
+<li>values are checked for "&lt;" or "&gt;":</li>
+<li>a value following a "&lt;" is halved</li>
+<li>a value following a "&gt;" is left as is</li>
 <li>the variable emz is created based on site</li>
 </ul>
-<p>Once the data is read in and tidied it is exported as a csv with the format “XX-X-XXXXX_annual_report_data_for_YYY.csv” where:</p>
+<p>Once the data is read in and tidied it is exported as a csv with the format "XX-X-XXXXX_annual_report_data_for_YYY.csv" where:</p>
 <ul>
-<li>“XX-X-XXXXX” is the estuary (i.e. SG-E-CANEST or SG-E-SWANEST)</li>
-<li>“YYYY” is the current reporting year.</li>
+<li>"XX-X-XXXXX" is the estuary (i.e. SG-E-CANEST or SG-E-SWANEST)</li>
+<li>"YYYY" is the current reporting year.</li>
 </ul>
 <p>Remember to change the file path slashes if on a Windows OS. Examples below.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co">#load the package</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rivRmon</span>)
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#load the package</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbca-wa/rivRmon">rivRmon</a></span><span class="op">)</span>
 
 <span class="co">#Canning estuary - forward slash example</span>
-<span class="fu"><a href="../reference/canning_WIN_report_data.html">canning_WIN_report_data</a></span>(<span class="kw">inpath</span> <span class="kw">=</span> <span class="st">"C:blah/blah/annual_data_location"</span>,
-                        <span class="kw">reportingYear</span> <span class="kw">=</span> <span class="fl">2019</span>,
-                        <span class="kw">outpath</span> <span class="kw">=</span> <span class="st">"C:blah/blah/somewhere"</span>)
+<span class="fu"><a href="../reference/canning_WIN_report_data.html">canning_WIN_report_data</a></span><span class="op">(</span>inpath <span class="op">=</span> <span class="st">"C:blah/blah/annual_data_location"</span>, 
+                        reportingYear <span class="op">=</span> <span class="fl">2019</span>, 
+                        outpath <span class="op">=</span> <span class="st">"C:blah/blah/somewhere"</span><span class="op">)</span>
 
 <span class="co">#Swan estuary - backslash example</span>
-<span class="fu"><a href="../reference/swan_WIN_report_data.html">swan_WIN_report_data</a></span>(<span class="kw">inpath</span> <span class="kw">=</span> <span class="st">"C:blah\\blah\\annual_data_location"</span>,
-                     <span class="kw">reportingYear</span> <span class="kw">=</span> <span class="fl">2019</span>,
-                     <span class="kw">outpath</span> <span class="kw">=</span> <span class="st">"C:blah\\blah\\somewhere"</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/swan_WIN_report_data.html">swan_WIN_report_data</a></span><span class="op">(</span>inpath <span class="op">=</span> <span class="st">"C:blah\\blah\\annual_data_location"</span>, 
+                     reportingYear <span class="op">=</span> <span class="fl">2019</span>, 
+                     outpath <span class="op">=</span> <span class="st">"C:blah\\blah\\somewhere"</span><span class="op">)</span></code></pre></div>
 <p><strong>inpath</strong> is a character file path to the downloaded data xlsx files <strong>reportingYear</strong> is a 4 digit numerical representing current reporting year <strong>outpath</strong> is a character file path to desired export location for writing of the csv files</p>
 <p>This function needs to be run each year to set up the data for the annual report. The output from this stage will be the input for the next two stages.</p>
 </div>
 <div id="stage-two---creating-plots-and-tables" class="section level1">
 <h1 class="hasAnchor">
 <a href="#stage-two---creating-plots-and-tables" class="anchor"></a>Stage Two - Creating plots and tables</h1>
-<p>There is a separate function for each estuary. These are essentially wrapper functions around other functions that work on data that has the same requirements for visualisation (mainly formatting such as plots per panel, or data filtering parameters etc). Outputs are saved to directories created by running the functions. There will be a <code>panels</code> and a <code>tables</code> directory with the prefix “c_” or “s_” for Canning and Swan estuaries respectively.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co">#Canning estuary - forward slash example</span>
-<span class="fu"><a href="../reference/canning_reportR.html">canning_reportR</a></span>(<span class="kw">inpath</span> <span class="kw">=</span> <span class="st">"C:blah/blah/somewhere"</span>,
-                <span class="kw">outpath</span> <span class="kw">=</span> <span class="st">"C:blah/blah/somewhere_else"</span>,
-                <span class="kw">surface</span> <span class="kw">=</span> <span class="st">"blue"</span>,
-                <span class="kw">bottom</span> <span class="kw">=</span> <span class="st">"red"</span>,
-                <span class="kw">chloro</span> <span class="kw">=</span> <span class="st">"darkgreen"</span>)
+<p>There is a separate function for each estuary. These are essentially wrapper functions around other functions that work on data that has the same requirements for visualisation (mainly formatting such as plots per panel, or data filtering parameters etc). Outputs are saved to directories created by running the functions. There will be a <code>panels</code> and a <code>tables</code> directory with the prefix "c_" or "s_" for Canning and Swan estuaries respectively.</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#Canning estuary - forward slash example</span>
+<span class="fu"><a href="../reference/canning_reportR.html">canning_reportR</a></span><span class="op">(</span>inpath <span class="op">=</span> <span class="st">"C:blah/blah/somewhere"</span>, 
+                outpath <span class="op">=</span> <span class="st">"C:blah/blah/somewhere_else"</span>, 
+                surface <span class="op">=</span> <span class="st">"blue"</span>, 
+                bottom <span class="op">=</span> <span class="st">"red"</span>,
+                chloro <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span>
 
 <span class="co">#Swan estuary - backslash example</span>
-<span class="fu"><a href="../reference/swan_reportR.html">swan_reportR</a></span>(<span class="kw">inpath</span> <span class="kw">=</span> <span class="st">"C:blah\\blah\\somewhere"</span>,
-                <span class="kw">outpath</span> <span class="kw">=</span> <span class="st">"C:blah\\blah\\somewhere_else"</span>,
-                <span class="kw">surface</span> <span class="kw">=</span> <span class="st">"blue"</span>,
-                <span class="kw">bottom</span> <span class="kw">=</span> <span class="st">"red"</span>,
-                <span class="kw">chloro</span> <span class="kw">=</span> <span class="st">"darkgreen"</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/swan_reportR.html">swan_reportR</a></span><span class="op">(</span>inpath <span class="op">=</span> <span class="st">"C:blah\\blah\\somewhere"</span>, 
+                outpath <span class="op">=</span> <span class="st">"C:blah\\blah\\somewhere_else"</span>, 
+                surface <span class="op">=</span> <span class="st">"blue"</span>, 
+                bottom <span class="op">=</span> <span class="st">"red"</span>,
+                chloro <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span></code></pre></div>
 <p><strong>inpath</strong> a character file path to pre-made annual report data (the out path from Stage 1 above)</p>
 <p><strong>outpath</strong> a character file path to desired export location</p>
 <p>The parameters <strong>surface</strong>, <strong>bottom</strong> and <strong>chloro</strong> can take a named colour or a <a href="http://instant-eyedropper.com/info/html_color_code/">hex colour code</a>. The defaults produce colours similar to those produced in prior reports, however access to these parameters allows users to tweak if required. <strong>surface</strong> relates to surface measurements, <strong>bottom</strong> to bottom measurements and <strong>chloro</strong> to integrated measurements specific only to chlorophyll plots.</p>
@@ -164,11 +163,17 @@
 <h3 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h3>
 <p>Canning estuary total oxidised nitrogen.</p>
-<p><img src="plots/nox.PNG"></p>
+<div class="figure">
+<img src="plots/nox.PNG">
+</div>
 <p>Swan estuary chlorophyll a.</p>
-<p><img src="plots/chloro.PNG"></p>
+<div class="figure">
+<img src="plots/chloro.PNG">
+</div>
 <p>Chlorophyll a csv table</p>
-<p><img src="plots/table.PNG"></p>
+<div class="figure">
+<img src="plots/table.PNG">
+</div>
 </div>
 </div>
 <div id="groupings-of-variables" class="section level1">
@@ -179,32 +184,25 @@
 <ul>
 <li>chlorophyll a - by itself</li>
 <li>dissolved organic carbon - by itself</li>
-<li>group 1
-<ul>
+<li>group 1</li>
 <li>total nitrogen</li>
 <li>ammonia nitrogen</li>
 <li>total oxidised nitrogen</li>
 <li>dissolved organic nitrogen</li>
 <li>total phosphorus</li>
 <li>filterable reactive phosphorus</li>
-</ul>
-</li>
-<li>group 3
-<ul>
+<li>group 3</li>
 <li>dissolved oxygen</li>
 <li>pH</li>
 <li>salinity</li>
 <li>temperature</li>
-</ul>
-</li>
 <li>secchi depth - by itself</li>
 <li>silica - by itself</li>
 </ul>
 <p>For the Swan estuary:</p>
 <ul>
 <li>chlorophyll a - by itself</li>
-<li>group 1
-<ul>
+<li>group 1</li>
 <li>total nitrogen</li>
 <li>ammonia nitrogen</li>
 <li>total oxidised nitrogen</li>
@@ -212,52 +210,45 @@
 <li>total phosphorus</li>
 <li>filterable reactive phosphorus</li>
 <li>silica</li>
-</ul>
-</li>
-<li>group 2
-<ul>
+<li>group 2</li>
 <li>alkalinity (not report variable for Canning estuary)</li>
 <li>dissolved organic carbon</li>
 <li>tss (not report variable for Canning estuary)</li>
-</ul>
-</li>
-<li>group 3
-<ul>
+<li>group 3</li>
 <li>dissolved oxygen</li>
 <li>pH</li>
 <li>salinity</li>
 <li>temperature</li>
-</ul>
-</li>
 <li>secchi depth</li>
 </ul>
-<p>Note that <code>swan_reportR</code> outputs 2 panel plots as per the original report for the group 3 variables. The extra panel plots are for the additional emz of “Swan”.</p>
+<p>Note that <code>swan_reportR</code> outputs 2 panel plots as per the original report for the group 3 variables. The extra panel plots are for the additional emz of "Swan".</p>
 </div>
 <div id="plotting-individual-variable-groupings" class="section level1">
 <h1 class="hasAnchor">
 <a href="#plotting-individual-variable-groupings" class="anchor"></a>Plotting individual variable groupings</h1>
 <p>As previously mentioned, the reportR functions are wrappers. The individual functions are available to the user and can be found in the reference index. The groupings match the above and function names take the format <code>ann_rep_vvvv_e()</code> where:</p>
 <ul>
-<li>“vvvv” is the variable or grouping</li>
+<li>"vvvv" is the variable or grouping</li>
 <li>"_e" is the estuary ("_c" or "_s")</li>
 </ul>
 <p>As these functions are written to be internal to the wrapper they need to be run in the following manner in order to read in the correct data.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co">#load additional packages</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#load additional packages</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 
 <span class="co">#setup a file path to the annual report data (i.e. csv from Stage One)</span>
-<span class="no">inpath</span> <span class="kw">&lt;-</span> <span class="st">"C:path/to/anuual_report_data"</span>
+<span class="va">inpath</span> <span class="op">&lt;-</span> <span class="st">"C:path/to/anuual_report_data"</span>
 
 <span class="co">#get the full name and pathrow to the required data - change pattern as required</span>
-<span class="no">file</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="kw">path</span> <span class="kw">=</span> <span class="no">inpath</span>, <span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"SG-E-CANEST_annual_report"</span>,
-                   <span class="kw">full.names</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="va">file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">inpath</span>, pattern <span class="op">=</span> <span class="st">"SG-E-CANEST_annual_report"</span>, 
+                   full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co">#create parameter variables for the function you want to use</span>
-<span class="no">outpath</span> <span class="kw">&lt;-</span> <span class="st">"C:path/to/desired_export_location"</span>
-<span class="no">data</span> <span class="kw">&lt;-</span> <span class="kw pkg">readr</span><span class="kw ns">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>(<span class="kw">file</span> <span class="kw">=</span> <span class="no">file</span>, <span class="kw">guess_max</span> <span class="kw">=</span> <span class="fl">10000</span>)
+<span class="va">outpath</span> <span class="op">&lt;-</span> <span class="st">"C:path/to/desired_export_location"</span>
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">file</span>, guess_max <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span>
 
 <span class="co">#run function - here we have chosen group 1 variables for the Swan</span>
-<span class="fu"><a href="../reference/ann_rep_grp1_s.html">ann_rep_grp1_s</a></span>(<span class="no">outpath</span>, <span class="no">data</span>, <span class="kw">surface</span> <span class="kw">=</span> <span class="st">"blue"</span>, <span class="kw">bottom</span> <span class="kw">=</span> <span class="st">"red"</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/ann_rep_grp1_s.html">ann_rep_grp1_s</a></span><span class="op">(</span><span class="va">outpath</span>, <span class="va">data</span>, surface <span class="op">=</span> <span class="st">"blue"</span>, bottom <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 
@@ -276,7 +267,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
