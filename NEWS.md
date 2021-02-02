@@ -1,3 +1,15 @@
+# rivRmon 2.0.1
+
+### Minor updates to functions
+
+* `swan_surfR` has been updated:
+     + to incorporate new names for sites BWR10 and Mulberry Farm, 
+     to SAND and MULB respectively.
+     
+* `sysdata`, which is only accessible to the package functions, has been updated:
+     + to create bathymetry profile from newly updated origin shape files.
+     + to create applicable filters for masking missing data.
+
 # rivRmon 2.0.0
 
 ### Updates to functions
