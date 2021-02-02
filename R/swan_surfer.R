@@ -88,7 +88,6 @@ swan_surfR <- function(path, ovit, ocav){
       # join and delete and rename prob sites
       samp_data <- dplyr::bind_rows(lower_clean, upper_clean) %>%
         janitor::clean_names() %>%
-        dplyr::mutate(site = ifelse(site == "MULB FARM", "MUL",site)) %>%
         dplyr::filter(site != "FP2.1")
       
       # join sites to WQ data
@@ -218,7 +217,7 @@ swan_surfR <- function(path, ovit, ocav){
       
       site_labs <- S_sitesdf %>%
         dplyr::filter(site != "SRP_RSSA") %>%
-        dplyr::filter(site != "BWR10" & site != "KMO" & site != "VIT")
+        dplyr::filter(site != "SAND" & site != "KMO" & site != "VIT")
       
       site_labs_upper <- S_sitesdf %>%
         dplyr::filter(site != "SRP_RSSA") %>%
