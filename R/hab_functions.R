@@ -2,12 +2,12 @@
 
 #' Creates summary HAB data for conditionally formatted table export
 #'
-#' \code{hab_groupR} takes a file path to raw PEU xlsx spreadsheets
+#' \code{hab_groupR} takes a file path to raw phyto data xlsx spreadsheets
 #'     and creates summary data for use HAB reporting tables.
 #'
 #' @details This is a precursor function to be run prior to using
 #'     (\code{\link{hab_tablR}}). It takes a file path to raw xlsx
-#'     phytoplankton data, i.e. PEU data, creates cummulative counts on specific
+#'     phytoplankton data, creates cummulative counts on specific
 #'     reportable phytoplankton groups and outputs a summary csv file. The
 #'     groups are determined from an input file of management species and
 #'     trigger levels.
@@ -17,7 +17,7 @@
 #'     exist, it is created.
 #'
 #' @param pathin a character filepath to the location of the raw phytoplankton
-#'     xlsx spreadsheets i.e. the PEU data
+#'     xlsx spreadsheets.
 #'
 #' @param pathout a character filepath to the location of the desired directory
 #'     for the summary csv files, suggest same as `pathin`
@@ -26,9 +26,6 @@
 #'     `mngt_response_triggers_2020.csv` data file that indicates group names,
 #'     species names and trigger thresholds for management action. See package
 #'     example dataset `mngt_response_triggers` for example of format required.
-#'
-#' @param skip numeric number of lines to skip at beginning of PEU data ingest.
-#'     Defaults to 5 which suits current PEU format, change only if required
 #'
 #' @param SHELL logical. Include Canning River site "Shell". Defaults to FALSE,
 #'     change if required
@@ -67,25 +64,26 @@ hab_groupR <- function (pathin, pathout, skip = 5, mngt_triggers, SHELL = FALSE)
     for (i in seq_along(locations)) {
       loc <- locations[i]
       sheet <- readxl::excel_sheets(loc)[stringr::str_sub(stringr::str_to_lower(readxl::excel_sheets(loc)), 1, 1) != "e"]
-      sheet1 <- sheet[str_detect(sheet, pattern = "Routine")]# looking for this only
-      dat <- readxl::read_excel(loc, sheet = sheet1, skip = skip)
+      sheet1 <- sheet[str_detect(sheet, pattern = "REPORT")]# looking for this only
+      dat <- readxl::read_excel(loc, sheet = sheet1)
       names(dat) <- tolower(names(dat))
 
       #stuff to get leading date 6 or 8 digit
       loc_splt <- stringr::str_split(loc, pattern = "/")
       loc_splt_1 <- stringr::str_split(loc_splt[[1]][length(loc_splt[[1]])], "_")
       samp_date <- lubridate::ymd(loc_splt_1[[1]][1])
-      project <- dat[[1, "project"]]
+      project <- ifelse(str_detect(loc_splt[[1]][length(loc_splt[[1]])], "SWAN"), 
+                        "SWAN", "CANNING")
       outpath_hab <- paste0(hab_folder, "/") ##
 
       # wiggy stuff here to work out river and supply names
-      if(project == "SG-E-CANEST" & SHELL == FALSE){
+      if(project == "CANNING" & SHELL == FALSE){
         site_df <- tibble(site = c("SCB2", "SAL", "RIV", "CASMID", "KEN", "BAC",
                                    "NIC",  "ELL"))
-      } else if(project == "SG-E-CANEST" & SHELL == TRUE){
+      } else if(project == "CANNING" & SHELL == TRUE){
         site_df <- tibble(site = c("SCB2", "SAL", "SHELL", "RIV", "CASMID", "KEN",
                                    "BAC", "NIC", "ELL"))
-      } else if(project == "SG-E-SWANEST"){
+      } else if(project == "SWAN"){
         site_df <- tibble(site = c("BLA",	"ARM", "HEA",	"NAR", "NIL", "STJ",
                                    "MAY", "RON", "KIN", "SUC", "WMP", "MSB"))
       } else {
@@ -194,8 +192,9 @@ hab_tablR <- function(hab_tables, focus_date, mngt_triggers){
     files <- file.path(hab_tables, list.files(hab_tables, "HAB_data.csv"))
     #dynamic length due to unknown file path
     d_length <- length(stringr::str_split(files[1], "/")[[1]])
-    est <- substr(sapply(stringr::str_split(files[1], "/"), "[[", d_length), 12,
-                  23)
+    loc_splt <- stringr::str_split(files[1], pattern = "/")
+    est <- ifelse(str_detect(loc_splt[[1]][length(loc_splt[[1]])], "SWAN"), 
+                  "SWAN", "CANNING")
 
     dat <- data.frame()
 

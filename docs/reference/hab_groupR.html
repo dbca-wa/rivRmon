@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Creates summary HAB data for conditionally formatted table export — hab_groupR" />
-<meta property="og:description" content="hab_groupR takes a file path to raw PEU xlsx spreadsheets
+<meta property="og:description" content="hab_groupR takes a file path to raw phyto data xlsx spreadsheets
     and creates summary data for use HAB reporting tables." />
 
 
@@ -131,7 +131,7 @@
     </div>
 
     <div class="ref-description">
-    <p><code>hab_groupR</code> takes a file path to raw PEU xlsx spreadsheets
+    <p><code>hab_groupR</code> takes a file path to raw phyto data xlsx spreadsheets
     and creates summary data for use HAB reporting tables.</p>
     </div>
 
@@ -143,17 +143,12 @@
     <tr>
       <th>pathin</th>
       <td><p>a character filepath to the location of the raw phytoplankton
-xlsx spreadsheets i.e. the PEU data</p></td>
+xlsx spreadsheets.</p></td>
     </tr>
     <tr>
       <th>pathout</th>
       <td><p>a character filepath to the location of the desired directory
 for the summary csv files, suggest same as `pathin`</p></td>
-    </tr>
-    <tr>
-      <th>skip</th>
-      <td><p>numeric number of lines to skip at beginning of PEU data ingest.
-Defaults to 5 which suits current PEU format, change only if required</p></td>
     </tr>
     <tr>
       <th>mngt_triggers</th>
@@ -173,7 +168,7 @@ change if required</p></td>
 
     <p>This is a precursor function to be run prior to using
     (<code><a href='hab_tablR.html'>hab_tablR</a></code>). It takes a file path to raw xlsx
-    phytoplankton data, i.e. PEU data, creates cummulative counts on specific
+    phytoplankton data, creates cummulative counts on specific
     reportable phytoplankton groups and outputs a summary csv file. The
     groups are determined from an input file of management species and
     trigger levels.</p>

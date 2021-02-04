@@ -8,13 +8,10 @@ hab_groupR(pathin, pathout, skip = 5, mngt_triggers, SHELL = FALSE)
 }
 \arguments{
 \item{pathin}{a character filepath to the location of the raw phytoplankton
-xlsx spreadsheets i.e. the PEU data}
+xlsx spreadsheets.}
 
 \item{pathout}{a character filepath to the location of the desired directory
 for the summary csv files, suggest same as `pathin`}
-
-\item{skip}{numeric number of lines to skip at beginning of PEU data ingest.
-Defaults to 5 which suits current PEU format, change only if required}
 
 \item{mngt_triggers}{a character filepath and name of the
 `mngt_response_triggers_2020.csv` data file that indicates group names,
@@ -25,13 +22,13 @@ example dataset `mngt_response_triggers` for example of format required.}
 change if required}
 }
 \description{
-\code{hab_groupR} takes a file path to raw PEU xlsx spreadsheets
+\code{hab_groupR} takes a file path to raw phyto data xlsx spreadsheets
     and creates summary data for use HAB reporting tables.
 }
 \details{
 This is a precursor function to be run prior to using
     (\code{\link{hab_tablR}}). It takes a file path to raw xlsx
-    phytoplankton data, i.e. PEU data, creates cummulative counts on specific
+    phytoplankton data, creates cummulative counts on specific
     reportable phytoplankton groups and outputs a summary csv file. The
     groups are determined from an input file of management species and
     trigger levels.
