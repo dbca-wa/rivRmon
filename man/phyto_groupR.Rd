@@ -8,13 +8,10 @@ phyto_groupR(pathin, pathout, skip = 5)
 }
 \arguments{
 \item{pathin}{a character filepath to the location of the raw phytoplankton
-xlsx spreadsheets i.e. the PEU data.}
+xlsx spreadsheets i.e. the data from thephyoplankton lab.}
 
 \item{pathout}{a character filepath to the location of the desired directory
 for the summary csv files.}
-
-\item{skip}{numeric number of lines to skip at beginning of PEU data ingest.
-Defaults to 5 which suits current PEU format, change only if required}
 }
 \description{
 \code{phyto_groupR} takes a file path to raw phytoplankton xlsx spreadsheets
@@ -28,7 +25,7 @@ This is a precursor function to be run prior to using
     Diatoms, Dinoflagellates, Cryptophyta and Other as a catch all.
 
     Summary csv files are exported to a `summaries/` directory and are named
-    with the date, estuary and the word "summary". If the directory doesnt
+    with the date, river name and the word "summary". If the directory doesnt
     exist, it is created.
 }
 \examples{
