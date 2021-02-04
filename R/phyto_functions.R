@@ -12,17 +12,14 @@
 #'     Diatoms, Dinoflagellates, Cryptophyta and Other as a catch all.
 #'
 #'     Summary csv files are exported to a `summaries/` directory and are named
-#'     with the date, estuary and the word "summary". If the directory doesnt
+#'     with the date, river name and the word "summary". If the directory doesnt
 #'     exist, it is created.
 #'
 #' @param pathin a character filepath to the location of the raw phytoplankton
-#'     xlsx spreadsheets i.e. the PEU data.
+#'     xlsx spreadsheets i.e. the data from thephyoplankton lab.
 #'
 #' @param pathout a character filepath to the location of the desired directory
 #'     for the summary csv files.
-#'     
-#' @param skip numeric number of lines to skip at beginning of PEU data ingest.
-#'     Defaults to 5 which suits current PEU format, change only if required
 #'
 #' @examples
 #' \dontrun{
@@ -51,12 +48,13 @@ phyto_groupR <- function(pathin, pathout, skip = 5){
   for(i in seq_along(locations)){
     loc <- locations[i]
     sheet <- readxl::excel_sheets(loc)[stringr::str_sub(stringr::str_to_lower(readxl::excel_sheets(loc)), 1, 1) != "e"]
-    sheet1 <- sheet[stringr::str_detect(sheet, pattern = "Routine")]# looking for this only
-    dat <- readxl::read_excel(loc, sheet = sheet1, skip = skip)
+    sheet1 <- sheet[stringr::str_detect(sheet, pattern = "REPORT")]# looking for this only
+    dat <- readxl::read_excel(loc, sheet = sheet1)
     names(dat) <- tolower(names(dat))
     loc_splt <- stringr::str_split(loc, pattern = "/")
     samp_date <- lubridate::ymd(substr(loc_splt[[1]][length(loc_splt[[1]])], 1, 8))
-    project <- dat[[1, "project"]]
+    project <- ifelse(str_detect(loc_splt[[1]][length(loc_splt[[1]])], "SWAN"), 
+                      "SWAN", "CANNING")
     outpath <- paste0(folder, "/")
     short_dat <- dat %>%
       dplyr::select(siterefname, species_name, groupname,
