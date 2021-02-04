@@ -6,6 +6,10 @@
      + to incorporate new names for sites BWR10 and Mulberry Farm, 
      to SAND and MULB respectively.
      
+* `phyto_groupR` has been updated:
+     + to function with a change of multiple project names to a single one with the 
+     change of lab. Outputs now named by "river".
+     
 * `sysdata`, which is only accessible to the package functions, has been updated:
      + to create bathymetry profile from newly updated origin shape files.
      + to create applicable filters for masking missing data.

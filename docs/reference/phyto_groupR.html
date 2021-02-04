@@ -143,17 +143,12 @@
     <tr>
       <th>pathin</th>
       <td><p>a character filepath to the location of the raw phytoplankton
-xlsx spreadsheets i.e. the PEU data.</p></td>
+xlsx spreadsheets i.e. the data from thephyoplankton lab.</p></td>
     </tr>
     <tr>
       <th>pathout</th>
       <td><p>a character filepath to the location of the desired directory
 for the summary csv files.</p></td>
-    </tr>
-    <tr>
-      <th>skip</th>
-      <td><p>numeric number of lines to skip at beginning of PEU data ingest.
-Defaults to 5 which suits current PEU format, change only if required</p></td>
     </tr>
     </table>
 
@@ -165,7 +160,7 @@ Defaults to 5 which suits current PEU format, change only if required</p></td>
     outputs a summary csv file. The groups are, Chlorophytes, Cyanophytes,
     Diatoms, Dinoflagellates, Cryptophyta and Other as a catch all.</p>
 <p>Summary csv files are exported to a `summaries/` directory and are named
-    with the date, estuary and the word "summary". If the directory doesnt
+    with the date, river name and the word "summary". If the directory doesnt
     exist, it is created.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
