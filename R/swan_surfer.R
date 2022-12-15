@@ -482,14 +482,14 @@ swan_surfR <- function(path, ovit, ocav){
       plts <- lapply(list(salPlot_s, doPlot_s, chlorPlot_s, tempPlot_s), ggplotGrob)
       # rbind (i.e. 1 column) size arg matters!
       surfers_s <- rbind(plts[[1]], plts[[2]], plts[[3]], plts[[4]], size = "first")
-      pdf_name <- paste0(path, "/plots/", "swan_", ymd(samp_date), "_surfer.pdf")
+      # pdf_name <- paste0(path, "/plots/", "swan_", ymd(samp_date), "_surfer.pdf")
       png_name <- paste0(path, "/plots/", "swan_", ymd(samp_date), "_surfer.png")
       
       # add margin padding coarse but effective
       # surfers_pads <- gtable::gtable_add_padding(surfers_s, padding = unit(c(1,4,3,4), "cm"))
       
-      ggsave(plot = grid.draw(surfers_s), filename = pdf_name, width=28, height=18)
-      cat(paste0(pdf_name,"\n"))
+      # ggsave(plot = grid.draw(surfers_s), filename = pdf_name, width=28, height=18)
+      # cat(paste0(pdf_name,"\n"))
       png(file = png_name, width = 1500, height = 960, res = 53, bg = "transparent") 
       grid.draw(surfers_s)
       dev.off()
@@ -753,14 +753,14 @@ swan_surfR <- function(path, ovit, ocav){
       pltzs <- lapply(list(salPlotZ_s, doPlotZ_s, chlorPlotZ_s, tempPlotZ_s), ggplotGrob)
       # rbind (i.e. 1 column) size arg matters!
       surfersZs <- rbind(pltzs[[1]], pltzs[[2]], pltzs[[3]], pltzs[[4]], size = "first")
-      pdf_nameZs <- paste0(path, "/plots/", "swan_middle_upper_", lubridate::ymd(samp_date), "_surfer.pdf")
+      # pdf_nameZs <- paste0(path, "/plots/", "swan_middle_upper_", lubridate::ymd(samp_date), "_surfer.pdf")
       png_nameZs <- paste0(path, "/plots/", "swan_middle_upper_", lubridate::ymd(samp_date), "_surfer.png")
       
       # add margin padding coarse but effective
       # surfersZ_pad <- gtable::gtable_add_padding(surfersZs, padding = unit(c(1,4,3,4), "cm"))
       
-      ggsave(plot = grid.draw(surfersZs), filename = pdf_nameZs, width=28, height=18)
-      cat(paste0(pdf_nameZs,"\n"))
+      # ggsave(plot = grid.draw(surfersZs), filename = pdf_nameZs, width=28, height=18)
+      # cat(paste0(pdf_nameZs,"\n"))
       png(file = png_nameZs, width = 1500, height = 960, res = 53, bg = "transparent") #, 
       grid.draw(surfersZs)
       dev.off()
