@@ -1,3 +1,24 @@
+# rivRmon 2.0.2
+
+### Minor update to functions
+
+* `canning_surfR` has been updated:
+    + to incorporate a new site, NIC-IN.
+    + to remove some plot aesthetics relating to downgraded sampling sites (KENU300,
+    BACD300, BACU300, GRE, MASD50, NICD200, MACD50).
+    + to remove PDF plot output.
+    
+* `swan_sufR` has been updated:
+    + to remove PDF plot output.
+    
+### Update to internal data
+
+* `sysdata`, which is only accessible to the package functions, has been updated:
+    + to create bathymetry profile from newly updated origin shape files that now 
+    contains site NIC-IN.
+    + to add new fixed depths for downgraded sampling sites (KENU300,
+    BACD300, BACU300, GRE, MASD50, NICD200, MACD50).
+
 # rivRmon 2.0.1
 
 ### Minor updates to functions
