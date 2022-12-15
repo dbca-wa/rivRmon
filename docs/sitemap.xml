@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dbca-wa.github.io/rivRmon/404.html</loc>
+  </url>
+  <url>
+    <loc>https://dbca-wa.github.io/rivRmon/articles/annual_reports.html</loc>
+  </url>
+  <url>
+    <loc>https://dbca-wa.github.io/rivRmon/articles/hab.html</loc>
+  </url>
+  <url>
+    <loc>https://dbca-wa.github.io/rivRmon/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://dbca-wa.github.io/rivRmon/articles/phyto.html</loc>
+  </url>
+  <url>
+    <loc>https://dbca-wa.github.io/rivRmon/articles/surfr.html</loc>
+  </url>
+  <url>
+    <loc>https://dbca-wa.github.io/rivRmon/authors.html</loc>
+  </url>
+  <url>
     <loc>https://dbca-wa.github.io/rivRmon/index.html</loc>
+  </url>
+  <url>
+    <loc>https://dbca-wa.github.io/rivRmon/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://dbca-wa.github.io/rivRmon/news/index.html</loc>
   </url>
   <url>
     <loc>https://dbca-wa.github.io/rivRmon/reference/ann_rep_chla_c.html</loc>
@@ -67,6 +94,9 @@
     <loc>https://dbca-wa.github.io/rivRmon/reference/hab_tablR.html</loc>
   </url>
   <url>
+    <loc>https://dbca-wa.github.io/rivRmon/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://dbca-wa.github.io/rivRmon/reference/just_nums.html</loc>
   </url>
   <url>
@@ -101,17 +131,5 @@
   </url>
   <url>
     <loc>https://dbca-wa.github.io/rivRmon/reference/swan_WIN_report_data.html</loc>
-  </url>
-  <url>
-    <loc>https://dbca-wa.github.io/rivRmon/articles/annual_reports.html</loc>
-  </url>
-  <url>
-    <loc>https://dbca-wa.github.io/rivRmon/articles/hab.html</loc>
-  </url>
-  <url>
-    <loc>https://dbca-wa.github.io/rivRmon/articles/phyto.html</loc>
-  </url>
-  <url>
-    <loc>https://dbca-wa.github.io/rivRmon/articles/surfr.html</loc>
   </url>
 </urlset>
