@@ -199,7 +199,7 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
         dplyr::rename(x = dist_bridg, y = dep_m) %>%
         dplyr::select(site, x, y)
       
-      samp_labels <- c("SCB2", "SAL", "SHELL","RIV", "CASMID", "KEN", "BAC", "NIC", "ELL")
+      samp_labels <- c("SCB2", "SAL", "SHELL","RIV", "CASMID", "KEN", "BAC", "KS7", "NIC", "ELL")
       samp_labels_locs <- C_sitesdf %>%
         dplyr::filter(site %in% samp_labels)
       
@@ -476,14 +476,14 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
       plta <- lapply(list(salPlot, doPlot, chlorPlot, tempPlot), ggplotGrob)
       # rbind (i.e. 1 column) size arg matters!
       surfers <- rbind(plta[[1]], plta[[2]], plta[[3]], plta[[4]], size = "first")
-      pdf_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surfer.pdf")
+      # pdf_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surfer.pdf")
       png_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surfer.png")
       
       # add margin padding coarse but effective
       # surfers_pad <- gtable::gtable_add_padding(surfers, padding = unit(c(1,4,3,4), "cm"))
       
-      ggsave(plot = grid.draw(surfers), filename = pdf_name, width=28, height=18)
-      cat(paste0(pdf_name,"\n"))
+      # ggsave(plot = grid.draw(surfers), filename = pdf_name, width=28, height=18)
+      # cat(paste0(pdf_name,"\n"))
       png(file = png_name, width = 1500, height = 960, res = 53, bg = "transparent")
       grid.draw(surfers)
       dev.off()
@@ -496,5 +496,3 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
   })
   
 }
-
-
