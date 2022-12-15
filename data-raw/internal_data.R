@@ -22,7 +22,9 @@ library(nngeo)
 
 #####Swan River
 ## Create site data - locations, depths and distances
-sites <- readOGR(dsn = "../vectors/swan100",
+## NOTE with the pacakge folder structure being moved to a PRODUCT folder a full
+## filepath to the vector data located in the DATA folders is required
+sites <- readOGR(dsn = "Z:/DEC/DBCA_R_Packages/SwanCanningRiversMonitoringProgram_rivRmon/DATA/Working/vectors/swan100",
                  layer = "SwanDepthDistProfile_MGA50_100m",
                  stringsAsFactors = FALSE)
 S_sitesdf <- as.data.frame(sites@data) %>%
@@ -166,7 +168,9 @@ temp_brk <- as.character(seq(11, 33, 1))
 
 #####Canning River
 ## Create site data - locations, depths and distances
-csites <- readOGR(dsn = "../vectors/canning100",
+## NOTE with the pacakge folder structure being moved to a PRODUCT folder a full
+## filepath to the vector data located in the DATA folders is required
+csites <- readOGR(dsn = "Z:/DEC/DBCA_R_Packages/SwanCanningRiversMonitoringProgram_rivRmon/DATA/Working/vectors/canning100",
                   layer = "CanningDepthDistProfile_MGA50_100m",
                   stringsAsFactors = FALSE)
 C_sitesdf <- as.data.frame(csites@data) %>%
