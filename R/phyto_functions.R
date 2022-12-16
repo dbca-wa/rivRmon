@@ -170,14 +170,14 @@ phyto_plotR <- function(summary, date, SHELL = FALSE){
     datp$site <- factor(datp$site, levels = c("BLA", "ARM", "HEA", "NAR", "NIL",
                                               "STJ", "MAY", "RON", "KIN", "SUC",
                                               "WMP", "MSB", "SCB2", "SAL", "SHELL",
-                                              "RIV","CASMID", "KEN", "BAC", "NIC",
-                                              "ELL"), ordered = TRUE)
+                                              "RIV","CASMID", "KEN", "BAC", "KS7",
+                                              "NIC", "ELL"), ordered = TRUE)
   } else {
     datp$site <- factor(datp$site, levels = c("BLA", "ARM", "HEA", "NAR", "NIL",
                                               "STJ", "MAY", "RON", "KIN", "SUC",
                                               "WMP", "MSB", "SCB2", "SAL","RIV",
-                                              "CASMID", "KEN", "BAC", "NIC",
-                                              "ELL"), ordered = TRUE)
+                                              "CASMID", "KEN", "BAC", "KS7",
+                                              "NIC", "ELL"), ordered = TRUE)
   }
   # required to remove NA site when not in list of site factors
   datp <- datp %>%
@@ -216,7 +216,7 @@ phyto_plotR <- function(summary, date, SHELL = FALSE){
          title = format(current, "%d %B %Y")) +
     theme_bw() +
     theme(panel.grid.major.x = element_blank(),
-          panel.grid.major.y = element_line( size=.1),
+          panel.grid.major.y = element_line(linewidth=.1),
           axis.text = element_text(color="black", size=9))
   
   
@@ -232,7 +232,7 @@ phyto_plotR <- function(summary, date, SHELL = FALSE){
          title = format(last, "%d %B %Y")) +
     theme_bw()+
     theme(panel.grid.major.x = element_blank(),
-          panel.grid.major.y = element_line( size=.1),
+          panel.grid.major.y = element_line(linewidth=.1),
           axis.text = element_text(color="black", size=9))
   
   ## save the plot
