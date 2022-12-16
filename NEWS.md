@@ -6,10 +6,14 @@
     + to incorporate a new site, NIC-IN.
     + to remove some plot aesthetics relating to downgraded sampling sites (KENU300,
     BACD300, BACU300, GRE, MASD50, NICD200, MACD50).
+    + to add plot aesthetics for site KS7.
     + to remove PDF plot output.
     
 * `swan_sufR` has been updated:
     + to remove PDF plot output.
+    
+* `phyto_plotR` has been updated:
+    + to add plot aesthetics if/when site KS7 is used for phytoplankton surveys. 
     
 ### Update to internal data
 
