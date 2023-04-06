@@ -103,21 +103,20 @@ investigate.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mngt_response_triggers</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    table_ord table_name             spp_name                     surve…¹ notif…²</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>         1 Alex spp               alexandrium_spp                    5      10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>         2 Dino spp               dinophysis_acuminata              23     230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>         2 Dino spp               dinophysis_caudata                23     230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>         2 Dino spp               dinophysis_acuta                  23     230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>         2 Dino spp               dinophysis_fortii                 23     230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>         3 karenia spp            karenia_spp                       50     500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>         4 karlo spp              karlodinium_spp                <span style="text-decoration: underline;">10</span>000   <span style="text-decoration: underline;">30</span>000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>         5 Pn seriata group       pseudonitzschia_seriata           10     100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>         6 Pn delicatissima group pseudonitzschia_delicatissi…     100     500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>         6 Pn delicatissima group pseudonitzschia_spp              100     500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>         7 H akashiwo             heterosigma_akashiwo           <span style="text-decoration: underline;">20</span>000   <span style="text-decoration: underline;">40</span>000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>         8 F japonica             fibrocapsa_japonica            <span style="text-decoration: underline;">20</span>000   <span style="text-decoration: underline;">40</span>000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​surveillance, ²​notification</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    table_ord table_name             spp_name           surveillance notification</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>         1 Alex spp               alexandrium_spp               5           10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>         2 Dino spp               dinophysis_acumin…           23          230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>         2 Dino spp               dinophysis_caudata           23          230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>         2 Dino spp               dinophysis_acuta             23          230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>         2 Dino spp               dinophysis_fortii            23          230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>         3 karenia spp            karenia_spp                  50          500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>         4 karlo spp              karlodinium_spp           <span style="text-decoration: underline;">10</span>000        <span style="text-decoration: underline;">30</span>000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>         5 Pn seriata group       pseudonitzschia_s…           10          100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>         6 Pn delicatissima group pseudonitzschia_d…          100          500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>         6 Pn delicatissima group pseudonitzschia_s…          100          500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>         7 H akashiwo             heterosigma_akash…        <span style="text-decoration: underline;">20</span>000        <span style="text-decoration: underline;">40</span>000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>         8 F japonica             fibrocapsa_japoni…        <span style="text-decoration: underline;">20</span>000        <span style="text-decoration: underline;">40</span>000</span>
 </code></pre></div>
     </div>
   </div>

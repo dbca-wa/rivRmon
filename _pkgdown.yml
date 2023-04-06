@@ -23,6 +23,7 @@ reference:
     contents:
       - canning_surfR
       - swan_surfR
+      - swan_surfR_alt
   - title: "Annual report data compilation and cleaning"
     desc: >
       Functions for reading in original WIN downloads and creating data for
