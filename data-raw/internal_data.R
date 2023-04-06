@@ -41,15 +41,15 @@ S_oxy_locs <- S_sitesdf %>%
 ## Bottoms for plotting
 S_bottom <- data.frame(x = c(-1, S_sitesdf$dist_mouth/1000,
                              51.6, 51.6, -1),
-                     y = c(-10 ,S_sitesdf$adj_depth,
-                           -1.9, -22.1, -22.1),
-                     id = 1)
+                       y = c(-10 ,S_sitesdf$adj_depth,
+                             -1.9, -22.1, -22.1),
+                       id = 1)
 
 S_bottom_nar <- data.frame(x = c(20.95 , S_sitesdf[S_sitesdf$dist_mouth/1000 >= 21, 8]/1000,
                                  51.6, 51.6, 20.95),
-                         y = c(-3.9 , S_sitesdf[S_sitesdf$dist_mouth/1000 >= 21, 9],
-                               -1.9, -10.05, -10.05),
-                         id = 1)
+                           y = c(-3.9 , S_sitesdf[S_sitesdf$dist_mouth/1000 >= 21, 9],
+                                 -1.9, -10.05, -10.05),
+                           id = 1)
 ## Irregular grid creation
 # for all river
 b_all <- data.frame(x = c(-1.1, S_sitesdf$dist_mouth/1000,
@@ -100,7 +100,17 @@ grd1 <- expand.grid(x = seq(from = x_range[1],
                             to = y_range[2],
                             by = 0.1))  # expand points to grid
 
-# create an empty regular grid of values for narrows and up
+# create an empty regular grid of values for whole of river fine res to be cropped
+# to above narrows
+grdf <- expand.grid(x = seq(from = x_range[1],
+                            to = x_range[2],
+                            by = 0.04),
+                    y = seq(from = y_range[1],
+                            to = y_range[2],
+                            by = 0.04))  # expand points to grid
+
+# create an empty regular grid of values for narrows and up this now used for 
+# creating msk to crop whole of river interpolation
 grd2 <- expand.grid(x = seq(from = x_range_nar[1],
                             to = x_range_nar[2],
                             by = 0.04),#0.1
@@ -117,10 +127,16 @@ S_grd_all <- grd1[!splancs::inout(grd1, b_list_all),]
 coordinates(S_grd_all) <- ~x + y
 gridded(S_grd_all) <- TRUE
 
-# create irregular grid following buffered bottom - from Narrows
-S_grd_nar <- grd2[!splancs::inout(grd2, b_list_nar),]
+# create irregular grid following buffered bottom - from Narrows - NOTE
+# using fine res whole of river - gets cropped in interpolation loop
+S_grd_nar <- grdf[!splancs::inout(grdf, b_list_all),]
 coordinates(S_grd_nar) <- ~x + y
 gridded(S_grd_nar) <- TRUE
+
+# original narrows and up grid used later for creating cropping mask
+M_grd_nar <- grd2[!splancs::inout(grd2, b_list_nar),]
+coordinates(M_grd_nar) <- ~x + y
+gridded(M_grd_nar) <- TRUE
 
 ## Reclassification matrices for binning interpolated rasters
 # salinity
@@ -410,7 +426,9 @@ phyto_cols <- c(Chlorophytes = "#008000", Cyanophytes = "#0000FF",
 ## Save out sysdtat.rda
 usethis::use_data(sal_brk, do_mg_l_brk, chl_brk, temp_brk, S_sitesdf, C_sitesdf,
                   S_oxy_locs, C_oxy_locs, S_bottom, S_bottom_nar, C_bottom_open,
-                  C_bottom_weir, S_grd_all, S_grd_nar, C_grd_low, C_grd_up,
+                  C_bottom_weir, S_grd_all, S_grd_nar, M_grd_nar, C_grd_low, C_grd_up,
                   C_grd_all, reclass_matrices, oxy_grob, S_blockdf_all, S_blockdf_nar,
                   C_blockdf_all, C_blockdf_weir, phyto_cols, internal = TRUE,
                   overwrite = TRUE)
+
+
