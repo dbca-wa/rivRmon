@@ -1,6 +1,6 @@
 template:
+  bootstrap: 5
   params:
-    bootstrap: 5
     bootswatch: flatly
     ganalytics: UA-147990841-1
 

@@ -2,6 +2,14 @@
 title: "How to make plots and tables for annual reports"
 author: "Bart Huntley"
 date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{annual_reports}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+resource_files:
+  - '../vignettes/plots/nox.png'
+  - '../vignettes/plots/chloro.png'
+  - '../vignettes/plots/table.png'
 ---
 
 ```{r, include = FALSE}
@@ -128,15 +136,15 @@ relates to surface measurements, **bottom** to bottom measurements and
 ### Examples
 Canning estuary total oxidised nitrogen.
 
-![](plots/nox.PNG)
+![](../vignettes/plots/nox.png)
 
 Swan estuary chlorophyll a.
 
-![](plots/chloro.PNG)
+![](../vignettes/plots/chloro.png)
 
 Chlorophyll a csv table
 
-![](plots/table.PNG)
+![](../vignettes/plots/table.png)
 
 # Groupings of variables
 As stated previously some variables are grouped so that code can filter data under similar circumstances. These groupings are as follows.

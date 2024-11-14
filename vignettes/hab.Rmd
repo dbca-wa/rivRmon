@@ -2,6 +2,13 @@
 title: "How to use the HAB functions"
 author: "Bart Huntley"
 date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{hab}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+resource_files:
+  - '../vignettes/plots/hab.png'
 ---
 
 ```{r, include = FALSE}
@@ -28,7 +35,7 @@ included species and trigger threshold values for the HAB report. This informati
 not only guides the summary but its layout also guides the final format of the 
 output pptx file. Below is an example.
 
-![](plots/hab.PNG)
+![](../vignettes/plots/hab.png)
 
 The table variables are:
 

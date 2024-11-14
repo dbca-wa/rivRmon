@@ -2,6 +2,15 @@
 title: "How to use the phyto functions"
 author: "Bart Huntley"
 date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{phyto}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+resource_files:
+  - '../vignettes/plots/summary.png'
+  - '../vignettes/plots/phyto.png'
+  - '../vignettes/plots/run.png'
 ---
 
 ```{r, include = FALSE}
@@ -42,7 +51,7 @@ recognised. The above example is the alternative method where the backslashes
 are converted to a single forward slash. An example of an exported summary csv 
 is below.
 
-![](plots/summary.PNG)
+![](../vignettes/plots/summary.png)
 
 # Stage Two - Creating the barcharts and running sheet
 This next stage reads in all the summary data csv's and based on date provided, 
@@ -75,8 +84,8 @@ snippet above and is used in creating the top barchart. The function finds the
 summary data for the prior sampling effort and uses that to plot the bottom 
 barchart.
 
-![](plots/phyto.PNG)
+![](../vignettes/plots/phyto.png){width=110%}
 
 Lastly an example of a portion of a running datasheet. 
 
-![](plots/run.PNG)
+![](../vignettes/plots/run.png)
