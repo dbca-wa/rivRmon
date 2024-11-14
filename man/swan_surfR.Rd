@@ -18,16 +18,16 @@ oxygenation plant status at site VIT.}
 oxygenation plant status at site CAV.}
 }
 \value{
-Two pdf format four panel surfer plots of the Swan River. One shows
+Two png four panel surfer plots of the Swan River. One shows
    the full extent of the monitoring run (river mouth to the just beyond the
    site POL - Upper Swan Power Lines). The second shows from the Narrows
    Bridge to site POL. Saved to a directory called `plots/`.
 }
 \description{
-\code{swan_surfR} takes a file path to Swan River sonde outputs and creates
+\code{swan_surfR_alt} takes a file path to Swan River sonde outputs and creates
     a four panel (single column) surfer plot of salinity, dissolved oxygen,
-    chlorophyll a, and temperature in pdf format. The function creates a
-    directory called `plots/` in the file path to store the pdf's. Code expects
+    chlorophyll a, and temperature in png format. The function creates a
+    directory called `plots/` in the file path to store the png's. Code expects
     only 2 excel workbooks for one monitoring run. Note sonde data from EXO
     models reads depth from the VPos metric. All other sonde models use a
     variant of a depth metric.
