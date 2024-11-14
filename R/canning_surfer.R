@@ -5,8 +5,8 @@
 #'
 #' \code{canning_surfR} takes a file path to Canning River sonde output and creates
 #'     a four panel (single column) surfer plot of salinity, dissolved oxygen,
-#'     chlorophyll a, and temperature in pdf format. The function creates a
-#'     directory called `plots/` in the file path to store the pdf's. Code expects
+#'     chlorophyll a, and temperature in png format. The function creates a
+#'     directory called `plots/` in the file path to store the png's. Code expects
 #'     only 2 excel workbooks for one monitoring run.  Note sonde data from EXO
 #'     models reads depth from the VPos metric. All other sonde models use a
 #'     variant of a depth metric.
@@ -34,7 +34,7 @@
 #' @param SHELL Logical (TRUE/FALSE) indicating whether to include the Shelley
 #'     Bridge site.
 #'
-#' @return A pdf format four panel surfer plot of the Canning River. Saved to
+#' @return A png four panel surfer plot of the Canning River. Saved to
 #'     a directory called `plots/`.
 #'
 #' @examples
@@ -53,10 +53,12 @@
 #' @import ggplot2
 #' @import scales
 #' @import grid
+#' @import gridExtra
 #' @import gtable
 #' @import metR
 #' @importFrom lubridate ymd
 #' @importFrom sp coordinates
+#' @importFrom purrr map
 #' @import fields
 #' @importFrom stats complete.cases
 #'
@@ -82,39 +84,40 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
       upper <- sonde_reader(path = locations[2])
       upper_clean <- upper[stats::complete.cases(upper), ]
       
-      # join and delete and rename prob sites
-      samp_data <- dplyr::bind_rows(lower_clean, upper_clean) %>%
-        janitor::clean_names()
+      # join and rename prob sites
+      samp_data <- dplyr::bind_rows(lower_clean, upper_clean) |>
+        janitor::clean_names() |>
+        dplyr::mutate(site = ifelse(site == "NICIN", "NIC-IN", site )) # spelling mismatch
       
       #function to find ord index in ./data_raw/internal_data.R
       if(SHELL == TRUE){C_sitesdf[C_sitesdf$ord == 79, "site"] <- "SHELL"}
       
       # join sites to WQ data
       comb_data <- dplyr::left_join(samp_data, C_sitesdf, by = "site")
-      d_reduced <- comb_data %>%
+      d_reduced <- comb_data |>
         dplyr::select(site, sal_ppt, do_mg_l, c, chl_ug_l, dep_m,
                       dist_bridg, max_depth)
       
       #### bottom adjust
-      daily_depth <- d_reduced %>%
-        dplyr::group_by(dist_bridg) %>%
-        dplyr::summarise(d_depth = -1*(max(dep_m) + 0.2)) %>%
+      daily_depth <- d_reduced |>
+        dplyr::group_by(dist_bridg) |>
+        dplyr::summarise(d_depth = -1*(max(dep_m) + 0.2)) |>
         dplyr::mutate(dist_bridg = dist_bridg/1000)
       
-      C_bottom_open1 <- C_bottom_open %>%
-        dplyr::left_join(daily_depth, by = c("x" = "dist_bridg")) %>%
+      C_bottom_open1 <- C_bottom_open |>
+        dplyr::left_join(daily_depth, by = c("x" = "dist_bridg")) |>
         dplyr::mutate(y = case_when(
           !is.na(d_depth) ~ d_depth,
           TRUE ~ y
-        )) %>%
+        )) |>
         dplyr::select(-d_depth)
       
-      C_bottom_weir1 <- C_bottom_weir %>%
-        dplyr::left_join(daily_depth, by = c("x" = "dist_bridg")) %>%
+      C_bottom_weir1 <- C_bottom_weir |>
+        dplyr::left_join(daily_depth, by = c("x" = "dist_bridg")) |>
         dplyr::mutate(y = case_when(
           !is.na(d_depth) ~ d_depth,
           TRUE ~ y
-        )) %>%
+        )) |>
         dplyr::select(-d_depth)
       
       
@@ -122,15 +125,15 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
       sparams <- c("Salinity", "Dissolved_Oxygen", "Temperature", "Chlorophyll")
       
       # filter sampling data for separate interpolations
-      d_all <- d_reduced[stats::complete.cases(d_reduced),] %>%
+      d_all <- d_reduced[stats::complete.cases(d_reduced),] |>
         dplyr::mutate(y = -1 * dep_m, x = dist_bridg/1000)
       
-      d_low <- d_reduced[stats::complete.cases(d_reduced),] %>%
-        dplyr::mutate(y = -1 * dep_m, x = dist_bridg/1000) %>%
+      d_low <- d_reduced[stats::complete.cases(d_reduced),] |>
+        dplyr::mutate(y = -1 * dep_m, x = dist_bridg/1000) |>
         dplyr::filter(x < 11.3)
       
-      d_up <- d_reduced[stats::complete.cases(d_reduced),] %>%
-        dplyr::mutate(y = -1 * dep_m, x = dist_bridg/1000) %>%
+      d_up <- d_reduced[stats::complete.cases(d_reduced),] |>
+        dplyr::mutate(y = -1 * dep_m, x = dist_bridg/1000) |>
         dplyr::filter(x > 11.3)
       
       # Based on TPS interps from here
@@ -194,18 +197,19 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
       }
       
       # make sample collection points
-      samp_locs <- comb_data %>%
-        dplyr::mutate(dist_bridg = dist_bridg/1000) %>%
-        dplyr::rename(x = dist_bridg, y = dep_m) %>%
+      samp_locs <- comb_data |>
+        dplyr::mutate(dist_bridg = dist_bridg/1000) |>
+        dplyr::rename(x = dist_bridg, y = dep_m) |>
         dplyr::select(site, x, y)
       
-      samp_labels <- c("SCB2", "SAL", "SHELL","RIV", "CASMID", "KEN", "BAC", "KS7", "NIC", "ELL")
-      samp_labels_locs <- C_sitesdf %>%
+      samp_labels <- c("SCB2", "SAL", "SHELL","RIV", "CASMID", "KEN", "BAC", 
+                       "KS7", "NIC", "ELL", "BACD500", "PO2", "KS9", "PAC")
+      samp_labels_locs <- C_sitesdf |>
         dplyr::filter(site %in% samp_labels)
       
       
       # Logic for weir no weir
-      cannoxy <- c("KENU300", "BACD500", "BACD300", "BACU300", "PO2", "GRE", "KS7",
+      cannoxy <- c("KENU300", "BACD500", "BACD300", "BACU300", "PO2", "GRE", 
                    "MASD50", "NICD200", "KS9", "PAC", "MACD50")
       if(sum(cannoxy %in% samp_locs$site) > 0 ){
         bottom <- C_bottom_weir1
@@ -228,14 +232,24 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
       # data frame of sites in this run
       sites_this_week <- tibble(site = unique(d_all$site))
       
+      # restrict label data to sites sampled
+      samp_labels_locs <- samp_labels_locs |>
+        dplyr::right_join(sites_this_week, by = "site") |>
+        dplyr::filter(site != "BICAP" & site != "BWR" & site != "DWP" &
+                        site != "KEND50" & site != "MT HENRY" & 
+                        site != "PRISPT")
+      
+      
       # black out areas for plotting
-      rectdf <- C_blockdf %>%
+      rectdf <- C_blockdf |>
         anti_join(sites_this_week, by = "site")
+      
       
       
       salPlot <- ggplot()+
         geom_tile(data = interp[[1]],
-                  aes(x=x, y=y, fill = factor(Salinity))) +
+                  aes(x=x, y=y, fill = factor(Salinity)),
+                  show.legend = c(fill = TRUE)) +
         scale_x_continuous(limits = c(0.5, 15.95),
                            expand = c(0, 0),
                            breaks = seq(0, 14, by = 2)) +
@@ -244,10 +258,11 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
         stat_contour2(data = interp[[1]], aes(x=x, y=y, z = Salinity),
                       colour = "grey10",
                       breaks = MakeBreaks(binwidth = 2),
-                      size = 0.1) +
+                      linewidth = 0.1) +
         scale_fill_manual(values = surfer_cols("sal"),
                           guide = guide_legend(reverse=T),
-                          limits = as.character(seq(2, 42, 2))) + 
+                          labels = c(as.character(seq(2, 40, 2)), ">40"),
+                          limits = c(as.character(seq(2, 40, 2)), "100")) +
         geom_rect(data = rectdf, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax + 0.05),
                   fill = "black") +
         geom_polygon(data = bottom,
@@ -264,12 +279,12 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
                   check_overlap = TRUE) +
         annotate("text",
                  label = "Salinity (ppt)",
-                 x = 3.25,
+                 x = 4.4,
                  y = -5.65,
+                 hjust = 0,
                  size = 9,
                  fontface = 2,
                  colour = "black") +
-        labs(y = "") +
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
               panel.background = element_blank(),
@@ -288,7 +303,9 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
               legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
               legend.position = c(0.43, 0.15),
+              legend.justification = "left",
               legend.key.size =  unit(8, "mm"),
+              legend.key.spacing.x = unit(0, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
@@ -297,7 +314,8 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
       
       doPlot <- ggplot()+
         geom_tile(data = interp[[2]],
-                  aes(x=x, y=y, fill = factor(Dissolved_Oxygen))) +
+                  aes(x=x, y=y, fill = factor(Dissolved_Oxygen)),
+                  show.legend = c(fill = TRUE)) +
         scale_x_continuous(limits = c(0.5, 15.95),
                            expand = c(0, 0),
                            breaks = seq(0, 14, by = 2)) +
@@ -306,10 +324,11 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
                       aes(x=x, y=y, z = Dissolved_Oxygen),
                       colour = "grey10",
                       breaks = MakeBreaks(binwidth = 1),
-                      size = 0.1) +
+                      linewidth = 0.1) +
         scale_fill_manual(values = surfer_cols("do"),
                           guide = guide_legend(reverse=T),
-                          limits = as.character(seq(1, 17, 1))) +
+                          labels = c(as.character(seq(1, 16, 1)), ">16"),
+                          limits = c(as.character(seq(1, 16, 1)), "100")) +
         geom_rect(data = rectdf, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax + 0.05),
                   fill = "black") +
         geom_polygon(data = bottom,
@@ -326,12 +345,12 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
                    shape = 24) +
         annotate("text",
                  label = "Dissolved Oxygen (mg/L)",
-                 x = 3.9,
+                 x = 4.4,
                  y = -5.7,
+                 hjust = 0,
                  size = 9,
                  fontface = 2,
                  colour = "black") +
-        labs(y = "Depth (m)") +
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
               panel.background = element_blank(),
@@ -350,7 +369,9 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
               legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
               legend.position = c(0.43, 0.15),
+              legend.justification = "left",
               legend.key.size =  unit(8, "mm"),
+              legend.key.spacing.x = unit(0, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
@@ -360,7 +381,8 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
       chlorPlot <- ggplot()+
         geom_tile(data = interp[[4]],
                   aes(x=x, y=y, fill = factor(Chlorophyll)),
-                  alpha = 0.5) +
+                  alpha = 0.5,
+                  show.legend = c(fill = TRUE)) +
         scale_x_continuous(limits = c(0.5, 15.95),
                            expand = c(0, 0),
                            breaks = seq(0, 14, by = 2)) +
@@ -369,11 +391,11 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
                       aes(x=x, y=y, z = Chlorophyll),
                       colour = "grey10",
                       breaks = chl_brk,
-                      size = 0.1) +
+                      linewidth = 0.1) +
         scale_fill_manual(values = surfer_cols("chl"),
                           guide = guide_legend(reverse=T),
                           labels = c("20", "40", "60", "80", "120", "160",
-                                     "200", "300", "400", "> 400"),
+                                     "200", "300", "400", ">400"),
                           limits = c(as.character(seq(20, 80, 20)),
                                      "120", "160", "200", "300", "400", "1000")) +
         geom_rect(data = rectdf, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax + 0.05),
@@ -386,12 +408,11 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
                    size = 0.5) +
         annotate("text",
                  label = expression('bold(paste("F-Chlorophyll (", mu,"g/L)"))'),
-                 x = 3.7,
+                 x = 4.4,
                  y = -5.8,
+                 hjust = 0,
                  size = 9,
                  colour = "black", parse = TRUE) +
-        labs(x = "Distance From Entrance (km)",
-             y = "") +
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
               panel.background = element_blank(),
@@ -409,7 +430,9 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
               legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
               legend.position = c(0.43, 0.15),
+              legend.justification = "left",
               legend.key.size =  unit(8, "mm"),
+              legend.key.spacing.x = unit(0, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
@@ -418,7 +441,8 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
       
       tempPlot <- ggplot()+
         geom_tile(data = interp[[3]],
-                  aes(x=x, y=y, fill = factor(Temperature))) +
+                  aes(x=x, y=y, fill = factor(Temperature)),
+                  show.legend = c(fill = TRUE)) +
         scale_x_continuous(limits = c(0.5, 15.95),
                            expand = c(0, 0),
                            breaks = seq(0, 14, by = 2)) +
@@ -427,10 +451,11 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
                       aes(x=x, y=y, z = Temperature),
                       colour = "grey10",
                       breaks = MakeBreaks(binwidth = 1),
-                      size = 0.1) +
+                      linewidth = 0.1) +
         scale_fill_manual(values = surfer_cols("temp"),
                           guide = guide_legend(reverse=T),
-                          limits = as.character(seq(11, 33, 1))) +
+                          labels = c(as.character(seq(11, 32, 1)), ">32"),
+                          limits = c(as.character(seq(11, 32, 1)), "100")) +
         geom_rect(data = rectdf, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax + 0.05),
                   fill = "black") +
         geom_polygon(data = bottom,
@@ -441,13 +466,12 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
                    size = 0.5) +
         annotate("text",
                  label = expression('bold(paste("Temperature (", degree,"C)"))'),
-                 x = 3.4,
+                 x = 4.4,
                  y = -5.7,
+                 hjust = 0,
                  size = 9,
                  fontface = 2,
                  colour = "black", parse = TRUE) +
-        labs(x = "Distance From Canning Bridge (km)",
-             y = "") +
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
               panel.background = element_blank(),
@@ -464,28 +488,25 @@ canning_surfR <- function(path, obac, onic, SHELL = FALSE){
               legend.background = element_rect(fill = "transparent"),
               legend.direction = "horizontal",
               legend.position = c(0.43, 0.15),
+              legend.justification = "left",
               legend.key.size =  unit(8, "mm"),
+              legend.key.spacing.x = unit(0, "mm"),
               legend.title = element_blank(),
               legend.text = element_text(size = 12),
               plot.margin=grid::unit(c(0,0,0,0), "mm")) +
         guides(fill = guide_legend(nrow = 1, byrow = TRUE,
                                    label.position = "bottom"))
       
-      # full length plots
-      # create list of plotGrobs
-      plta <- lapply(list(salPlot, doPlot, chlorPlot, tempPlot), ggplotGrob)
-      # rbind (i.e. 1 column) size arg matters!
-      surfers <- rbind(plta[[1]], plta[[2]], plta[[3]], plta[[4]], size = "first")
-      # pdf_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surfer.pdf")
       png_name <- paste0(path, "/plots/", "canning_", ymd(samp_date), "_surfer.png")
-      
-      # add margin padding coarse but effective
-      # surfers_pad <- gtable::gtable_add_padding(surfers, padding = unit(c(1,4,3,4), "cm"))
-      
-      # ggsave(plot = grid.draw(surfers), filename = pdf_name, width=28, height=18)
-      # cat(paste0(pdf_name,"\n"))
-      png(file = png_name, width = 1500, height = 960, res = 53, bg = "transparent")
-      grid.draw(surfers)
+      p <- list(salPlot, doPlot, chlorPlot, tempPlot) |> 
+        purrr::map(~.x + labs(x = NULL, y = NULL))
+      leftLAB <- grid::textGrob("Depth (m)", rot = 90, gp = gpar(fontsize = 20))
+      bottomLAB <- grid::textGrob("Distance From Estuary Mouth (km)", gp = gpar(fontsize = 20))
+      surfers <- gridExtra::grid.arrange(grobs = p, ncol = 1, nrow = 4, 
+                                         left = leftLAB, bottom = bottomLAB,
+                                         vp=viewport(height=0.998))# avoids cutting off 'g' 
+      png(file = png_name, width = 1500, height = 960, res = 53)
+      grid::grid.draw(surfers)
       dev.off()
       cat(paste0(png_name,"\n"))
       
