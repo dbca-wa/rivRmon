@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to use the phyto functions • rivRmon</title>
+<title>Ad hoc metric plotting • rivRmon</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="How to use the phyto functions">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Ad hoc metric plotting">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -74,14 +74,14 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>How to use the phyto functions</h1>
+      <h1 data-toc-skip>Ad hoc metric plotting</h1>
                         <h4 data-toc-skip class="author">Bart
 Huntley</h4>
             
             <h4 data-toc-skip class="date">2024-11-14</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/dbca-wa/rivRmon/blob/HEAD/vignettes/phyto.Rmd" class="external-link"><code>vignettes/phyto.Rmd</code></a></small>
-      <div class="hidden name"><code>phyto.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/dbca-wa/rivRmon/blob/HEAD/vignettes/plotmetric.Rmd" class="external-link"><code>vignettes/plotmetric.Rmd</code></a></small>
+      <div class="hidden name"><code>plotmetric.Rmd</code></div>
 
     </div>
 
@@ -90,74 +90,87 @@ Huntley</h4>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>These functions have been created to aid in visualising phytoplankton
-counts in the Canning and Swan estuaries. There is a two stage process
-with details below.</p>
+<p>Sometimes it is useful to have the ability to make a quick surfer
+styled plot. The metric could be one of the normal metrics as plotted by
+using <code>swan_sufR()</code> for example or any of the other metrics
+that are recorded by the sonde.</p>
+<p>Whilst it is easy enough to plot up a metric by writing your own
+code, the benefit of using the new <code><a href="../reference/plot_metric.html">plot_metric()</a></code> function
+is that it is using the <code>rivRmon</code> package data to plot the
+river bottom, interpolate between samples and label the sampling
+sites.</p>
 </div>
 <div class="section level2">
-<h2 id="stage-one---create-summary-data">Stage One - Create summary data<a class="anchor" aria-label="anchor" href="#stage-one---create-summary-data"></a>
+<h2 id="creating-a-metric-plot">Creating a metric plot<a class="anchor" aria-label="anchor" href="#creating-a-metric-plot"></a>
 </h2>
-<p>Phytoplankton count data in its raw form (hereafter called raw data)
-provides count and other information for a multitude of species. This
-data is analysed and provided to us by the Department of Water and
-Environmental Regulation’s Phytoplankton Ecology unit. In order to
-visualise the data it benefits from some summarising into larger
-groupings. This first stage undertakes this process and outputs
-summaries that are used in stage two.</p>
-<p>After loading the <code>rivRmon</code> package, two file paths are
-provided to the <code><a href="../reference/phyto_groupR.html">phyto_groupR()</a></code> function. A file path to the
-raw data xlsx spreadsheets and a file path to the desired location of
-the exported summary data. This summary data will be written to a
-<code>summaries/</code> directory and if it doesn’t already exist it
-will be created.</p>
+<p>Firstly the user needs to compile and edit the sonde data so the data
+is in a consistent format. This entails:</p>
+<ul>
+<li><p>Creating a new excel workbook with a single sheet. The sheet must
+be named “edited data”.</p></li>
+<li><p>Copying the data from the two consecutive river sampling days
+into the above sheet.</p></li>
+<li><p>Editing the <code>Date</code> column. Ensure this has only one
+unique date, it can be the first or the second day of sampling but
+cannot be both.</p></li>
+<li><p>Editing the vertical position column. It must be named
+<code>vpos</code> and not <code>vpos m</code>.</p></li>
+<li><p>Deleting unused columns. The most important one to delete is the
+<code>Dep M</code> column. It is also good practice to delete
+<code>Time</code>, <code>Sample Number</code>, <code>User ID</code>,
+<code>BGA...</code> and the <code>Lat</code> and <code>Long</code>
+columns. See below for an example.</p></li>
+</ul>
+<p><img src="plots%2Fmetricexcel.PNG"></p>
+<p>NOTE at this stage the BGA data cannot be plotted. This is because
+one sonde records BGA-PC and the other, BGA-PE. If this situation
+changes in the future then whichever metric is consistently recorded can
+be included in the plots by leaving it in the data.</p>
+<p>Next the function can be run. It has 3 basic parameters. A file path
+(character string) to the excel workbook as described above, a colour
+(character string) to represent the colour of the sampling points and
+lastly a letter (character string) designating which of the Viridis
+colour scales to use, <a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html" class="external-link">see
+ggplot2 doco for the ‘option’ parameter</a>. Example usage below.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#load the package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbca-wa/rivRmon" class="external-link">rivRmon</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#run the phyto_groupR function</span></span>
-<span><span class="fu"><a href="../reference/phyto_groupR.html">phyto_groupR</a></span><span class="op">(</span>pathin <span class="op">=</span> <span class="st">"C:/path/to/raw_data"</span>, pathout <span class="op">=</span> <span class="st">"C:/path/for_export"</span><span class="op">)</span></span></code></pre></div>
-<p>The only thing to be careful of is ensuring that if you are copying a
-fiile path from a Windows OS you will need to double all the backslashes
-for the path to be recognised. The above example is the alternative
-method where the backslashes are converted to a single forward slash. An
-example of an exported summary csv is below.</p>
-<p><img src="plots%2Fsummary.PNG"></p>
-</div>
-<div class="section level2">
-<h2 id="stage-two---creating-the-barcharts-and-running-sheet">Stage Two - Creating the barcharts and running sheet<a class="anchor" aria-label="anchor" href="#stage-two---creating-the-barcharts-and-running-sheet"></a>
-</h2>
-<p>This next stage reads in all the summary data csv’s and based on date
-provided, generates two barcharts, arranged vertically, in the one
-output. The top barchart is for the date provided and the bottom
-barchart is for the prior sample. As sampling of the estuaries occurs on
-different days, the choice of date will only plot data for a single
-estuary. In other words it won’t get confused when summary csv’s exist
-for both estuaries.</p>
-<p>The input for the <code><a href="../reference/phyto_plotR.html">phyto_plotR()</a></code> function is a file path
-to the location of the <code>summaries/</code> directory not the summary
-csv’s themselves. This is essentially the <strong>pathout</strong>
-parameter that you specified when running <code><a href="../reference/phyto_groupR.html">phyto_groupR()</a></code>.
-The barcharts (as pdf) will be exported here along with a “running
-datasheet”.</p>
-<p>The running datasheet is a csv that is exported with all the summary
-data up to and including the date provided for that estuary. To run the
-function.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#run the phyto_plotR function</span></span>
-<span><span class="fu"><a href="../reference/phyto_plotR.html">phyto_plotR</a></span><span class="op">(</span>summary <span class="op">=</span> <span class="st">"C:/path/for_export"</span>, date <span class="op">=</span> <span class="st">"20190715"</span><span class="op">)</span></span></code></pre></div>
-<p>Only two things to watch out for here. Again ensure that you have
-handled the character filepath correctly. Also provide the date as a
-character string in the format “yyyymmdd”. It can be presented as above
-in the code snippet or contain separators (e.g. “2019/07/15” or
-“2019-07-15”).</p>
-<p>An example of a barchart follows. This one is for the Swan estuary
-(identified by its name and the sites present). The date provided is
-that in the code snippet above and is used in creating the top barchart.
-The function finds the summary data for the prior sampling effort and
-uses that to plot the bottom barchart.</p>
-<p><img src="plots%2Fphyto.PNG"></p>
-<p>Lastly an example of a portion of a running datasheet.</p>
-<p><img src="plots%2Frun.PNG"></p>
+<span><span class="fu"><a href="../reference/plot_metric.html">plot_metric</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"C:data_location/the workbook you created.xslx"</span>, samp <span class="op">=</span> <span class="st">"red"</span>, </span>
+<span>            colscale <span class="op">=</span> <span class="st">"d"</span><span class="op">)</span></span></code></pre></div>
+<p>The naming convention of the workbook can be whatever makes sense for
+the user. Internally the function will determine which river you are
+plotting.</p>
+<p>When the function is called it will present the user with a numbered
+list of metrics available to plot, as per example below. The user inputs
+a number corresponding to their metric of choice. This negates awkward
+representations of temperature symbols etc.</p>
+<p><img src="plots%2Fuser.PNG"></p>
+<p>Plots will be rendered in png format and will be saved to a directory
+called <code>metric_plots</code> located in your current working
+directory. Some examples below.</p>
+<p>A plot of the Swan river showing chlorophyll in the default colour
+scale (“d”). <img src="plots%2FmetricSch.png" style="width:110.0%"></p>
+<p>A plot showing the same in the inferno (b”) colour scale. <img src="plots%2FmetricSch2.png" style="width:110.0%"></p>
+<p>A couple of things to note:</p>
+<ul>
+<li><p>The <code>samp</code> parameter is useful to highlight the
+sampling points by chosing a colur that stands out from the background
+colour scale choice.</p></li>
+<li><p>The <code>colscale</code> parameter choices are nothing like the
+standard colours used in the weekly surfer plots. These Viridis colour
+scales are a flexible choice when plotting metrics which we have not
+defined a discrete colour scale for.</p></li>
+<li><p>Also be aware that the data range present in the sonde data will
+always scale to the Viridis continuous colour scales. As such the same
+colours will be present in winter and summer data. These plots are not
+intended to compare through time but are an ad hoc glimpse showing the
+present concentrations of the metric of choice.</p></li>
+<li><p>Lastly <code>plot_metric</code> behaves similarly to the surfer
+functions in that it has logic to define the status of the Kent St Weir
+and will plot up all sampling locations whilst only labeling the usual
+spots.</p></li>
+</ul>
 </div>
   </div>
 

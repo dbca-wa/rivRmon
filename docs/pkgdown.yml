@@ -1,9 +1,13 @@
-pandoc: 2.19.2
-pkgdown: 2.0.6
+pandoc: '3.2'
+pkgdown: 2.1.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2023-04-06T07:54Z
+articles:
+  annual_reports: annual_reports.html
+  hab: hab.html
+  phyto: phyto.html
+  plotmetric: plotmetric.html
+  surfr: surfr.html
+last_built: 2024-11-14T05:19Z
 urls:
   reference: https://dbca-wa.github.io/rivRmon/reference
   article: https://dbca-wa.github.io/rivRmon/articles
-

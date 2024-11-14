@@ -5,7 +5,7 @@
 \title{Reads in external sonde data, combines with internal data sets and produces a
 single surfer plot of a user defined metric.}
 \usage{
-plot_metric(path, samp = "red", colscale = "f")
+plot_metric(path, samp = "red", colscale = "d")
 }
 \arguments{
 \item{path}{Character string file path to location of edited xlsx workbook. 
@@ -19,7 +19,7 @@ the sampling locations in the water column. Changing colour can help them stand
 out in the different colour scales used for the interpolation. Default "red".}
 
 \item{colscale}{A single letter designating a Viridis colour scale to be used 
-for the interpolation. Any letter from A-H. Default "f".}
+for the interpolation. Any letter from A-H. Default "d".}
 }
 \value{
 A png format single panel surfer plot of the Canning River for the user's

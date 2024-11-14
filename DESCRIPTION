@@ -6,7 +6,7 @@ Authors@R: person("Bart", "Huntley", email = "bart.huntley@dbca.wa.gov.au",
                   role = c("aut", "cre", "prg", "res"),
                   comment = c(ORCID = "0000-0002-9519-4105"))
 Maintainer: Bart Huntley <bart.huntley@dbca.wa.gov.au>
-URL: https://github.com/dbca-wa/rivRmon
+URL: https://github.com/dbca-wa/rivRmon, https://dbca-wa.github.io/rivRmon 
 BugReports: https://github.com/dbca-wa/rivRmon/issues
 Description: Specialised functions for dealing with monitoring data imports
     and visualisation.
