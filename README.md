@@ -13,8 +13,6 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 [![GitHub
 issues](https://img.shields.io/github/issues/dbca-wa/rivRmon.svg?style=popout)](https://github.com/dbca-wa/rivRmon/issues/)
 [![Last-changedate](https://img.shields.io/github/last-commit/dbca-wa/rivRmon.svg)](https://github.com/dbca-wa/rivRmon/commits/master)
-[![Travis build
-status](https://travis-ci.org/dbca-wa/rivRmon.svg?branch=master)](https://travis-ci.org/dbca-wa/rivRmon)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/dbca-wa/rivRmon?branch=master&svg=true)](https://ci.appveyor.com/project/dbca-wa/rivRmon)
 [![Github top

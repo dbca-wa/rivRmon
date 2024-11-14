@@ -1,3 +1,48 @@
+# rivRmon 3.0.0
+
+### Minor update to functions
+
+* `swan_sufR` has been updated:
+    + to replace the `swan_sufR_alt` function which has been removed.
+    + to include minor adjustments to legend titles and legend bars to improve 
+    aesthetics.
+    + site SAND is now SANDBR in plots and it is expected to be called this in 
+    the sonde data.
+    + centred axis labels and added minor padding to the x axis to avoid 
+    truncating labels.
+    + top bin of colour scales in now a greater than ('>') category to accommodate 
+    temperatures that exceed the existing scale.
+    + response sites can now be included in the data and will be used as extra data 
+    for interpolation, will appear in the plots in the water column but will not 
+    be labelled (due to room limitations).
+    
+* `canning_sufR` has been updated:
+    + to include minor adjustments to legend titles and legend bars to improve 
+    aesthetics.
+    + centred axis labels and added minor padding to the x axis to avoid 
+    truncating labels.
+    + top bin of colour scales in now a greater than ('>') category to accommodate 
+    temperatures that exceed the existing scale.
+    + response sites can now be included in the data and will be used as extra data 
+    for interpolation, will appear in the plots in the water column but will not 
+    be labelled.
+    
+### Update to internal data
+
+* `sysdata`, which is only accessible to the package functions, has been updated:
+    + to create bathymetry profile from newly updated origin shape files that now 
+    contains site historical response sites.
+    + to have new data breaks and labels to incorporate changes to the surfer plot 
+    legends where the top bins are now a greater than ('>') category.
+    
+### A new function!
+
+* `plot_metric` is a new function:
+    + it draws on data from an edited excel workbook sheet that has BOTH sonde 
+    data files appended and produces a single surfer style plot of any metric in the data.
+    + the user will be prompted by the code for the metric they wish to plot.
+    + the plots are intended as ad-hoc/quick looks at the data.
+
 # rivRmon 2.0.2
 
 ### Minor update to functions
