@@ -7,9 +7,9 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-  - '../vignettes/plots/nox.png'
-  - '../vignettes/plots/chloro.png'
-  - '../vignettes/plots/table.png'
+  - '../man/figures/nox.png'
+  - '../man/figures/chloro.png'
+  - '../man/figures/table.png'
 ---
 
 ```{r, include = FALSE}
@@ -136,15 +136,15 @@ relates to surface measurements, **bottom** to bottom measurements and
 ### Examples
 Canning estuary total oxidised nitrogen.
 
-![](../vignettes/plots/nox.png)
+![](../man/figures/nox.png)
 
 Swan estuary chlorophyll a.
 
-![](../vignettes/plots/chloro.png)
+![](../man/figures/chloro.png)
 
 Chlorophyll a csv table
 
-![](../vignettes/plots/table.png)
+![](../man/figures/table.png)
 
 # Groupings of variables
 As stated previously some variables are grouped so that code can filter data under similar circumstances. These groupings are as follows.

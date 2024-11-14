@@ -8,9 +8,9 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-  - '../vignettes/plots/summary.png'
-  - '../vignettes/plots/phyto.png'
-  - '../vignettes/plots/run.png'
+  - '../man/figures/summary.png'
+  - '../man/figures/phyto.png'
+  - '../man/figures/run.png'
 ---
 
 ```{r, include = FALSE}
@@ -51,7 +51,7 @@ recognised. The above example is the alternative method where the backslashes
 are converted to a single forward slash. An example of an exported summary csv 
 is below.
 
-![](../vignettes/plots/summary.png)
+![](../man/figures/summary.png)
 
 # Stage Two - Creating the barcharts and running sheet
 This next stage reads in all the summary data csv's and based on date provided, 
@@ -84,8 +84,8 @@ snippet above and is used in creating the top barchart. The function finds the
 summary data for the prior sampling effort and uses that to plot the bottom 
 barchart.
 
-![](../vignettes/plots/phyto.png){width=110%}
+![](../man/figures/phyto.png){width=110%}
 
 Lastly an example of a portion of a running datasheet. 
 
-![](../vignettes/plots/run.png)
+![](../man/figures/run.png)

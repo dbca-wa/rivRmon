@@ -8,10 +8,10 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-  - '../vignettes/plots/metricexcel.png'
-  - '../vignettes/plots/user.png'
-  - '../vignettes/plots/metricSch.png'
-  - '../vignettes/plots/metricSch2.png'
+  - '../man/figures/metricexcel.png'
+  - '../man/figures/user.png'
+  - '../man/figures/metricSch.png'
+  - '../man/figures/metricSch2.png'
 ---
 
 ```{r, include = FALSE}
@@ -48,7 +48,7 @@ first or the second day of sampling but cannot be both.
 
 + Deleting unused columns. The most important one to delete is the `Dep M` column. It is also good practice to delete `Time`, `Sample Number`, `User ID`, `BGA...` and the `Lat` and `Long` columns. See below for an example.
 
-![](../vignettes/plots/metricexcel.png)
+![](../man/figures/metricexcel.png)
 
 NOTE at this stage the BGA data cannot be plotted. This is because one sonde records 
 BGA-PC and the other, BGA-PE. If this situation changes in the future then whichever 
@@ -74,16 +74,16 @@ When the function is called it will present the user with a numbered list of met
 available to plot, as per example below. The user inputs a number corresponding to their metric of choice. 
 This negates awkward representations of temperature symbols etc.
 
-![](../vignettes/plots/user.png)
+![](../man/figures/user.png)
 
 
 Plots will be rendered in png format and will be saved to a directory called `metric_plots` located in your current working directory. Some examples below.
 
 A plot of the Swan river showing chlorophyll in the default colour scale ("d").
-![](../vignettes/plots/metricSch.png){width=110%}
+![](../man/figures/metricSch.png){width=110%}
 
 A plot showing the same in the inferno ("b") colour scale.
-![](../vignettes/plots/metricSch2.png){width=110%}
+![](../man/figures/metricSch2.png){width=110%}
 
 A couple of things to note:
 

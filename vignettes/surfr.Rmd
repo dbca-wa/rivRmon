@@ -8,9 +8,9 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-  - '../vignettes/plots/canning.png'
-  - '../vignettes/plots/swan.png'
-  - '../vignettes/plots/upper.png'
+  - '../man/figures/canning.png'
+  - '../man/figures/swan.png'
+  - '../man/figures/upper.png'
 ---
 
 ```{r, include = FALSE}
@@ -79,7 +79,7 @@ structure downstream of site KEN represents the Kent street weir in an open
 position. The function will interpret the status of the weir from the sonde data 
 and plot it accordingly.
 
-![](../vignettes/plots/canning.png){width=110%}
+![](../man/figures/canning.png){width=110%}
 
 
 ## Swan river examples
@@ -97,11 +97,11 @@ Other sections of the river may be blacked out from time to time and could be
 due to equipment malfunction or more generally an inability to hold station at a
 site due to conditions on the day (strong wind, strong current etc).
 
-![](../vignettes/plots/swan.png){width=110%}
+![](../man/figures/swan.png){width=110%}
 
 And here is an example of the middle and upper Swan showing greater detail.
 
-![](../vignettes/plots/upper.png){width=110%}
+![](../man/figures/upper.png){width=110%}
 
 
 # Things to note

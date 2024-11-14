@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 resource_files:
-  - '../vignettes/plots/hab.png'
+  - '../man/figures/hab.png'
 ---
 
 ```{r, include = FALSE}
@@ -35,7 +35,7 @@ included species and trigger threshold values for the HAB report. This informati
 not only guides the summary but its layout also guides the final format of the 
 output pptx file. Below is an example.
 
-![](../vignettes/plots/hab.png)
+![](../man/figures/hab.png)
 
 The table variables are:
 
