@@ -83,10 +83,10 @@ data_finder <- function(path, river){
 sonde_reader <- function(path){
   # make sure of correct tab
   sheet <- readxl::excel_sheets(path)[stringr::str_sub(stringr::str_to_lower(readxl::excel_sheets(path)), 1, 1) == "e"]
-
+  
   # read in and see what we have
   dat <- readxl::read_excel(path, sheet = sheet)
-
+  
   # handle "YV" sondes with double header
   if(stringr::str_detect(dat[1,1], "D/M/Y|M/D/Y")){
     dat2 <- readxl::read_excel(path, sheet = sheet, col_names = FALSE)
@@ -101,7 +101,7 @@ sonde_reader <- function(path){
       dplyr::pull(header)
     dat3 <- readxl::read_excel(path, sheet = sheet, skip = 2, col_names = FALSE)
     names(dat3) <- tolower(col_headers)
-
+    
     # standardise names
     search_for_these <- c("site codes", "sitenum", "site name", "site", "site code", "site names",
                           "temp c", "temp °c", "temp øc", "temp", "°c",
@@ -113,15 +113,15 @@ sonde_reader <- function(path){
                             rep("SAL-ppt", 3), rep("DEP m", 4), rep("Chl ug/L", 4))
     found <- match(colnames(dat3), search_for_these, nomatch = 0)
     colnames(dat3)[colnames(dat3) %in% search_for_these] <- replace_with_these[found]
-
+    
     # return only required data for surfer
     dat4 <- dat3 %>%
       dplyr::select(Site, '°C', 'DO mg/L', 'SAL-ppt', 'DEP m', 'Chl ug/L')
-
+    
     return(dat4)
-
+    
   } else {
-
+    
     # no double headers proceed with standardise names
     names(dat) <- tolower(names(dat))
     search_for_these <- c("site codes", "sitenum", "site name", "site", "site code", "site names",
@@ -134,14 +134,53 @@ sonde_reader <- function(path){
                             rep("SAL-ppt", 3), rep("DEP m", 1), rep("Chl ug/L", 4))
     found <- match(colnames(dat), search_for_these, nomatch = 0)
     colnames(dat)[colnames(dat) %in% search_for_these] <- replace_with_these[found]
-
+    
     # return only required data for surfer
     dat4 <- dat %>%
       dplyr::select(Site, '°C', 'DO mg/L', 'SAL-ppt', 'DEP m', 'Chl ug/L')
-
+    
     return(dat4)
   }
+  
+}
 
+#' Reads in sonde data and formats specifically for use for plotting single metrics
+#' 
+#' \code{sonde_reader_metric} takes a filepath to one xlsx workbook as identified
+#'    by \code{\link{data_finder}} and formats it for single metric plotting.
+#'     
+#' @param path Character string filepath to location of manually combined sonde 
+#'    data xlsx workbook (one only). Looks for shhet tab beginning with the letter 
+#'    'e'.
+#'     
+#' @return A data frame where the 'VPos' variable has been renamed to "Dep m" 
+#'    to allow for consistency with legacy code.
+#'    
+#' @examples
+#' \dontrun{
+#' sonde_reader_metric(path = "Z:/DEC/MonitoringProgram/Data/20191201cpoEXO1.xlsx")}
+#'
+#' @author Bart Huntley, \email{bart.huntley@@dbca.wa.gov.au}
+#'
+#' For more details see  \url{https://dbca-wa.github.io/rivRmon/index.html}
+#' {the rivRmon website}
+#' 
+#' @import dplyr
+#' @import stringr
+#' @importFrom readxl read_excel excel_sheets
+#' @importFrom lubridate as_date
+sonde_reader_metric <- function(path){
+  # make sure of correct tab
+  sheet <- readxl::excel_sheets(path)[stringr::str_sub(stringr::str_to_lower(readxl::excel_sheets(path)), 1, 1) == "e"]
+  
+  # read in and see what we have
+  dat <- readxl::read_excel(path, sheet = sheet) |>
+    dplyr::rename_with(tolower) |>
+    rename_with(~ gsub("vpos(.*)", "dep m", .x), starts_with("vp")) |> # we use 'vpos' but call it 'dep m'
+    dplyr::mutate(date = lubridate::as_date(date))
+  
+  return(dat)
+  
 }
 
 #' Creates correct colour palette for measured metric
@@ -165,7 +204,7 @@ sonde_reader <- function(path){
 #' {the rivRmon website}
 surfer_cols <- function(metric){
   if(metric == "sal"){
-    sal_brk <- as.character(seq(2, 42, 2))
+    sal_brk <- c(as.character(seq(2, 40, 2)), "100")
     sal_cols <- c("#996633", "#916E3D", "#897648", "#817E53", "#79865D", "#718E68",
                   "#699673", "#619E7E", "#59A688", "#51AE93", "#49B69E", "#41BEA9",
                   "#39C6B3", "#31CEBE", "#29D6C9", "#21DED4", "#19E6DE", "#11EEE9",
@@ -173,7 +212,7 @@ surfer_cols <- function(metric){
     names(sal_cols) <- sal_brk
     return(sal_cols)
   } else if(metric == "do"){
-    do_mg_l_brk <- as.character(seq(1, 17, 1))
+    do_mg_l_brk <- c(as.character(seq(1, 16, 1)), "100")
     do_mg_l_cols <- c("#FF0000", "#FF6600", "#FFCC00", "#DAC35D", "#B5BABA",
                       "#A4E3E3", "#52F1F1", "#29DFF8", "#00CCFF", "#61EDC7",
                       "#99FF99", "#99FF4D", "#99FF00", "#73D90C", "#4DB319",
@@ -189,7 +228,7 @@ surfer_cols <- function(metric){
     names(chlr_cols) <- chl_brk
     return(chlr_cols)
   } else {
-    temp_brk <- as.character(seq(11, 33, 1))
+    temp_brk <- c(as.character(seq(11, 32, 1)), "100")
     temp_cols <- c("#00FFFF", "#0CECFF", "#19D9FF", "#26C6FF", "#33B3FF",
                    "#3FA0FF", "#4C8DFF", "#5284FF", "#597AFF", "#6373F0",
                    "#6D6BE0", "#7764D0", "#825CC0", "#8C55B0", "#974DA0",
@@ -220,7 +259,7 @@ surfer_cols <- function(metric){
 #'
 #' @importFrom dplyr case_when
 just_nums <- function(n){
-
+  
   suff <- case_when(n %in% c(11,12,13) ~ "th",
                     n %% 10 == 1 ~ 'st',
                     n %% 10 == 2 ~ 'nd',
