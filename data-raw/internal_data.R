@@ -1,9 +1,10 @@
 #### Code used to create and generate internal data for both rivers
+# NOTE rgeos and rgdal no longer work in R. Read comments at end of script for work around
 library(raster)
 library(ggplot2)
 library(gstat)
-library(rgdal)
-library(rgeos)
+# library(rgdal)
+# library(rgeos)
 library(scales)
 library(tidyverse)
 library(janitor)
@@ -24,12 +25,16 @@ library(nngeo)
 ## Create site data - locations, depths and distances
 ## NOTE with the pacakge folder structure being moved to a PRODUCT folder a full
 ## filepath to the vector data located in the DATA folders is required
-sites <- readOGR(dsn = "Z:/DEC/DBCA_R_Packages/SwanCanningRiversMonitoringProgram_rivRmon/DATA/Working/vectors/swan100",
-                 layer = "SwanDepthDistProfile_MGA50_100m",
-                 stringsAsFactors = FALSE)
-S_sitesdf <- as.data.frame(sites@data) %>%
-  # dplyr::mutate(site = ifelse(site == "BWR10", "BWR", site)) %>%
+# sites <- readOGR(dsn = "Z:/DEC/DBCA_R_Packages/SwanCanningRiversMonitoringProgram_rivRmon/DATA/Working/vectors/swan100",
+#                  layer = "SwanDepthDistProfile_MGA50_100m",
+#                  stringsAsFactors = FALSE)
+
+S_sitesdf <- sf::st_read("Z:/DEC/DBCA_R_Packages/SwanCanningRiversMonitoringProgram_rivRmon/DATA/Working/vectors/swan100/SwanDepthDistProfile_MGA50_100m.shp") |>
+  sf::st_drop_geometry() |>
   dplyr::arrange(dist_mouth)
+# S_sitesdf <- as.data.frame(sites@data) %>%
+#   # dplyr::mutate(site = ifelse(site == "BWR10", "BWR", site)) %>%
+#   dplyr::arrange(dist_mouth)
 
 ## Create oxygen location sites
 S_oxy_locs <- S_sitesdf %>%
@@ -140,23 +145,23 @@ gridded(M_grd_nar) <- TRUE
 
 ## Reclassification matrices for binning interpolated rasters
 # salinity
-aSal <- seq(0, 42, 2)
+aSal <- seq(0, 40, 2)
 bSal <- rep(aSal, each = 3)
-reclass_dfSal <- c(-Inf, bSal, Inf, 44)
+reclass_dfSal <- c(-Inf, bSal, Inf, 100)
 reclass_mSal <- matrix(reclass_dfSal,
                        ncol = 3,
                        byrow = TRUE)
 # dissolved oxygen
 aDo <- seq(0, 16, 1)
 bDo <- rep(aDo, each = 3)
-reclass_dfDo <- c(-Inf, bDo, Inf, 17)
+reclass_dfDo <- c(-Inf, bDo, Inf, 100)
 reclass_mDo <- matrix(reclass_dfDo,
                       ncol = 3,
                       byrow = TRUE)
 # temperature
-aT <- seq(0, 33, 1)
+aT <- seq(0, 32, 1)
 bT <- rep(aT, each = 3)
-reclass_dfT <- c(-Inf, bT, Inf, 34)
+reclass_dfT <- c(-Inf, bT, Inf, 100)
 reclass_mT <- matrix(reclass_dfT,
                      ncol = 3,
                      byrow = TRUE)
@@ -175,22 +180,24 @@ reclass_matrices <- list(reclass_mSal = reclass_mSal,
                          reclass_mT = reclass_mT,
                          reclass_mChl = reclass_mChl)
 
-## Create colour breaks for metrics
-sal_brk <- as.character(seq(2, 42, 2))
-do_mg_l_brk <- as.character(seq(1, 17, 1))
+# all other breaks handled with stat_contour2()
 chl_brk <- c(as.character(seq(20, 80, 20)), "120", "160", "200", "300", "400", "1000")
-temp_brk <- as.character(seq(11, 33, 1))
 
 
 #####Canning River
 ## Create site data - locations, depths and distances
 ## NOTE with the pacakge folder structure being moved to a PRODUCT folder a full
 ## filepath to the vector data located in the DATA folders is required
-csites <- readOGR(dsn = "Z:/DEC/DBCA_R_Packages/SwanCanningRiversMonitoringProgram_rivRmon/DATA/Working/vectors/canning100",
-                  layer = "CanningDepthDistProfile_MGA50_100m",
-                  stringsAsFactors = FALSE)
-C_sitesdf <- as.data.frame(csites@data) %>%
+# csites <- readOGR(dsn = "Z:/DEC/DBCA_R_Packages/SwanCanningRiversMonitoringProgram_rivRmon/DATA/Working/vectors/canning100",
+#                   layer = "CanningDepthDistProfile_MGA50_100m",
+#                   stringsAsFactors = FALSE)
+# C_sitesdf <- as.data.frame(csites@data) %>%
+#   dplyr::arrange(dist_bridg)
+
+C_sitesdf <- sf::st_read("Z:/DEC/DBCA_R_Packages/SwanCanningRiversMonitoringProgram_rivRmon/DATA/Working/vectors/canning100/CanningDepthDistProfile_MGA50_100m.shp") |>
+  sf::st_drop_geometry() |>
   dplyr::arrange(dist_bridg)
+
 
 ## Create oxygen location sites
 C_oxy_locs <- C_sitesdf %>%
@@ -423,12 +430,25 @@ phyto_cols <- c(Chlorophytes = "#008000", Cyanophytes = "#0000FF",
 
 
 
-## Save out sysdtat.rda
-usethis::use_data(sal_brk, do_mg_l_brk, chl_brk, temp_brk, S_sitesdf, C_sitesdf,
+## Save out sysdata.rda
+usethis::use_data(S_sitesdf, C_sitesdf, chl_brk,
                   S_oxy_locs, C_oxy_locs, S_bottom, S_bottom_nar, C_bottom_open,
                   C_bottom_weir, S_grd_all, S_grd_nar, M_grd_nar, C_grd_low, C_grd_up,
                   C_grd_all, reclass_matrices, oxy_grob, S_blockdf_all, S_blockdf_nar,
                   C_blockdf_all, C_blockdf_weir, phyto_cols, internal = TRUE,
                   overwrite = TRUE)
 
+# external to package structure as some package dependencies no longer work 
+# "rgeos" only required for interpolation grids. if only updating site names, depths,
+# colours etc - suggested workflow:
+#  - load old sysdata.rda into environment
+#  - re-run parts of code to update those objects needing change which will update in environment
+#  - use below to resave as sysdata.rda and copy into package
+# If needing to create new grids then research required to find alternatives to 
+# usage of rgdal and rgeos.
+save(S_sitesdf, C_sitesdf, chl_brk,
+     S_oxy_locs, C_oxy_locs, S_bottom, S_bottom_nar, C_bottom_open,
+     C_bottom_weir, S_grd_all, S_grd_nar, M_grd_nar, C_grd_low, C_grd_up,
+     C_grd_all, reclass_matrices, oxy_grob, S_blockdf_all, S_blockdf_nar,
+     C_blockdf_all, C_blockdf_weir, phyto_cols, file = "sysdata.rda")
 
