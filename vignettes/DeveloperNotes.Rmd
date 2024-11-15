@@ -1,0 +1,160 @@
+---
+title: "Developer Notes"
+author: "Bart Huntley"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{plotmetric}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Background
+
+The `rivRmon` package was developed back in 2019 to fill a need in the Department's 
+reporting on the Swan and Canning Rivers. The initial brief was to create a product 
+that had the same look and feel as reporting that had been undertaken using a 
+proprietary software.
+
+After the initial development, further functionality (e.g. phytoplankton reporting) 
+was added as were tweaks to the original surfer plots to accommodate extra sites, 
+deeper profiles, better interpolation etc. As with a lot of projects like this, 
+time was always the limiting factor and the package, whilst still robust at time 
+of writing, would benefit from some refactoring and removal of older package 
+dependencies.
+
+The intention of these notes is to aid any future developer in navigating the 
+package structure and hopefully give some context around decisions made when 
+formulating the code base.
+
+# Package structure
+
+The basic package structure should look familiar to anyone who has had experience 
+with writing R packages. In a nutshell though:
+
++ `rivRmon` is hosted on the [Department's GitHub account](https://github.com/dbca-wa/rivRmon).
++ `rivRmon` has a [supporting website](https://dbca-wa.github.io/rivRmon/index.html) 
+hosted through GitHub pages created by using the `pkgdown` R package which automates 
+the creation of all files necessary for a static website. As such there are extra 
+directories and files in the GitHub repo that do not form part of an R package 
+and are noted in the .Rbuildignore file.
++ new version releases are managed through GitHub's Release functionality.
++ new releases have been linked to a [Zenodo DOI](https://zenodo.org/records/14166500). 
+If future versions are published please add your own ORCID account and I would 
+appreciate still being attached.
+
+A fabulous resource to get up to speed on R package development and covers most 
+of the above is the excellent resource [R Packages](https://r-pkgs.org/). For GitHub integration with R Studio try [Happy Git and GitHub for the useR](https://happygitwithr.com/).
+
+Any work on the package should follow:
+
++ Source the latest version from GitHub.
++ Make edits/changes to code.
++ Commit changes locally.
++ Perform extensive testing locally.
++ Rebuild package (new version), documentation and website locally.
++ Update package NEWS file.
++ Test loading of package.
++ Run package R CMD checks and clear up any errors.
++ Retest package after loading new version.
++ Commit all changes along the way locally.
++ Push new package to GitHub repository.
++ Create a new release and ensure same in Zenodo (where DOI is minted).
++ Tell users that a new package is available and how to access.
+
+# Additional package notes
+
+## Internal data
+There are two sources of internal data that are required for the package to 
+operate and are bundled with the software. The first can be found in `.data/` and 
+covers the management response triggers. It is a `.rda` file and if required can 
+be recreated and updated easily in R if required.
+
+The second internal data source resides in the `.R/` directory as the `sysdata.rda` 
+file and contains a lot of extra data including:
+
++ site locations and information.
++ locations of the oxy plants.
++ coordinates used for the bathymetry (bottom profiles of the surfer plots).
++ pre-baked interpolation grids.
++ reclassification matrices used to bin continuous metric values so that discrete 
+colour scales can be used.
++ coordinates used for "black-out" rectangles for missing data.
++ the phytoplankton plotting colour scale.
+
+Recreating this data can be accomplished by editing and 
+running the script found at `data-raw/internal_data.R`. Note that adding new 
+sites is accomplished by editing a shape file that maintains the spatial integrity 
+of the relationship between the sampling sites and the bathymetry. The file path 
+to the shape file is in the script and access can be gained by contacting the 
+DBCA RSSA program.
+
+It is also worth noting that not all of the `inetrnal_data.R` script can be 
+successfully run at present. Whilst this has no impact on `rivRmon` in its present 
+form an update to this should be completed to negate future issues. Attention 
+needs to be paid to updating any older package dependencies that are required to 
+build the interpolation grids, namely `rgdal`, `rgeos`, `raster` and possibly `sp`. 
+These are all spatial packages and would benefit from being upgraded to utilise 
+functionality from `terra` and `sf`, their modern equivalents.
+
+As `sysdata.rda` is just a data file with multiple objects there is an easy workaround 
+if only certain objects need updating. Starting with a clean environment, clicking 
+on `sysdata.rda` in R studio will load all objects into the environment. The 
+developer can then update the required object and then resave as `sysdata.rda` 
+(see bottom of the `inetrnal_data.R` script for more notes and what objects are 
+required).
+
+## Functions
+Most functions live in their own `.R` files as they are generally quite long and 
+can be complicated. Internal functions (i.e. helper functions run inside the main 
+functions but are not exported with the package) are contained in `data-prep.R` 
+and contain helpers for:
+
++ for finding the correct workbooks for input to surfer and phyto functions.
++ ingesting the sonde data and standardizing the output for the surfer plots and a 
+special case version for use with the ad hoc `plot_metric()` function.
++ colour scales for the surfer plots.
++ creating a pretty date (i.e. 1st, 2nd, 3rd, 4th etc).
+
+## Surfer concept
+As previously mentioned, the `surfR` functions were developed to imitate the exact 
+outputs from a proprietary software. To accomplish this, it necessitated a departure 
+from some very capable (and easier to maintain) plotting paradigms. Therefore it 
+may be helpful to understand the internal "process" and design choices in a `sufR` 
+function and this is generalised below:
+
++ File paths to data workbooks (1 per sonde) are established with internal checks 
+to establish correct river `sufR` is being called.
++ Sonde data is read in and aggregated. The helper function here was necessarily 
+complicated as many different sondes had been used with no real standardisation 
+in naming of metrics. 
++ Depth profiles are sourced.
++ Data for the interpolations is collated.
++ Data is interpolated over sourced grids.
++ Sampling locations are determined and locations restricted to those appearing 
+in data (standard and response sites).
++ Sampling site labels are generated, omitting those that overplot.
++ Black out rectangles are generated for any missing data.
++ Individual ggplot2 objects are created for each of the 4 metrics with very 
+specific themes per plot to allow correct axis labels etc.
++ plots are arranged into a panel layout and written to `.png`.
++ Swan `surfR` always outputs a whole of river plot and a "Narrows and up" plot.
++ Canning `surfR` determines if the Kent Street weir should be included based on 
+the presence of some sampling sites. If it is, an alternate bathymetry profile 
+is chosen and the interpolation is now split over two grids that meet at the weir. 
+This is because the weir produces a boundary for the interpolation.
+
+## Last thoughts
+If this is all very new to a new maintainer/developer then please practice creating 
+packages before attempting any irreversible changes to the DBCA-WA repository. 
+Whilst Git is great for version control you have to know Git to do it. There are 
+dozens of resources out there for practicing package creation and GitHub workflows. 
+Lastly you will need to contact OIM to be added as an administrator to the 
+`dbac-wa/rivRmon` repository to be able to push any changes to the package.

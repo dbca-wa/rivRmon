@@ -16,6 +16,7 @@ articles:
       - annual_reports
       - phyto
       - hab
+      - DeveloperNotes
 
 reference:
   - title: "Generating surfer plots"
