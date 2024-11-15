@@ -18,7 +18,7 @@ issues](https://img.shields.io/github/issues/dbca-wa/rivRmon.svg?style=popout)](
 status](https://ci.appveyor.com/api/projects/status/github/dbca-wa/rivRmon?branch=master&svg=true)](https://ci.appveyor.com/project/dbca-wa/rivRmon)
 [![Github top
 language](https://img.shields.io/github/languages/top/dbca-wa/rivRmon.svg)](https://github.com/dbca-wa/rivRmon/)
-[![DOI](https://zenodo.org/badge/202643428.svg)](https://zenodo.org/badge/latestdoi/202643428)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14166500.svg)](https://doi.org/10.5281/zenodo.14166500)
 <!-- badges: end -->
 
 The goal of rivRmon is to provide tools to aid in data munging and
