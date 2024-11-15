@@ -3,11 +3,12 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   annual_reports: annual_reports.html
+  DeveloperNotes: DeveloperNotes.html
   hab: hab.html
   phyto: phyto.html
   plotmetric: plotmetric.html
   surfr: surfr.html
-last_built: 2024-11-14T07:12Z
+last_built: 2024-11-15T05:38Z
 urls:
   reference: https://dbca-wa.github.io/rivRmon/reference
   article: https://dbca-wa.github.io/rivRmon/articles
