@@ -1,3 +1,12 @@
+# rivRmon 3.0.1
+
+### Minor update to internal data
+
+* Sampling site KEND50 addition caused problems with over-plotting at Kent Street 
+weir. Site was artificially moved a little downstream so that the weir appearance did not 
+change in the long running surfer plots. Bottom bathymetry was slightly adjusted 
+to account for sampling depth indicators on the plot.
+
 # rivRmon 3.0.0
 
 ### Minor update to functions
