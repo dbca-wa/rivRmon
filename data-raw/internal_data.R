@@ -186,7 +186,7 @@ chl_brk <- c(as.character(seq(20, 80, 20)), "120", "160", "200", "300", "400", "
 
 #####Canning River
 ## Create site data - locations, depths and distances
-## NOTE with the pacakge folder structure being moved to a PRODUCT folder a full
+## NOTE with the package folder structure being moved to a PRODUCT folder a full
 ## filepath to the vector data located in the DATA folders is required
 # csites <- readOGR(dsn = "Z:/DEC/DBCA_R_Packages/SwanCanningRiversMonitoringProgram_rivRmon/DATA/Working/vectors/canning100",
 #                   layer = "CanningDepthDistProfile_MGA50_100m",
@@ -197,6 +197,11 @@ chl_brk <- c(as.character(seq(20, 80, 20)), "120", "160", "200", "300", "400", "
 C_sitesdf <- sf::st_read("Z:/DEC/DBCA_R_Packages/SwanCanningRiversMonitoringProgram_rivRmon/DATA/Working/vectors/canning100/CanningDepthDistProfile_MGA50_100m.shp") |>
   sf::st_drop_geometry() |>
   dplyr::arrange(dist_bridg)
+
+## With the addition of KEND50 problems ensued with plotting clashes at the weir.
+## The weir is overly wide to be visually appealing in the surfer plots. Here I 
+## artificially move KEND50 further downstream.
+C_sitesdf[117, 7] <- 11195
 
 
 ## Create oxygen location sites
@@ -216,6 +221,15 @@ C_bottom_weir <- data.frame(x = c(C_sitesdf$dist_bridg[C_sitesdf$dist_bridg >= 5
                                   C_sitesdf$adj_depth[C_sitesdf$dist_bridg > 11300],
                                   -1, -7.1, -7.1),
                             id = 1)
+
+## With the addition of KEND50 problems ensued with plotting clashes at the weir.
+## The weir is overly wide to be visually appealing in the surfer plots. Here I 
+## adjust the bottom to allow for the sampling depths
+C_bottom_weir[110, 2] <- -1.86
+C_bottom_weir[111, 2] <- -1.95
+C_bottom_weir[112, 2] <- -2.1
+
+
 
 
 C_bottom_open <- data.frame(x = c(C_sitesdf$dist_bridg[C_sitesdf$dist_bridg >= 500 & C_sitesdf$dist_bridg <= 11100]/1000,
